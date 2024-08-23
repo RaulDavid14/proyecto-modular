@@ -9,7 +9,6 @@ class Catalogo(models.Model):
     class Meta:
         abstract = True
 
-
 # Create your models here.
 class CatGenero(Catalogo): #herencia
    class Meta:
@@ -19,8 +18,8 @@ class CatGenero(Catalogo): #herencia
 
 class CatEstadoCivil(Catalogo):
     class Meta:
-       verbose_name = 'Género'
-       verbose_name_plural = 'Géneros'
+       verbose_name = 'Estado Civil'
+       verbose_name_plural = 'Tipos de Estado Civil'
        db_table = 'cat_estado_civil'
            
 class CatPoblacion(Catalogo):
