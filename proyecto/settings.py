@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'home',
     'layout',
     'datos_generales',
+    'datos_socioeconomicos',
+    'landing',
+    'consumo',
 ]
 
 MIDDLEWARE = [
