@@ -1,35 +1,33 @@
 from django.db import models
 
 # Create your models here.
-
-class General(models.Model):
-    id = models.Autofield(primaty_key = True)
-    nombre = models.CharField(verbose_name="Nombre", max_length=50)
-
-class Pregunta(General):
-    cat_respuestas = models.IntegerField(verbose_name="Tipo de respuesta")
-    is_selected = models.IntegerField(verbose_name="siguiente pregunta")
-    next_question = models.IntegerField(verbose_name="siguiente")
+class CatFrecuencia(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="Valor")
+    nombre = models.CharField(max_length=50, verbose_name="Frecuencia", help_text="Escribe el texto de la respuesta")
+    abvr = models.CharField(max_length=5, verbose_name="Abreviación", help_text='Escribe la abreviación del campo')
 
     class Meta:
-        verbose_name = 'Pregunta' #especifica como mostrar en el panel de administrador.
-        verbose_name_plural = 'Preguntas' #especifica como mostrar el listado.
-        db_table = 'preguntas' #especifica el nombre el nombre de la tabla en la base de datos.     
+        db_table = 'cat_frecuencia'  # Nombre de la tabla
+        verbose_name = 'Respuesta Frecuencia'
+        verbose_name_plural = 'Respuestas Frecuencia'
 
-    def __str__(self):
-        return self.nombre 
 
-    def __unicode__(self):
-        return 
-
-class catFrecuencia(General):
-    avb = models.CharField(max_length=50, verbose_name = "Abreviación")
-
+class Pregunta(models.Model):
+    id_pregunta = models.AutoField(primary_key=True, verbose_name='ID Pregunta')
+    texto = models.TextField(verbose_name='Texto de la pregunta')
+    tipo_respuesta = models.IntegerField(verbose_name='Tipo de Respuesta')  # IntegerField es lo correcto
+    grupo_imagen = models.BooleanField(default=False, verbose_name='¿Tiene grupo de imágenes?')  # Cambiado a BooleanField
 
     class Meta:
-        verbose_name = "Frecuencia"
-        verbose_name_plural = "Opciones Frecuencia"
-        db_table = 'cat_frecuencia'
+        db_table = 'pregunta'
+        verbose_name = 'Pregunta'
+        verbose_name_plural = 'Preguntas'
 
-    def __str__(self):
-        return self.name
+
+class CatImagen(models.Model):
+    id_imagen = models.AutoField(primary_key=True, verbose_name="ID Imagen")
+    
+    class Meta:
+        db_table = 'cat_imagen'
+        verbose_name = 'Imagen'
+        verbose_name_plural = 'Imágenes'  # Corregido verbose_name_plural

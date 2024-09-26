@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CATALOGOS',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': '1234',
         'HOST': 'localhost',  # o la dirección del servidor MySQL
         'PORT': '3306',  # Puerto por defecto de MySQL
     }
