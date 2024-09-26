@@ -3,4 +3,4 @@ from .models import *
 # Register your models here.
 admin.site.register(CatFrecuencia)
 admin.site.register(Pregunta)
-admin.site.register(CatImagen)
+admin.site.register(CatOpcion)

@@ -6,6 +6,9 @@ class CatFrecuencia(models.Model):
     nombre = models.CharField(max_length=50, verbose_name="Frecuencia", help_text="Escribe el texto de la respuesta")
     abvr = models.CharField(max_length=5, verbose_name="Abreviación", help_text='Escribe la abreviación del campo')
 
+    def __str__(self):
+        return self.nombre
+    
     class Meta:
         db_table = 'cat_frecuencia'  # Nombre de la tabla
         verbose_name = 'Respuesta Frecuencia'
@@ -13,10 +16,13 @@ class CatFrecuencia(models.Model):
 
 
 class Pregunta(models.Model):
-    id_pregunta = models.AutoField(primary_key=True, verbose_name='ID Pregunta')
+    id_pregunta = models.AutoField(primary_key=True, verbose_name='valor')
     texto = models.TextField(verbose_name='Texto de la pregunta')
     tipo_respuesta = models.IntegerField(verbose_name='Tipo de Respuesta')  # IntegerField es lo correcto
     grupo_imagen = models.BooleanField(default=False, verbose_name='¿Tiene grupo de imágenes?')  # Cambiado a BooleanField
+
+    def __str__(self):
+        return self.texto
 
     class Meta:
         db_table = 'pregunta'
@@ -24,10 +30,24 @@ class Pregunta(models.Model):
         verbose_name_plural = 'Preguntas'
 
 
-class CatImagen(models.Model):
-    id_imagen = models.AutoField(primary_key=True, verbose_name="ID Imagen")
-    
+class CatOpcion(models.Model):
+    id_opcion = models.AutoField(primary_key=True, verbose_name='valor')
+    nombre_opcion = models.CharField(verbose_name='opción', max_length=30)
+    avbr = models.CharField(verbose_name='Abreviación', max_length=30)
+
+    def __str__(self):
+        return self.nombre_opcion
+
     class Meta:
-        db_table = 'cat_imagen'
-        verbose_name = 'Imagen'
-        verbose_name_plural = 'Imágenes'  # Corregido verbose_name_plural
+        db_table = 'cat_opcion'
+        verbose_name = 'opción'
+        verbose_name_plural = 'opciones'
+
+
+class RespuestaConsumo(models.Model):
+    id_respuesta = models.AutoField(primary_key=True, verbose_name='id pregunta')
+    respuestas = models.TextField(verbose_name='respuestas')
+    class Meta:
+        db_table = 'respuestas_consumo'
+        verbose_name = 'respuesta de consumo'
+        verbose_name_plural = 'respuestas de consumo'
