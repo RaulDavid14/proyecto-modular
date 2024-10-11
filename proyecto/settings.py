@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'layout',
-    'datos_generales',
     'datos_socioeconomicos',
     'landing',
-    'consumo',
+    'usuarios',
+    'catalogos',
 ]
 
 MIDDLEWARE = [
@@ -79,30 +79,28 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+user = 'root'
+password = '1234'
+host = 'localhost'
+port = '3306'
 
-"""
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CATALOGOS',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',  # o la dirección del servidor MySQL
-        'PORT': '3306',  # Puerto por defecto de MySQL
-    }
+        'NAME': 'catalogos',
+        'USER': user,
+        'PASSWORD': password,
+        'HOST': host,  # o la dirección del servidor MySQL
+        'PORT': port,  # Puerto por defecto de MySQL
+    },
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'usuarios.UsuarioModel'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
