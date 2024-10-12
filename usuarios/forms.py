@@ -1,5 +1,13 @@
 from django import forms
 
+class LoginForm(forms.Form):
+    correo = forms.EmailField(label='Correo', required=True, widget=forms.EmailInput(attrs={
+        'class': 'form-control', 'placeholder': 'Ingresa tu primer nombre'
+    }))
+
+    password = forms.CharField(label='Contraseña', required=True, widget=forms.PasswordInput(widget={'class': 'form-control', 'placeholder': 'tu contraseña'}))
+
+
 class UsuarioForm(forms.Form):
     
     primer_nombre = forms.CharField(label='Primer Nombre', required=True, max_length=30, widget = forms.TextInput(

@@ -31,4 +31,9 @@ def store(request):
             nuevo_usuario.save()
 
             return redirect('inicio')
+
+def login(request):
+    form = LoginForm()
+
+    return render(request, 'login.html', {'form' : form})
    
