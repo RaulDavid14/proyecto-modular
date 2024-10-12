@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block titulo %}Nuevo Usuario{% endblock titulo %}
+
+
+{% block body %}
+<div class="">
+    <h4>Registrate</h4>
+    <form action="{%url 'guardar' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+{% endblock body %}
