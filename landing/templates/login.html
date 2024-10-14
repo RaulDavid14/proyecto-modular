@@ -3,11 +3,11 @@
 {% block titulo %}Bienvenido{% endblock titulo %}
 
 {% block body %}
-
-<form action="{%url 'guardar' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}  
-    <button type="submit">Inicio</button>
-</form>
-
+<h2>Iniciar Sesión</h2>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+<p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
 {% endblock body %}

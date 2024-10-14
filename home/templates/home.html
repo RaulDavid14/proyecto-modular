@@ -3,9 +3,17 @@
 {% block title %}Regístrate{% endblock title %}
 
 {% block body %}
-<form action="{%url 'guardar' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}  
-    <button type="submit">Registrar</button>
-</form>
+<div class="row">
+    <div class="col-12">
+        <h3>Cuestionarios disponibles</h3>
+    </div>
+    <div class="col-12">
+        <nav>
+            <a href="">Datos Generales</a>
+            <a href="">Socio Economico</a>
+            <a href="">Consumo</a>
+        </nav>
+    </div>
+</div>
+
 {% endblock body %}

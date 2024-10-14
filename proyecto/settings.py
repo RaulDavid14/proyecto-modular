@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'layout',
     'datos_socioeconomicos',
     'landing',
-    'usuarios',
     'catalogos',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -96,11 +96,13 @@ DATABASES = {
     },
 }
 
+# settings.py
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'usuarios.UsuarioModel'
+AUTH_USER_MODEL = 'usuario.UserModel'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
