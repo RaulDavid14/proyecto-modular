@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'landing',
     'catalogos',
     'usuario',
+    'cuestionario',
 ]
 
 MIDDLEWARE = [
