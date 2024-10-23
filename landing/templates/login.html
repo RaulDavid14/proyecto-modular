@@ -3,11 +3,30 @@
 {% block titulo %}Bienvenido{% endblock titulo %}
 
 {% block body %}
-<h2>Iniciar Sesión</h2>
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar Sesión</button>
-    </form>
-<p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+<div class="row">
+    <div class="col-12 text-center">
+       <h2>Iniciar Sesión</h2>
+    </div>
+    <div class="col-12 mt-5">
+        <form action="{% url 'login' %}" method="post">
+            <div class="row">
+                {% csrf_token %}
+                <div class="form-group col-12">
+                    <label for="{{form.username.id_for_label}}">Correo Electrónico <span class="">*</span></label>
+                    {{form.username}}
+                </div>
+                <div class="form-group col-12 mt-5">
+                    <label for="{{form.password.id_for_label}}">Contraseña <span class="">*</span></label>
+                    {{form.password}}
+                </div>
+                <div class="col-12 text-center">
+                    <button class="btn btn-outline-success w-50 mt-5" type="submit">Iniciar Sesión</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 text-center mt-3">
+        <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+    </div>
+</div>
 {% endblock body %}

@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#manejar el tipo de autenticacion para los usuarios dentro del proyecto
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True  #permite dejar la sesion activa de la sesion aun cuando el usuario cierre el navegador. 
+#SESSION_COOKIE_AGE = 86400
 
 # Application definition
 
@@ -137,6 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# settings.py
+LOGIN_URL = '/usuarios/login/' #redigir en caso de no estar autenticado.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

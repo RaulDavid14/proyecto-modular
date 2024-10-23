@@ -19,8 +19,9 @@ from django.urls import path, include
 from landing import views as landing
 
 urlpatterns = [
-    path('', include('usuario.urls')),
+    path('auth/', include('usuario.urls')),
     path('home/', include('home.urls')),
     path('admin/', admin.site.urls),
     path('cuestionario', include('cuestionario.urls')),
+    path('', include('landing.urls')),
 ]

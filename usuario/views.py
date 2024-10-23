@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .forms import UserRegistrationForm, UserLoginForm
 
 def signup(request):
@@ -25,3 +25,7 @@ def login_view(request):
     else:
         form = UserLoginForm()
     return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Redirigir a la página de inicio de sesión

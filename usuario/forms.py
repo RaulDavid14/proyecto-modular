@@ -13,10 +13,20 @@ class UserRegistrationForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs.update({'placeholder': 'Primer Nombre'})
-        self.fields['last_name'].widget.attrs.update({'placeholder': 'Apellido Paterno'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Email'})
-        self.fields['birth_date'].widget.attrs.update({'placeholder': 'Fecha de Nacimiento (YYYY-MM-DD)'})
+        self.fields['first_name'].widget.attrs.update({'placeholder': 'Primer Nombre', 'class' : 'form-control'})
+        self.fields['second_name'].widget.attrs.update({'placeholder': 'Segundo Nombre', 'class' : 'form-control'})
+        self.fields['third_name'].widget.attrs.update({'placeholder': 'Tercer Nombre', 'class' : 'form-control'})
+        self.fields['last_name'].widget.attrs.update({'placeholder': 'Apellido Paterno', 'class' : 'form-control'})
+        self.fields['last_name_maternal'].widget.attrs.update({'placeholder': 'Apellido Materno', 'class' : 'form-control'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'email', 'class' : 'form-control'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'contraseña', 'class' : 'form-control'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'contraseña', 'class' : 'form-control'})
+        self.fields['birth_date'].widget = forms.DateInput(attrs={
+            'placeholder': 'YYYY-MM-DD',
+            'type': 'date',
+            'class' : 'form-control'
+        })
+
 
 class UserLoginForm(AuthenticationForm):
     class Meta:
@@ -25,5 +35,5 @@ class UserLoginForm(AuthenticationForm):
     
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'placeholder': 'Email'})
-        self.fields['password'].widget.attrs.update({'placeholder': 'Contraseña'})
+        self.fields['username'].widget.attrs.update({'placeholder': 'email', 'class' : 'form-control'})
+        self.fields['password'].widget.attrs.update({'placeholder': 'Contraseña', 'class' : 'form-control'})
