@@ -26,13 +26,13 @@
 <body>
 
     <div class="sidebar">
-        <h2>{% block nombre %}{% endblock nombre %}</h2>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Datos Generales</a>
+                <a class="nav-link active" href="{% url 'home' %}">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Datos Socioeconómicos</a>
+                <a class="nav-link active" href="{% url 'generales' %}">Datos Generales</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Configuraciones</a>
