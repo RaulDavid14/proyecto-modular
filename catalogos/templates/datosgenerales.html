@@ -42,37 +42,6 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div class="mt-5 mb-5 col">
-                    <h3 class="text-center">Datos Socieconomicos</h3>
-                </div>
-                <div class="accordion" id="formAccordion">
-                    {% for dato in economico %}
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
-                                {{ dato.label }} 
-                            </button>
-                        </h2>
-                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#formAccordion">
-                            <div class="accordion-body">
-                                <div class="form-check form-check-inline">
-                                    {% for result in dato %}
-                                        <div class="form-check form-check-inline">
-                                            {{ result.tag }}
-                                            {{ result.choice_label }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                {% if dato.errors %}
-                                    <div class="text-danger">
-                                        {{ dato.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
                 <div class="col text-center mt-5">
                     <button class="btn btn-outline-success w-50" type="submit">Guardar</button>
                 </div>
