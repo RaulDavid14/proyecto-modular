@@ -1,14 +1,18 @@
 {% extends 'layout.html' %}
 
+{% load static%}
+
 {% block title %}CFCA MX{% endblock title %}
 
 {% block body %}
+<link rel="stylesheet" href="{% static 'CSS/styles.css' %}">
+
 <div class="container mt-5">
     <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#">CFCA MX</a>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Regístrate</a>
                     </li>
@@ -49,10 +53,10 @@
                     <p class="text-justify">
                         Participar es fácil y rápido. Simplemente regístrate y accede al cuestionario. Tu información será tratada de manera confidencial y solo se utilizará con fines académicos y de investigación.
                     </p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock body %}
