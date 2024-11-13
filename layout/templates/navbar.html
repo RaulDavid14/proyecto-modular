@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,43 @@
     <title>{% block titulo %}{% endblock titulo %}</title>
     <style>
         body {
-            height: 100vh; /* Altura total de la ventana */
+            height: 100vh; 
+            margin: 0; 
         }
+
         .sidebar {
-            height: 100%; /* Altura completa */
-            background-color: #f8f9fa; /* Color de fondo de la barra lateral */
-            position: fixed; /* Fija la barra lateral */
-            left: 0; /* Alinea la barra lateral a la izquierda */
-            top: 0; /* Alinea la barra lateral al tope */
-            padding: 20px; /* Espaciado interno */
+            height: 100%; 
+            background-color: #f8f9fa; 
+            position: fixed; 
+            left: 0; 
+            top: 0;
+            padding: 20px; 
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
         }
+
         .content {
-            margin-left: 250px; /* Espacio para la barra lateral */
-            padding: 20px; /* Espaciado interno del contenido */
+            margin-left: 250px; 
+            padding: 20px; 
+        }
+
+        .nav-link {
+            transition: background-color 0.3s, color 0.3s; 
+        }
+
+        .nav-link:hover {
+            background-color: #007bff; /* Color de fondo al pasar el mouse */
+            color: white; /* Color del texto al pasar el mouse */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .nav-link.active {
+            background-color: #007bff; /* Color de fondo para el enlace activo */
+            color: white; /* Color del texto para el enlace activo */
+            border-radius: 5px; /* Bordes redondeados */
         }
     </style>
 </head>
+
 <body>
 
     <div class="sidebar">
@@ -56,4 +78,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
