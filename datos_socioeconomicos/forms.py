@@ -6,6 +6,7 @@ class DatosSocioeconomicosForm(forms.Form):
         label='Situación laboral',
         widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
     )
+    
 
     ingresos = forms.ChoiceField(
         label='Ingresos',
