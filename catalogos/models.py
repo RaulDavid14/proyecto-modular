@@ -33,3 +33,9 @@ class CatNivelEducativo(CatalogoModel):
         db_table = 'catalogo_nivel_educativo'
         verbose_name = 'Nivel educativo'
         verbose_name_plural = 'Niveles educativos'
+
+class CatCuestionarios(CatalogoModel):
+    class Meta:
+        db_table = 'catalogo_cuestionario'
+        verbose_name = 'Cuestionario'
+        verbose_name_plural = 'Cuestionarios'
