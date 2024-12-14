@@ -2,7 +2,7 @@ from django.db import models
 
 class Catalogo(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=50, verbose_name='Nombre')
+    nombre = models.CharField(max_length=30, verbose_name='Nombre')
     abreviacion = models.CharField(max_length=5, verbose_name='Abreviación')
     descripcion = models.TextField(verbose_name='Descripción')
     

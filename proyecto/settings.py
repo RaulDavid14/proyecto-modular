@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#manejar el tipo de autenticacion para los usuarios dentro del proyecto
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True  #permite dejar la sesion activa de la sesion aun cuando el usuario cierre el navegador. 
+#SESSION_COOKIE_AGE = 86400
 
 # Application definition
 
@@ -39,10 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'layout',
-    'datos_generales',
     'datos_socioeconomicos',
     'landing',
-    'consumo',
+    'catalogos',
+    'usuario',
+    'cuestionario',
 ]
 
 MIDDLEWARE = [
@@ -79,30 +83,30 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+user = 'root'
+password = '1234'
+host = 'localhost'
+port = '3306'
 
-"""
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CATALOGOS',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',  # o la dirección del servidor MySQL
-        'PORT': '3306',  # Puerto por defecto de MySQL
-    }
+        'NAME': 'catalogos',
+        'USER': user,
+        'PASSWORD': password,
+        'HOST': host,  # o la dirección del servidor MySQL
+        'PORT': port,  # Puerto por defecto de MySQL
+    },
 }
+
+# settings.py
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'usuario.UserModel'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -136,6 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# settings.py
+LOGIN_URL = '/usuarios/login/' #redigir en caso de no estar autenticado.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

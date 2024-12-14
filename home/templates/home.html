@@ -1,31 +1,31 @@
-{% extends 'layout.html' %}
+{% extends 'navbar.html' %}
 
-{% block title %}Bienvenido{% endblock title %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'vendor/css/home.css' %}">
+{% endblock links %}
+
+{% block titulo %}Cuestionario{% endblock titulo %}
 
 {% block body %}
-       <div class="card bg-white text-dark shadow-lg">
-            <div class="card-header text-center bg-info text-white">
-                <h2>Datos Generales</h2>
-            </div>
-            <div class="card-body">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    
-                    {% for pregunta in datos_gen %}
-                    <div class="mb-4">
-                        <div class="card bg-light border-dark">
-                            <div class="card-body">
-                                <h5>{{pregunta.label_tag}}</h5>
-                                {% for opcion in pregunta %}
-                                    <div class="form-check">
-                                        {{opcion}}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </form>
-            </div>
-       </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="mb-5" >Cuestionarios disponibles</h2>
+            <table class="table tabla">
+                <tr>
+                    <th>Cuestionario</th>
+                    <th>Progreso</th>
+                    <th>Acción</th>
+                </tr>
+                
+                {% for cuestionario in cuestionarios %}
+                    <tr>
+                        <td>{{cuestionario}}</td>
+                        <td>0%</td>
+                        <td>{{opciones|safe}}</td>            
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 {% endblock body %}

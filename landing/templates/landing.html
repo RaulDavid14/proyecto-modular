@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% load static%}
+
+{% block title %}CFCA MX{% endblock title %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'vendor/css/styles.css' %}">
+
+<div class="container mt-5">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">CFCA MX</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Regístrate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card border-primary">
+                <div class="card-header text-center">
+                    <h3>CFCA MX</h3>
+                </div>
+                <div class="card-body text-center">
+                    <p>Cuestionario de Frecuencia de Consumo de Alimentos Cuantitativo Autoadministrado en Línea para la Población Mexicana.</p>
+                    <a href="{% url 'register' %}" class="btn btn-primary">Comienza Aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección informativa del proyecto -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Acerca del Proyecto</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-justify">
+                        Este cuestionario tiene como objetivo recopilar datos sobre la frecuencia de consumo de alimentos en la población mexicana. 
+                        Los resultados permitirán evaluar patrones de alimentación y contribuir a la investigación en salud pública y nutrición.
+                    </p>
+                    <p class="text-justify">
+                        Participar es fácil y rápido. Simplemente regístrate y accede al cuestionario. Tu información será tratada de manera confidencial y solo se utilizará con fines académicos y de investigación.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

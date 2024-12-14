@@ -1,11 +1,27 @@
-from django.shortcuts import render
-from datos_generales.forms import *
+from django.shortcuts import render, redirect
+from django.contrib.auth import *
+from django.contrib.auth.decorators import login_required
+from catalogos.models import CatCuestionarios
+from django.views.decorators.cache import cache_control
+from utils.cuestionario import Cuestionario
 
 
-# Create your views here.
+@login_required
+@cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def index(request):
-    datos_generales = DatosGeneralesForm()
+    nombre = request.user.first_name
+    apellido = request.user.last_name
+
+    cuestionarios = [cuestionario.nombre_largo for cuestionario in CatCuestionarios.objects.all()]
+
+    opciones = """
+        <a href="#" class="btn btn-outline-success w-50">Iniciar</a> 
+        <a href="#" class="btn btn-outline-warning w-25"> Reiniciar </a>
+     """
+
     datos = {
-        'datos_gen' : datos_generales
+        'opciones' : opciones,
+        'cuestionarios' : cuestionarios
     }
-    return render(request, 'home.html', context=datos)
+
+    return render(request, 'home.html', datos)
