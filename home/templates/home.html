@@ -13,16 +13,16 @@
             <h2 class="mb-5" >Cuestionarios disponibles</h2>
             <table class="table tabla">
                 <tr>
-                    <th>Cuestionario</th>
                     <th>Progreso</th>
+                    <th>Cuestionario</th>
                     <th>Acción</th>
                 </tr>
                 
                 {% for cuestionario in cuestionarios %}
                     <tr>
-                        <td>{{cuestionario}}</td>
                         <td>0%</td>
-                        <td>{{opciones|safe}}</td>            
+                        <td>{{cuestionario.nombre_cuestionario}}</td>            
+                        <td>{{cuestionario.url|safe}}</td>
                     </tr>
                 {% endfor %}
             </table>
