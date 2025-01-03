@@ -3,49 +3,134 @@
 {% block titulo %}Datos Generales{% endblock titulo %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2>Tu informacion personal</h2>
-        </div>
-        <hr>
-        <div class="row col-12 mt-5">
-            <form action="" method="post">
-                <div class="col">
-                    <h3 class="text-center mb-5">Datos Generales</h3>
-                </div>
-                {% csrf_token %}
-                <div class="accordion" id="formAccordion">
-                    {% for campo in form %}
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
-                                {{ campo.label }} 
-                            </button>
-                        </h2>
-                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#formAccordion">
-                            <div class="accordion-body">
-                                <div class="form-check form-check-inline">
-                                    {% for opcion in campo %}
-                                        <div class="form-check form-check-inline">
-                                            {{ opcion.tag }}
-                                            {{ opcion.choice_label }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                {% if campo.errors %}
-                                    <div class="text-danger">
-                                        {{ campo.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="col text-center mt-5">
-                    <button class="btn btn-outline-success w-50" type="submit">Guardar</button>
-                </div>
-            </form>
-        </div>
+<div class="row">
+    <div class="col-12 text-center mb-5">
+        <h2>Datos personales</h2>
     </div>
-{% endblock body %}z
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-12 text-end mb-5">
+            <button type="submit" class="btn btn-outline-success w-25">Enviar</button>
+        </div>
+
+        <div class="col-12 mb-4 text-center">
+            <h5>{{ form.sexo.label }}</h5>
+            <div class="row justify-content-center">
+                {% for campo in form.sexo %}
+                <div class="form-check col-12 col-md-6 col-lg-4 mb-2 text-start">
+                    <input 
+                        type="radio" 
+                        name="{{ campo.name }}" 
+                        id="{{ campo.id_for_label }}" 
+                        value="{{ campo.choice_value }}" 
+                        class="form-check-input"
+                    >
+                    <label for="{{ campo.id_for_label }}" class="form-check-label text-wrap">
+                        {{ campo.choice_label }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 mb-4 text-center">
+            <h5>{{ form.estado_civil.label }}</h5>
+            <div class="row justify-content-center">
+                {% for campo in form.estado_civil %}
+                <div class="form-check col-2 text-start">
+                    <input 
+                        type="radio" 
+                        name="{{ campo.name }}" 
+                        id="{{ campo.id_for_label }}" 
+                        value="{{ campo.choice_value }}" 
+                        class="form-check-input"
+                    >
+                    <label for="{{ campo.id_for_label }}" class="form-check-label text-wrap">
+                        {{ campo.choice_label }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 mb-4 text-center">
+            <h5>{{ form.poblacion.label }}</h5>
+            <div class="row justify-content-center">
+                {% for campo in form.poblacion %}
+                <div class="form-check col-12 col-md-6 col-lg-4 mb-2 text-start">
+                    <input 
+                        type="radio" 
+                        name="{{ campo.name }}" 
+                        id="{{ campo.id_for_label }}" 
+                        value="{{ campo.choice_value }}" 
+                        class="form-check-input"
+                    >
+                    <label for="{{ campo.id_for_label }}" class="form-check-label text-wrap">
+                        {{ campo.choice_label }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 mb-4 text-center">
+            <h5>{{ form.nivel_educativo.label }}</h5>
+            <div class="row justify-content-center">
+                {% for campo in form.nivel_educativo %}
+                <div class="form-check col-2 mb-2 text-start">
+                    <input 
+                        type="radio" 
+                        name="{{ campo.name }}" 
+                        id="{{ campo.id_for_label }}" 
+                        value="{{ campo.choice_value }}" 
+                        class="form-check-input "
+                    >
+                    <label for="{{ campo.id_for_label }}" class="form-check-label text-wrap">
+                        {{ campo.choice_label }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 text-center mb-5">
+            <h2>Datos socioeconómicos</h2>
+        </div>
+
+        <div class="row"> 
+            <div class="col-6 mb-4">
+                <h5>{{ economico.ingresos.label }}</h5>
+                <div class="row justify-content-center">
+                    <select name="{{ economico.ingresos.name }}" id="{{ economico.ingresos.auto_id }}" class="form-select col-12 col-md-6 col-lg-4">
+                        <option value="">--Selecciona una opcion</option>
+                        {% for campo in economico.ingresos %}
+                        <option value="{{ campo.choice_value }}" 
+                            {% if campo.choice_value == economico.ingresos.value %}selected{% endif %}
+                        >
+                            {{ campo.choice_label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-6 mb-4">
+                <h5>{{ economico.situacion_laboral.label }}</h5>
+                <div class="row justify-content-center">
+                    <select name="{{ economico.situacion_laboral.name }}" id="{{ economico.situacion_laboral.auto_id }}" class="form-select col-12 col-md-6 col-lg-4">
+                        <option value="">--Selecciona una opcion</option>
+                        {% for campo in economico.situacion_laboral %}
+                        <option value="{{ campo.choice_value }}" 
+                            {% if campo.choice_value == economico.situacion_laboral.value %}selected{% endif %}
+                        >
+                            {{ campo.choice_label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock body %}

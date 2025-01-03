@@ -5,7 +5,11 @@ class DatosGeneralesForm(forms.Form):
 
     sexo = forms.ChoiceField(
         label='Sexo',
-        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+        widget=forms.RadioSelect(
+            attrs={
+                'class': 'form-check-input',
+                'id' : 'id_sexo'
+            })
     )
 
     estado_civil = forms.ChoiceField(
