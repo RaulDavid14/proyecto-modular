@@ -3,6 +3,11 @@
 {% block title %}Bienvenido{% endblock title %}
 
 {% block body %}
+
+
+<div class="row">
+    {% include 'navbar_landing.html' %}    
+</div>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -14,12 +19,12 @@
                     <form action="{% url 'login' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group mb-3">
-                            <label for="{{ form.username.id_for_label }}">Correo Electrónico <span class="text-danger">*</span></label>
-                            {{ form.username }}
+                            <label for="username">Correo Electrónico <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="username" id="username">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="{{ form.password.id_for_label }}">Contraseña <span class="text-danger">*</span></label>
-                            {{ form.password }} 
+                            <label for="password">Contraseña <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
                         <div class="text-center mt-4">
                             <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
