@@ -39,3 +39,18 @@ class CatCuestionarios(CatalogoModel):
         db_table = 'catalogo_cuestionario'
         verbose_name = 'Cuestionario'
         verbose_name_plural = 'Cuestionarios'
+        
+class CatFrecuencia(CatalogoModel):
+    class Meta:
+        db_table = 'frecuencia'
+        verbose_name = 'frecuencia'
+        verbose_name_plural = 'frecuencias'
+
+
+class CatOpcionMultiple(CatalogoModel):
+    class Meta:
+        db_table = 'opcion'
+        verbose_name = 'opcion'
+        verbose_name_plural = 'opciones'
+
+      

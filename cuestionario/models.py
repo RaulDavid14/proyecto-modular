@@ -24,3 +24,13 @@ class RespuestaModel(models.Model):
         db_table = 'respuestas'
         verbose_name = 'respuesta'
         verbose_name_plural = 'respuestas'
+
+"""
+    progreso = {
+        id_cuestionario : iniciado  
+    }
+"""
+
+class ProgresoModel(models.Model):
+    id_usuario = models.IntegerField(verbose_name='usuario')
+    progreso = models.JSONField(verbose_name='progreso')
