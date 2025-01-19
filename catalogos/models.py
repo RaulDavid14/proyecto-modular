@@ -46,11 +46,9 @@ class CatFrecuencia(CatalogoModel):
         verbose_name = 'frecuencia'
         verbose_name_plural = 'frecuencias'
 
-
 class CatOpcionMultiple(CatalogoModel):
     class Meta:
         db_table = 'opcion'
         verbose_name = 'opcion'
         verbose_name_plural = 'opciones'
-
-      
+  
