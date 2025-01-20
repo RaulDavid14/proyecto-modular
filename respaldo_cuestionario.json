@@ -1,0 +1,1053 @@
+[
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 1,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió LECHE ENTERA DE VACA (deslactosada o no)?\n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera.",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 4,
+            "2": 2,
+            "3": 2,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2,
+            "8": 2,
+            "9": 2,
+            "10": 2
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 2,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de LECHE ENTERA DE VACA (deslactosada o no) por ocasión: \n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera. \n\nLa imagen solo es ilustrativa de la cantidad habitual de consumo",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 3
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 3,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de LECHE ENTERA DE VACA (deslactosada o no) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 4
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 4,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió LECHE LIGHT O 0% GRASA DE VACA (deslactosada o no)?\n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera.",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 7,
+            "2": 5,
+            "3": 5,
+            "4": 5,
+            "5": 5,
+            "6": 5,
+            "7": 5,
+            "8": 5,
+            "9": 5,
+            "10": 5
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 5,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  LECHE LIGHT O 0% GRASA DE VACA (deslactosada o no) por ocasión: \n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera. \n\nLa imagen solo es ilustrativa de la cantidad habitual de consumo",
+        "tipo_respuesta": 2,
+        "sig_pregunta": "{ 1 : 6, 2 : 7, 3 : 7, 4 : 7, 5 : 6 }",
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 6,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de LECHE LIGHT O 0% GRASA DE VACA (deslactosada o no) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 7
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 7,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió LECHE VEGETAL  (soya, almendra, coco, entre otras)?\n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera.",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 10,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8,
+            "6": 8,
+            "7": 8,
+            "8": 8,
+            "9": 8,
+            "10": 8
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 8,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  LECHE VEGETAL  (soya, almendra, coco, entre otras) por ocasión: \n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera. \n\nLa imagen solo es ilustrativa de la cantidad habitual de consumo",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 9,
+            "2": 10,
+            "3": 10,
+            "4": 10,
+            "5": 9
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 9,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de LECHE VEGETAL  (soya, almendra, coco, entre otras) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 10
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 10,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió LECHE SABORIZADA ( industrializada, cualquier sabor)?\n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera.",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 13,
+            "2": 11,
+            "3": 11,
+            "4": 11,
+            "5": 11,
+            "6": 11,
+            "7": 11,
+            "8": 11,
+            "9": 11,
+            "10": 11
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 11,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  LECHE SABORIZADA ( industrializada, cualquier sabor) por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 12,
+            "2": 13,
+            "3": 13,
+            "4": 13,
+            "5": 12
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 12,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de LECHE SABORIZADA ( industrializada, cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 13
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 13,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió LECHE SABORIZADA VEGETAL ( industrializada, cualquier sabor)?\n\nConsiderar la leche del café, el licuado, chocomilk u otra preparación casera.",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 16,
+            "2": 14,
+            "3": 14,
+            "4": 14,
+            "5": 14,
+            "6": 14,
+            "7": 14,
+            "8": 14,
+            "9": 14,
+            "10": 14
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 14,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  LECHE SABORIZADA VEGETAL ( industrializada, cualquier sabor) por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 15,
+            "2": 16,
+            "3": 16,
+            "4": 16,
+            "5": 15
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 15,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de LECHE SABORIZADA VEGETAL ( industrializada, cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 16
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 16,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió YOGURT ENTERO ( cualquier sabor)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 19,
+            "2": 17,
+            "3": 17,
+            "4": 17,
+            "5": 17,
+            "6": 17,
+            "7": 17,
+            "8": 17,
+            "9": 17,
+            "10": 17
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 17,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción A\" mencione la cantidad habitual de consumo de YOGURT ENTERO ( cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la mitad de la opción A, un cuarto de la opción A, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 19
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 18,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió YOGURT LIGHT O 0% GRASA ( cualquier sabor)",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 22,
+            "2": 20,
+            "3": 20,
+            "4": 20,
+            "5": 20,
+            "6": 20,
+            "7": 20,
+            "8": 20,
+            "9": 20,
+            "10": 20
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 19,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de YOGURT LIGHT O 0% GRASA ( cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la mitad de la opción A, un cuarto de la opción A, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 22
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 20,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió YOGURT LIGHT O 0% GRASA SIN AZÚCAR ( cualquier sabor)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 25,
+            "2": 23,
+            "3": 23,
+            "4": 23,
+            "5": 23,
+            "6": 23,
+            "7": 23,
+            "8": 23,
+            "9": 23,
+            "10": 23
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 21,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de YOGURT LIGHT O 0% GRASA SIN AZÚCAR ( cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la mitad de la opción A, un cuarto de la opción A, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 25
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 22,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió YOGURT ESTILO GRIEGO (cualquier sabor)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": "{\"1\":28,\"2\":26,\"3\":26,\"4\":26,\"5\":26,\"6\":26,\"7\":26,\"8\":26,\"9\":26,1\"0\":26}",
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 23,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  YOGURT ESTILO GRIEGO ( cualquier sabor) por ocasión:",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 27,
+            "2": 28,
+            "3": 28,
+            "4": 28,
+            "5": 27
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 24,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de YOGURT ESTILO GRIEGO ( cualquier sabor) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 28
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 25,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió CREMA ENTERA?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": "{\"1\":31,\"2\":29,\"3\":29,\"4\":29,\"5\":29,\"6\":29,\"7\":29,\"8\":29,\"9\":29,1\"0\":29}",
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 26,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de CREMA ENTERA por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción B,  etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 31
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 27,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió CREMA LIGHT?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 34,
+            "2": 32,
+            "3": 32,
+            "4": 32,
+            "5": 32,
+            "6": 32,
+            "7": 32,
+            "8": 32,
+            "9": 32,
+            "10": 32
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 28,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de CREMA LIGHT por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción B,  etc. Si sabe la cantidad exacta en mililitros, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 34
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 29,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió REQUESÓN?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 37,
+            "2": 35,
+            "3": 35,
+            "4": 35,
+            "5": 35,
+            "6": 35,
+            "7": 35,
+            "8": 35,
+            "9": 35,
+            "10": 35
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 30,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  REQUESÓN por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 36,
+            "2": 37,
+            "3": 37,
+            "4": 37,
+            "5": 36
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 31,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de REQUESÓN por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 37
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 32,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO COTTAGE?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 40,
+            "2": 38,
+            "3": 38,
+            "4": 38,
+            "5": 38,
+            "6": 38,
+            "7": 38,
+            "8": 38,
+            "9": 38,
+            "10": 38
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 33,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO COTTAGE por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 39,
+            "2": 40,
+            "3": 40,
+            "4": 40,
+            "5": 39
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 34,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO COTTAGE por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 40
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 35,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO PANELA?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 43,
+            "2": 41,
+            "3": 41,
+            "4": 41,
+            "5": 41,
+            "6": 41,
+            "7": 41,
+            "8": 41,
+            "9": 41,
+            "10": 41
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 36,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO PANELA por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 42,
+            "2": 43,
+            "3": 43,
+            "4": 43,
+            "5": 42
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 37,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO PANELA por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en  gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 43
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 38,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO PANELA LIGHT ?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 46,
+            "2": 44,
+            "3": 44,
+            "4": 44,
+            "5": 44,
+            "6": 44,
+            "7": 44,
+            "8": 44,
+            "9": 44,
+            "10": 44
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 39,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO PANELA LIGHT  por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 45,
+            "2": 46,
+            "3": 46,
+            "4": 46,
+            "5": 45
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 40,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO PANELA LIGHT  por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 46
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 41,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO ADOBERA U OAXACA?\n\nNo considerar el queso de las quesadillas",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 49,
+            "2": 47,
+            "3": 47,
+            "4": 47,
+            "5": 47,
+            "6": 47,
+            "7": 47,
+            "8": 47,
+            "9": 47,
+            "10": 47
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 42,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO ADOBERA U OAXACA  por ocasión: \n\nNo considerar el queso de las quesadillas\n",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 48,
+            "2": 49,
+            "3": 49,
+            "4": 49,
+            "5": 48
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 43,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO ADOBERA U OAXACA  por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 49
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 44,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO ADOBERA U OAXACA LIGHT?\n\nNo considerar el queso de las quesadillas",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 52,
+            "2": 50,
+            "3": 50,
+            "4": 50,
+            "5": 50,
+            "6": 50,
+            "7": 50,
+            "8": 50,
+            "9": 50,
+            "10": 50
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 45,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO ADOBERA U OAXACA LIGTH  por ocasión: \n\nNo considerar el queso de las quesadillas\n",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 51,
+            "2": 52,
+            "3": 52,
+            "4": 52,
+            "5": 51
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 46,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR?\n\nNo considerar el queso de las quesadillas o pizza",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 55,
+            "2": 53,
+            "3": 53,
+            "4": 53,
+            "5": 53,
+            "6": 53,
+            "7": 53,
+            "8": 53,
+            "9": 53,
+            "10": 53
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 47,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR por ocasión: \n\nNo considerar el queso de las quesadillas o pizza\n",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 54,
+            "2": 55,
+            "3": 55,
+            "4": 55,
+            "5": 54
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 48,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 55
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 49,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR LIGHT ?\n\nNo considerar el queso de las quesadillas o pizza",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 58,
+            "2": 56,
+            "3": 56,
+            "4": 56,
+            "5": 56,
+            "6": 56,
+            "7": 56,
+            "8": 56,
+            "9": 56,
+            "10": 56
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 50,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR LIGHT por ocasión: \n\nNo considerar el queso de las quesadillas o pizza\n",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 57,
+            "2": 58,
+            "3": 58,
+            "4": 58,
+            "5": 57
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 51,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESO MOZARELLA, MANCHEGO, GOUDA U OTRO SIMILAR LIGHT por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": {
+            "1": 58
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 52,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió TOFU O QUESO DE SOJA?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 61,
+            "2": 61,
+            "3": 61,
+            "4": 61,
+            "5": 61,
+            "6": 61,
+            "7": 61,
+            "8": 61,
+            "9": 61,
+            "10": 61
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 53,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de  TOFU O QUESO DE SOJA por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 60,
+            "2": 59,
+            "3": 59,
+            "4": 59,
+            "5": 60
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 54,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de TOFU O QUESO DE SOJA por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": 61,
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 55,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESADILLA CON TORTILLA DE HARINA?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 64,
+            "2": 62,
+            "3": 62,
+            "4": 62,
+            "5": 62,
+            "6": 62,
+            "7": 62,
+            "8": 62,
+            "9": 62,
+            "10": 62
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 56,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de QUESADILLA CON TORTILLA DE HARINA por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 63,
+            "2": 64,
+            "3": 64,
+            "4": 64,
+            "5": 63
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 57,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESADILLA CON TORTILLA DE HARINA por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": 64,
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 58,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió QUESADILLA CON TORTILLA DE MAÍZ?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 67,
+            "2": 65,
+            "3": 65,
+            "4": 65,
+            "5": 65,
+            "6": 65,
+            "7": 65,
+            "8": 65,
+            "9": 65,
+            "10": 65
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 59,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de QUESADILLA CON TORTILLA DE MAÍZ por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 66,
+            "2": 67,
+            "3": 67,
+            "4": 67,
+            "5": 66
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 60,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de QUESADILLA CON TORTILLA DE MAÍZ por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": 67,
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 61,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió FLAN O JERICALLA (PREPARACIÓN CASERA)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 70,
+            "2": 68,
+            "3": 68,
+            "4": 68,
+            "5": 68,
+            "6": 68,
+            "7": 68,
+            "8": 68,
+            "9": 68,
+            "10": 68
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 62,
+    "fields": {
+        "texto": "Seleccione la fotografía que más se acerque a la cantidad habitual de consumo de FLAN O JERICALLA (PREPARACIÓN CASERA) por ocasión: ",
+        "tipo_respuesta": 2,
+        "sig_pregunta": {
+            "1": 69,
+            "2": 70,
+            "3": 70,
+            "4": 70,
+            "5": 69
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 63,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de FLAN O JERICALLA (PREPARACIÓN CASERA) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A, la opción A+B, la mitad de la opción D, un cuarto de la opción D, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": 70,
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 64,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió HELADO A BASE DE LECHE O CREMA (CUALQUIER SABOR)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 73,
+            "2": 71,
+            "3": 71,
+            "4": 71,
+            "5": 71,
+            "6": 71,
+            "7": 71,
+            "8": 71,
+            "9": 71,
+            "10": 71
+        },
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 65,
+    "fields": {
+        "texto": "En caso de responder \"más de la opción A\" o \"menos de la opción D\" mencione la cantidad habitual de consumo de HELADO A BASE DE LECHE O CREMA (CUALQUIER SABOR) por ocasión.\n\nEjemplo, 2 veces la opción A, 3 veces la opción A,  la mitad de la opción A, un cuarto de la opción A, etc. Si sabe la cantidad exacta en gramos, mencionarla.",
+        "tipo_respuesta": 3,
+        "sig_pregunta": 73,
+        "tipo_cuestionario": 1
+    }
+},
+{
+    "model": "cuestionario.preguntamodel",
+    "pk": 66,
+    "fields": {
+        "texto": "En los últimos TRES MESES ¿Con qué frecuencia consumió HELADO A BASE DE AGUA (CUALQUIER SABOR)?",
+        "tipo_respuesta": 1,
+        "sig_pregunta": {
+            "1": 76,
+            "2": 74,
+            "3": 74,
+            "4": 74,
+            "5": 74,
+            "6": 74,
+            "7": 74,
+            "8": 74,
+            "9": 74,
+            "10": 74
+        },
+        "tipo_cuestionario": 1
+    }
+}
+]

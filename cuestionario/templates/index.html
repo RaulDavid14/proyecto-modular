@@ -4,6 +4,16 @@
 
 {% block body %}
 
-<p>el id del usuario es: {{id}}</p>
-<p>el cuestionario seleccionado: {{cuestionario}}</p>
+    <div class="">
+        <p>{{pregunta}}</p>
+    </div>
+    <div class="">
+        {% for respuesta in respuestas %}
+            <input value="{{respuesta.id}}" type="radio" name="respuesta">
+            <label for="">{{respuesta.nombre_largo}}</label>
+        {% endfor %}
+    </div>
+    <div class="">
+        <a href="">Anterior</a>  <a href="">Siguiente</a>
+    </div>        
 {% endblock body %}

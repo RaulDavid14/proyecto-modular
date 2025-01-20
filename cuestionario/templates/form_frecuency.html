@@ -1,0 +1,10 @@
+<form action="{% url '' %}" method="post">
+    {% csrf_token %}
+    <label for=""></label>
+     
+    {% for respuesta in respuestas %}
+       <input class="" type="radio" name="opcion" value="">
+    {% endfor %}
+    
+    <button class="" ></button>
+</form>
