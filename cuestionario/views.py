@@ -9,19 +9,19 @@ def index(request, cuestionario):
     catFrecuencia = CatFrecuencia.objects.all()
     catOpcionMultiple = CatOpcionMultiple.objects.all()
     
-    data = {
-        'id' : request.user.id,
-        'cuestionario' : cuestionario
-    }
-    
+    template = ''
     if preguntaModel.tipo_cuestionario == 1:
         respuestas = catFrecuencia
+        template = 1
+        
     elif preguntaModel.tipo_cuestionario == 2:
         respuestas = catOpcionMultiple
-        
+        template = 2
     data = {
-        'pregunta' : preguntaModel.texto
+        'cuestionario' : cuestionario
+        ,'pregunta' : preguntaModel.texto
         , 'respuestas' : respuestas
+        , 'template' : template
     }
     
-    return render(request, "index.html", data)
+    return render(request, 'index.html', data)

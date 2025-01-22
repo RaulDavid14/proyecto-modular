@@ -1,10 +1,18 @@
-<form action="{% url '' %}" method="post">
-    {% csrf_token %}
-    <label for=""></label>
-     
-    {% for respuesta in respuestas %}
-       <input class="" type="radio" name="opcion" value="">
-    {% endfor %}
-    
-    <button class="" ></button>
-</form>
+<div class="row">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="text-center col-12">
+            <h4>{{pregunta}}</h4>
+        </div>
+        <div class="col-12 mb-5 mt-5">
+            {% for respuesta in respuestas %}
+                <input id="respuesta{{respuesta.id}}" class="" type="radio" name="opcion" value="respuesta">
+                <label for="respuesta{{respuesta.id}}">{{respuesta.nombre_largo}}</label>
+            {% endfor %}
+        </div>
+        <div class="display-flex row col-12 mt-5">
+            <a class="btn btn-outline-success w-25" href="">Anterior</a>
+            <button class="col-6 btn btn-outline-success w-25" >Siguiente</button>
+        </div>
+    </form>
+</div>
