@@ -6,7 +6,7 @@
         </div>
         <div class="col-12 mb-5 mt-5">
             {% for respuesta in respuestas %}
-                <input id="respuesta{{respuesta.id}}" class="" type="radio" name="opcion" value="respuesta">
+                <input id="respuesta{{respuesta.id}}" class="" type="radio" name="opcion" value="{{respuesta.id}}" required>
                 <label for="respuesta{{respuesta.id}}">{{respuesta.nombre_largo}}</label>
             {% endfor %}
         </div>

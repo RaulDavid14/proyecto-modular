@@ -6,15 +6,16 @@ from cuestionario.models import PreguntaModel
     GUARDAR RESPUESTA
     SIGUIENTE PREGUNTA
 """
-#extraer el inicio en la base de datos
 class CuestionarioStateMachine():
     def __init__(self, user):
         self.__inicio = False
         self.__progreso = self.get_progreso()
+        self.__user = user
         
         
     def get_progreso(self):
-        return None
+        
+        pass
     
     def buscar_pregunta(self, id_pregunta):
         try:
