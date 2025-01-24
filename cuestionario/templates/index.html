@@ -11,9 +11,12 @@
     </div>
 
     {% if template == 1 %}
-        {% include 'form_images.html' %}
-       
-    {% elif template == 2 %}
         {% include 'form_frecuency.html' %}
+    {% elif template == 2 %}
+        {% include 'form_images.html' %}
     {% endif %}
 {% endblock body %}
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'vendor/js/form.js' %}"></script>
+{% endblock scripts %}
