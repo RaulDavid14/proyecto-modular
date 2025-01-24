@@ -1,17 +1,26 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import PreguntaModel
+from .models import PreguntaModel, RespuestaModel
 from catalogos.models import CatFrecuencia, CatOpcionMultiple
-from state_machines.form_state_machine import CuestionarioStateMachine
 from usuario.models import ProgresoModel
+
+"""
+    contenido faltante para la vista
+    guardar la respuesta en la base de datos de respuestas
+    falta definir funcionamiento para retornar a la pregunta anterior en caso de ser necesario
+    procedimiento para obtener el avance del cuestionario.
+    modificar script para cargar las respuestas en la base de datos
+"""
+
 
 @login_required
 def index(request, cuestionario):
     progresoModel = ProgresoModel.objects.get(id_usuario = request.user.id)
-    print(f'Contenido progreso - {progresoModel}')
-    progreso_cuestionarios = progresoModel.cuestionarios
-    avance_actual = progreso_cuestionarios[cuestionario]['pregunta_actual']
     
+    progreso_cuestionarios = progresoModel.cuestionarios
+    inicio = progreso_cuestionarios[cuestionario]['inicio']
+    avance_actual = progreso_cuestionarios[cuestionario]['pregunta_actual']
+    id_cuestionario = progreso_cuestionarios[cuestionario]['id_cuestionario']
     preguntaModel = PreguntaModel.objects.get(id=avance_actual)
       
     if request.method == 'POST':
@@ -21,8 +30,9 @@ def index(request, cuestionario):
         
         progreso_cuestionarios[cuestionario]['pregunta_actual'] = sig_pregunta  
         ProgresoModel.objects.filter(id_usuario = request.user.id).update(cuestionarios=progreso_cuestionarios)
+        respuestaModel = RespuestaModel(id_usuario = request.user.id, id_cuestionario = id_cuestionario, id_pregunta = avance_actual, id_respuesta = opcion)
+        respuestaModel.save()
         
-    
     if preguntaModel.tipo_respuesta == 1:
         respuestas = CatFrecuencia.objects.all()
         template = 1
