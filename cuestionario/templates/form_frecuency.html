@@ -1,18 +1,55 @@
-<div class="row">
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="text-center col-12">
-            <h4>{{pregunta}}</h4>
-        </div>
-        <div class="col-12 mb-5 mt-5">
-            {% for respuesta in respuestas %}
-                <input id="respuesta{{respuesta.id}}" class="" type="radio" name="opcion" value="{{respuesta.id}}" required>
-                <label for="respuesta{{respuesta.id}}">{{respuesta.nombre_largo}}</label>
-            {% endfor %}
-        </div>
-        <div class="d-flex justify-content-between mt-5 px-3">
-            <a class="btn btn-success w-25" href="">Anterior</a>
-            <button class="btn btn-success w-25">Siguiente</button>
-        </div>
-    </form>
+<div class="container mt-4">
+    <div class="border p-4 rounded shadow-sm">
+        <form action="" method="post" id="formulario">
+            {% csrf_token %}
+            
+            <!-- Título de la pregunta -->
+            <div class="text-center mb-4">
+                <h4>{{ pregunta }}</h4>
+            </div>
+
+            <!-- Menú desplegable para respuestas -->
+            <div class="form-group mb-5">
+                <select class="form-control" id="opcionesSelect" name="opcion">
+                    <option value="" disabled selected>Selecciona una respuesta</option>
+                    {% for respuesta in respuestas %}
+                        <option value="{{ respuesta.id }}">{{ respuesta.nombre_largo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="d-flex justify-content-between mt-4 px-3">
+                <a class="btn btn-outline-success w-25" href="" id="anterior">Anterior</a>
+                <button type="submit" class="btn btn-success w-25">Siguiente</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<!-- Script de confirmación de salida -->
+<script>
+    // Variable para controlar si se está enviando el formulario o navegando
+    let isSubmitting = false;
+    let isNavigating = false;
+
+    // Detecta el evento de envío del formulario
+    document.getElementById('formulario').addEventListener('submit', function() {
+        isSubmitting = true;
+    });
+
+    // Detecta el clic en el enlace de "Anterior" para evitar que el mensaje aparezca
+    document.getElementById('anterior').addEventListener('click', function() {
+        isNavigating = true;
+    });
+
+    window.addEventListener('beforeunload', function (e) {
+        if (isSubmitting || isNavigating) {
+            return; // No mostrar el mensaje si se está enviando el formulario o navegando
+        }
+
+        var mensaje = "¿Estás seguro de que deseas salir del formulario?";
+        e.returnValue = mensaje;
+        return mensaje;
+    });
+</script>

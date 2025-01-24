@@ -1,5 +1,4 @@
-{% extends "layout.html" %}
-
+{% extends 'navbar.html' %}
 {% block title %}{{cuestionario}}{% endblock title %}
 
 {% block body %}
@@ -12,8 +11,9 @@
     </div>
 
     {% if template == 1 %}
-        {% include 'form_frecuency.html' %}
-    {% elif template == 2 %}
         {% include 'form_images.html' %}
+       
+    {% elif template == 2 %}
+        {% include 'form_frecuency.html' %}
     {% endif %}
 {% endblock body %}
