@@ -18,7 +18,7 @@
                 <div class="form-group d-flex flex-column" style="flex-grow: 1; justify-content: flex-start; margin-left: 500px;">
                     {% for respuesta in respuestas %}
                         <div class="form-check mb-3 text-right">
-                            <input class="form-check-input" type="checkbox" value="{{ respuesta.id }}" id="respuesta_{{ respuesta.id }}" name="respuestas">
+                            <input class="form-check-input" type="radio" value="{{ respuesta.id }}" id="respuesta_{{ respuesta.id }}" name="respuestas">
                             <label class="form-check-label" for="respuesta_{{ respuesta.id }}">
                                 {{ respuesta.nombre_largo }}
                             </label>
