@@ -1,6 +1,15 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
+class ProgresoModel(models.Model):
+    id_usuario = models.IntegerField(verbose_name='id usuario')
+    cuestionarios = models.JSONField(verbose_name='Cuestionarios disponibles')
+
+    class Meta:
+        db_table = 'progreso_usuario'
+        verbose_name = 'progreso de usuario'
+        verbose_name_plural = 'progresos de usuario'
+    
 class AdminModel(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -42,7 +51,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
     objects = AdminModel()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']  # Campos obligatorios para crear usuario
+    REQUIRED_FIELDS = ['first_name', 'last_name'] 
 
     def __str__(self):
         return self.email
