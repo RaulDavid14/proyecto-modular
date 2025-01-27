@@ -56,24 +56,6 @@
                             </select>
                         </div>
                         
-                        <!-- Campo: Estado Civil -->
-                        <div class="mb-4">
-                            <h6>{{ form.estado_civil.label }}</h6>
-                            <select 
-                                name="estado_civil" 
-                                id="{{ form.estado_civil.auto_id }}" 
-                                class="form-select form-control-sm" 
-                                required
-                            >
-                                <option value="" disabled selected>--Selecciona una opción--</option>
-                                {% for campo in form.estado_civil %}
-                                <option value="{{ campo.choice_value }}">
-                                    {{ campo.choice_label }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
                         <!-- Campo: Nivel Educativo -->
                         <div class="mb-4">
                             <h6>{{ form.nivel_educativo.label }}</h6>
