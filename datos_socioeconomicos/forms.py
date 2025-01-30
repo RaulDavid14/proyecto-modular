@@ -2,12 +2,18 @@ from django import forms
 from .models import *
 
 class DatosSocioeconomicosForm(forms.Form):
-    genero = forms.ChoiceField(
-        choices=[(genero.id, genero.nombre) for genero in CatSituacionLaboral.objects.all()] , widget=forms.RadioSelect(
-        attrs={'class' : 'form-check-input', 'name' : 'sit_laboral', 'id' : 'genero'}
-    ))
+    situacion_laboral = forms.ChoiceField(
+        label='Situación laboral',
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+    )
     
-    estado_civil = forms.ChoiceField(
-        choices=[(estado.id, estado.nombre) for estado in CatIngresos.objects.all()], widget=forms.RadioSelect(
-        attrs={'class' : 'form-check-input', 'name' : 'Ingresos', 'id' : 'est_civil'}
-    ))
+
+    ingresos = forms.ChoiceField(
+        label='Ingresos',
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(DatosSocioeconomicosForm, self).__init__(*args, **kwargs)
+        self.fields['situacion_laboral'].choices = [(situacion_laboral.id, situacion_laboral.nombre) for situacion_laboral in CatSituacionLaboral.objects.all()]
+        self.fields['ingresos'].choices = [(ingresos.id, ingresos.nombre) for ingresos in CatIngresos.objects.all()]
