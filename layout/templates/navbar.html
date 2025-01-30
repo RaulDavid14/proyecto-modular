@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,11 +14,12 @@
     {% block links %}{% endblock links %}
 
     <title>{% block titulo %}{% endblock titulo %}</title>
-    </head>
+</head>
 
 <body>
 
     <div class="sidebar">
+        <img src="{% static 'vendor/img/logo.png' %}" alt="Logo" class="logo mb-3" width="150">
         <h2 class="title mb-5">Bienvenido</h2>
         <ul class="nav flex-column">
             <li class="nav-item mt-3">
@@ -30,15 +32,12 @@
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link" href="#">Configuraciones</a>
-                
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link" href="#">Ayuda</a>
-                
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
-                
             </li>
         </ul>
     </div>
