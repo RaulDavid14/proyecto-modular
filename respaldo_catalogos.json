@@ -1,0 +1,344 @@
+[
+{
+    "model": "catalogos.catsexo",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "Hombre",
+        "abreviacion": "H",
+        "descripcion": "Genero masculino"
+    }
+},
+{
+    "model": "catalogos.catsexo",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "Mujer",
+        "abreviacion": "M",
+        "descripcion": "Genero femenino"
+    }
+},
+{
+    "model": "catalogos.catestadocivil",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "soltero",
+        "abreviacion": "solt",
+        "descripcion": "Persona no casada que no ha tenido una unión formal"
+    }
+},
+{
+    "model": "catalogos.catestadocivil",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "casado",
+        "abreviacion": "casa",
+        "descripcion": "Persona unida en matrimonio"
+    }
+},
+{
+    "model": "catalogos.catestadocivil",
+    "pk": 3,
+    "fields": {
+        "nombre_largo": "viudo",
+        "abreviacion": "viudo",
+        "descripcion": "Persona cuya pareja ha fallecido"
+    }
+},
+{
+    "model": "catalogos.catestadocivil",
+    "pk": 4,
+    "fields": {
+        "nombre_largo": "unión libre",
+        "abreviacion": "unlib",
+        "descripcion": "Persona en una relación de convivencia sin matrimonio formal"
+    }
+},
+{
+    "model": "catalogos.catestadocivil",
+    "pk": 5,
+    "fields": {
+        "nombre_largo": "separado/divorciado",
+        "abreviacion": "se_di",
+        "descripcion": "Persona que ha terminado una relación matrimonial o de unión formal"
+    }
+},
+{
+    "model": "catalogos.catpoblacion",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "rural",
+        "abreviacion": "rural",
+        "descripcion": "Persona que reside en una zona o comunidad rural"
+    }
+},
+{
+    "model": "catalogos.catpoblacion",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "urbana",
+        "abreviacion": "urban",
+        "descripcion": "Persona que reside en una zona o ciudad urbana"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "primaria",
+        "abreviacion": "prim",
+        "descripcion": "Persona que ha completado o está cursando el nivel educativo de primaria"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "secundaria",
+        "abreviacion": "secu",
+        "descripcion": "Persona que ha completado o está cursando el nivel educativo de secundaria"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 3,
+    "fields": {
+        "nombre_largo": "preparatoria",
+        "abreviacion": "prepa",
+        "descripcion": "Persona que ha completado o está cursando el nivel educativo de preparatoria o bachillerato"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 4,
+    "fields": {
+        "nombre_largo": "universidad",
+        "abreviacion": "univ",
+        "descripcion": "Persona que ha completado o está cursando estudios universitarios o técnicos"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 5,
+    "fields": {
+        "nombre_largo": "posgrado",
+        "abreviacion": "posgr",
+        "descripcion": "Persona que ha completado estudios de nivel posgrado (maestría o doctorado)"
+    }
+},
+{
+    "model": "catalogos.catniveleducativo",
+    "pk": 6,
+    "fields": {
+        "nombre_largo": "ninguno",
+        "abreviacion": "none",
+        "descripcion": "Persona que no ha completado ningún nivel educativo formal"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "Productos lácteos",
+        "abreviacion": "LPL",
+        "descripcion": "Contiene todo lo relacionado sobre el consumo de productos lacteos"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "Verduras y Hortalizas",
+        "abreviacion": "VyH",
+        "descripcion": "Contiene todo lo relacionado sobre el consumo de verduras"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 3,
+    "fields": {
+        "nombre_largo": "Frutas y frutos Secos",
+        "abreviacion": "FyFC",
+        "descripcion": "Contiene todo lo relacionado sobre el consumo de frutas"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 6,
+    "fields": {
+        "nombre_largo": "Productos de panadería",
+        "abreviacion": "PdP",
+        "descripcion": "Contiene todo lo relacionado sobre el consumo productos fabricados con harina"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 8,
+    "fields": {
+        "nombre_largo": "Miceláneos",
+        "abreviacion": "Mice",
+        "descripcion": "Contiene todo lo relacionado sobre otro tipo de alimentos"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 9,
+    "fields": {
+        "nombre_largo": "Bebidas",
+        "abreviacion": "Bebid",
+        "descripcion": "Contiene todo lo relacionado sobre tipos de bebidas"
+    }
+},
+{
+    "model": "catalogos.catcuestionarios",
+    "pk": 10,
+    "fields": {
+        "nombre_largo": "Platillos preparados",
+        "abreviacion": "PP",
+        "descripcion": "Contiene todo lo relacionado sobre el consumo platillos preparados"
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "Nunca",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "1 vez al mes o menos",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 3,
+    "fields": {
+        "nombre_largo": "2-3 veces por mes",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 4,
+    "fields": {
+        "nombre_largo": "1 vez por semana",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 5,
+    "fields": {
+        "nombre_largo": "2-4 veces por semana",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 6,
+    "fields": {
+        "nombre_largo": "5-7 veces por semana",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 7,
+    "fields": {
+        "nombre_largo": "1-2 veces por día",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 8,
+    "fields": {
+        "nombre_largo": "2-3 veces por día",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 9,
+    "fields": {
+        "nombre_largo": "4-6 veces por día",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catfrecuencia",
+    "pk": 10,
+    "fields": {
+        "nombre_largo": "Más de 6 veces por día",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 1,
+    "fields": {
+        "nombre_largo": "Más de la opción A",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 2,
+    "fields": {
+        "nombre_largo": "Opción A",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 3,
+    "fields": {
+        "nombre_largo": "Opción B",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 4,
+    "fields": {
+        "nombre_largo": "Opción C",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 5,
+    "fields": {
+        "nombre_largo": "Opción D",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+},
+{
+    "model": "catalogos.catopcionmultiple",
+    "pk": 6,
+    "fields": {
+        "nombre_largo": "Menos de la opción D",
+        "abreviacion": "",
+        "descripcion": ""
+    }
+}
+]
