@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/css/styles.css' %}" rel="stylesheet">
+    
+    {% block links %}
+    {% endblock links %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-   {% block body %}
-   
-   {% endblock body %}
+    <div class="container-fluid">
+        {% block body %}
+        {% endblock body %}
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
 </body>
 </html>

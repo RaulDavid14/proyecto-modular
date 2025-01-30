@@ -1,0 +1,29 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #f8f9fa; /* Color de fondo de la barra de navegación */
+}
+
+.navbar-brand {
+    color: #000; /* Color del texto de la marca */
+}
+
+.nav-link {
+    color: #000; /* Color del texto de los enlaces */
+    padding: 10px 15px; /* Espacio alrededor de los enlaces */
+    border: 2px solid transparent; /* Bordes transparentes por defecto */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: border-color 0.3s, background-color 0.3s; /* Transiciones suaves */
+}
+
+.nav-link:hover {
+    border: 2px solid #007bff; /* Bordes azules al pasar el mouse */
+    background-color: rgba(0, 123, 255, 0.1); /* Fondo azul claro al pasar el mouse */
+}
+
+.nav-item {
+    margin: 0; /* Evita el margen que puede causar movimiento */
+}
+
+.navbar-nav {
+    margin-left: auto; /* Alineación a la izquierda de los enlaces */
+}

@@ -1,0 +1,43 @@
+.title{
+    color: #fff;
+}
+
+.nav-link{
+    font-size: large;
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar {
+  height: 100vh; /* Altura completa de la ventana */
+  width: 250px; /* Ancho del sidebar */
+  position: fixed; /* Fijo en la página */
+  top: 0;
+  left: 0;
+  background-color: #343a40; /* Color oscuro */
+  padding: 15px;
+}
+
+.sidebar a {
+  text-decoration: none;
+}
+
+.sidebar .menu-item {
+  background-color: #f7f8fa;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.sidebar .menu-item:hover {
+  background-color: #1285ea;
+}
+
+.content {
+  margin-left: 270px; /* Dejar espacio para el sidebar */
+  padding: 20px;
+}

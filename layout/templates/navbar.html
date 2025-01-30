@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/css/navbar.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block links %}{% endblock links %}
+
+    <title>{% block titulo %}{% endblock titulo %}</title>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <img src="{% static 'vendor/img/logo.png' %}" alt="Logo" class="logo mb-3" width="150">
+        <h2 class="title mb-5">Bienvenido</h2>
+        <ul class="nav flex-column">
+            <li class="nav-item mt-3">
+                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+            </li>
+            <li class="nav-item mt-3">
+                <div class="accordion" id="formAccordion">
+                    <a class="nav-link" href="{% url 'generales' %}">Datos Generales</a>
+                </div>
+            </li>
+            <li class="nav-item mt-3">
+                <a class="nav-link" href="#">Configuraciones</a>
+            </li>
+            <li class="nav-item mt-3">
+                <a class="nav-link" href="#">Ayuda</a>
+            </li>
+            <li class="nav-item mt-3">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block body %}
+        {% endblock body %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+
+</html>
