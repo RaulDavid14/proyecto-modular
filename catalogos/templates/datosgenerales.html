@@ -7,12 +7,12 @@
 {% endblock titulo %}
 
 {% block body %}
-<div class="container my-5">
+<div class="container my-1">
     <div class="card shadow-lg">
         <div class="card-body">
-            <form id="datosForm" method="post" class="needs-validation">
+            <form id="datosForm" method="post" class="needs-validation" novalidate onsubmit="mostrarDatos(event)">
                 {% csrf_token %}
-                
+
                 <!-- Sección: Datos Personales -->
                 <div class="card mb-4">
                     <div class="card-header bg-primary text-white">
@@ -20,76 +20,37 @@
                     </div>
                     
                     <div class="card-body">
-                        <!-- Campo: Población -->
                         <div class="mb-4">
                             <h6>{{ form.poblacion.label }}</h6>
-                            <select 
-                                name="poblacion" 
-                                id="{{ form.poblacion.auto_id }}" 
-                                class="form-select form-control-sm" 
-                                required
-                            >
+                            <select name="poblacion" id="poblacion" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
                                 {% for campo in form.poblacion %}
-                                <option value="{{ campo.choice_value }}">
-                                    {{ campo.choice_label }}
-                                </option>
+                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
                                 {% endfor %}
                             </select>
+                            <div class="invalid-feedback">Por favor selecciona una opción.</div>
                         </div>
 
-                        <!-- Campo: Sexo -->
                         <div class="mb-4">
                             <h6>{{ form.sexo.label }}</h6>
-                            <select 
-                                name="sexo" 
-                                id="{{ form.sexo.auto_id }}" 
-                                class="form-select form-control-sm" 
-                                required
-                            >
+                            <select name="sexo" id="sexo" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
                                 {% for campo in form.sexo %}
-                                <option value="{{ campo.choice_value }}">
-                                    {{ campo.choice_label }}
-                                </option>
+                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
                                 {% endfor %}
                             </select>
+                            <div class="invalid-feedback">Por favor selecciona una opción.</div>
                         </div>
                         
-                        <!-- Campo: Estado Civil -->
-                        <div class="mb-4">
-                            <h6>{{ form.estado_civil.label }}</h6>
-                            <select 
-                                name="estado_civil" 
-                                id="{{ form.estado_civil.auto_id }}" 
-                                class="form-select form-control-sm" 
-                                required
-                            >
-                                <option value="" disabled selected>--Selecciona una opción--</option>
-                                {% for campo in form.estado_civil %}
-                                <option value="{{ campo.choice_value }}">
-                                    {{ campo.choice_label }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <!-- Campo: Nivel Educativo -->
                         <div class="mb-4">
                             <h6>{{ form.nivel_educativo.label }}</h6>
-                            <select 
-                                name="nivel_educativo" 
-                                id="{{ form.nivel_educativo.auto_id }}" 
-                                class="form-select form-control-sm" 
-                                required
-                            >
+                            <select name="nivel_educativo" id="nivel_educativo" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
                                 {% for campo in form.nivel_educativo %}
-                                <option value="{{ campo.choice_value }}">
-                                    {{ campo.choice_label }}
-                                </option>
+                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
                                 {% endfor %}
                             </select>
+                            <div class="invalid-feedback">Por favor selecciona una opción.</div>
                         </div>
                     </div>
                 </div>
@@ -101,67 +62,104 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <!-- Campo: Ingresos -->
                             <div class="col-md-6 mb-4">
                                 <h6>{{ economico.ingresos.label }}</h6>
-                                <select 
-                                    name="ingresos" 
-                                    id="{{ economico.ingresos.auto_id }}" 
-                                    class="form-select form-control-sm" 
-                                    required
-                                >
+                                <select name="ingresos" id="ingresos" class="form-select form-control-sm" required>
                                     <option value="" disabled selected>--Selecciona una opción--</option>
                                     {% for campo in economico.ingresos %}
-                                    <option value="{{ campo.choice_value }}">
-                                        {{ campo.choice_label }}
-                                    </option>
+                                    <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
                                     {% endfor %}
                                 </select>
+                                <div class="invalid-feedback">Por favor selecciona una opción.</div>
                             </div>
 
-                            <!-- Campo: Situación Laboral -->
                             <div class="col-md-6 mb-4">
                                 <h6>{{ economico.situacion_laboral.label }}</h6>
-                                <select 
-                                    name="situacion_laboral" 
-                                    id="{{ economico.situacion_laboral.auto_id }}" 
-                                    class="form-select form-control-sm" 
-                                    required
-                                >
+                                <select name="situacion_laboral" id="situacion_laboral" class="form-select form-control-sm" required>
                                     <option value="" disabled selected>--Selecciona una opción--</option>
                                     {% for campo in economico.situacion_laboral %}
-                                    <option value="{{ campo.choice_value }}">
-                                        {{ campo.choice_label }}
-                                    </option>
+                                    <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
                                     {% endfor %}
                                 </select>
+                                <div class="invalid-feedback">Por favor selecciona una opción.</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Botón de Envío -->
+                <!-- Botón para enviar el formulario -->
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg px-5">Enviar</button>
                 </div>
             </form>
+
+            <!-- Sección para mostrar los datos ingresados -->
+            <div id="datosIngresados" style="display: none;">
+                <h5 class="mt-4">Datos Ingresados</h5>
+                <p><strong>Población:</strong> <span id="confirmPoblacion"></span></p>
+                <p><strong>Sexo:</strong> <span id="confirmSexo"></span></p>
+                <p><strong>Nivel Educativo:</strong> <span id="confirmNivelEducativo"></span></p>
+                <p><strong>Ingresos:</strong> <span id="confirmIngresos"></span></p>
+                <p><strong>Situación Laboral:</strong> <span id="confirmSituacionLaboral"></span></p>
+                <button type="button" class="btn btn-secondary" onclick="editarDatos()">Editar Datos</button>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Validación personalizada con JavaScript
-    document.getElementById('datosForm').addEventListener('submit', function(event) {
-        const form = event.target;
-        const selects = form.querySelectorAll('select');
+    // Validación del formulario
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-        // Verifica si cada campo obligatorio tiene un valor seleccionado
-        const isFormValid = Array.from(selects).every(select => select.value !== "");
+    function mostrarDatos(event) {
+        // Evitar el envío del formulario
+        event.preventDefault();
 
-        if (!isFormValid) {
-            event.preventDefault(); // Detiene el envío del formulario
-            alert('Debe seleccionar una opción válida en todos los campos.');
+        // Validar formulario antes de mostrar datos
+        var form = document.getElementById("datosForm");
+        if (form.checkValidity() === false) {
+            form.classList.add('was-validated');
+            return;
         }
-    });
+
+        // Obtener valores seleccionados en el formulario
+        let poblacion = document.getElementById("poblacion").selectedOptions[0].text;
+        let sexo = document.getElementById("sexo").selectedOptions[0].text;
+        let nivelEducativo = document.getElementById("nivel_educativo").selectedOptions[0].text;
+        let ingresos = document.getElementById("ingresos").selectedOptions[0].text;
+        let situacionLaboral = document.getElementById("situacion_laboral").selectedOptions[0].text;
+
+        // Insertar valores en la sección de datos ingresados
+        document.getElementById("confirmPoblacion").innerText = poblacion;
+        document.getElementById("confirmSexo").innerText = sexo;
+        document.getElementById("confirmNivelEducativo").innerText = nivelEducativo;
+        document.getElementById("confirmIngresos").innerText = ingresos;
+        document.getElementById("confirmSituacionLaboral").innerText = situacionLaboral;
+
+        // Mostrar la sección de datos ingresados y ocultar el formulario
+        document.getElementById("datosForm").style.display = "none";
+        document.getElementById("datosIngresados").style.display = "block";
+    }
+
+    function editarDatos() {
+        // Mostrar el formulario y ocultar la sección de datos ingresados
+        document.getElementById("datosForm").style.display = "block";
+        document.getElementById("datosIngresados").style.display = "none";
+    }
 </script>
+
 {% endblock body %}

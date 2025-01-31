@@ -16,12 +16,6 @@ class CatSexo(CatalogoModel):
         verbose_name = 'Sexo'
         verbose_name_plural = 'Sexos'
         
-class CatEstadoCivil(CatalogoModel):
-    class Meta:
-        db_table = 'catalogo_estado_civil'
-        verbose_name = 'Estado cívil'
-        verbose_name_plural = 'Estados Civiles'
-        
 class CatPoblacion(CatalogoModel):
     class Meta:
         db_table = 'catalogo_poblacion'

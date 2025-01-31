@@ -1,5 +1,5 @@
 from django import forms
-from .models import CatSexo, CatEstadoCivil, CatPoblacion, CatNivelEducativo
+from .models import CatSexo, CatPoblacion, CatNivelEducativo
 
 class DatosGeneralesForm(forms.Form):
 
@@ -10,11 +10,6 @@ class DatosGeneralesForm(forms.Form):
                 'class': 'form-check-input',
                 'id' : 'id_sexo'
             })
-    )
-
-    estado_civil = forms.ChoiceField(
-        label='Estado Civil',
-        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
     )
 
     poblacion = forms.ChoiceField(
@@ -31,6 +26,5 @@ class DatosGeneralesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(DatosGeneralesForm, self).__init__(*args, **kwargs)
         self.fields['sexo'].choices = [(sexo.id, sexo.nombre_largo) for sexo in CatSexo.objects.all()]
-        self.fields['estado_civil'].choices = [(estado.id, estado.nombre_largo) for estado in CatEstadoCivil.objects.all()]
         self.fields['poblacion'].choices = [(poblacion.id, poblacion.nombre_largo) for poblacion in CatPoblacion.objects.all()]
         self.fields['nivel_educativo'].choices = [(nivel.id, nivel.nombre_largo) for nivel in CatNivelEducativo.objects.all()]
