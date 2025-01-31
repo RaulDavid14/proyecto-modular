@@ -29,6 +29,10 @@ media/
 *.env
 .env
 
+# Django migrations
+*/migrations/*
+!*/migrations/__init__.py
+
 # If you are using macOS
 .DS_Store
 
