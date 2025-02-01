@@ -15,33 +15,13 @@
                     <form action="{% url 'register' %}" method="post">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.first_name.id_for_label }}">Primer Nombre <span class="text-danger">*</span></label>
-                                {{ form.first_name }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.second_name.id_for_label }}">Segundo Nombre</label>
-                                {{ form.second_name }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.third_name.id_for_label }}">Tercer Nombre</label>
-                                {{ form.third_name }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.last_name.id_for_label }}">Apellido Paterno <span class="text-danger">*</span></label>
-                                {{ form.last_name }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.last_name_maternal.id_for_label }}">Apellido Materno</label>
-                                {{ form.last_name_maternal }}
+                            <div class="form-group col-12 mb-3">
+                                <label for="{{ form.nombre_completo.id_for_label }}">Nombre Completo <span class="text-danger">*</span></label>
+                                {{ form.nombre_completo }}
                             </div>
                             <div class="form-group col-12 mb-3">
                                 <label for="{{ form.email.id_for_label }}">Correo Electrónico <span class="text-danger">*</span></label>
                                 {{ form.email }}
-                            </div>
-                            <div class="form-group col-12 mb-3">
-                                <label for="{{ form.birth_date.id_for_label }}">Fecha Nacimiento <span class="text-danger">*</span></label>
-                                {{ form.birth_date }}
                             </div>
                             <div class="form-group col-6 mb-3">
                                 <label for="{{ form.password1.id_for_label }}">Contraseña <span class="text-danger">*</span></label>
