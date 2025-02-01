@@ -8,13 +8,11 @@ from utils.cuestionario import Cuestionario
 @login_required
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def index(request):
-
-    nombre = request.user.first_name
-    apellido = request.user.last_name
     cuestionario = Cuestionario()
-
+    
     datos = {
-        'cuestionarios' : cuestionario.get_quiz()        
+        'cuestionarios': cuestionario.get_quiz(),
+        'nombre_completo': request.user.nombre_completo
     }
 
     return render(request, 'home.html', datos)
