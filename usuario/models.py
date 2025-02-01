@@ -36,8 +36,8 @@ class AdminModel(BaseUserManager):
 
 class UserModel(AbstractBaseUser, PermissionsMixin):
     # Campos obligatorios
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)  # Apellido paterno
+    # Campo combinado para nombre completo
+    nombre_completo = models.CharField(max_length=255, verbose_name="Nombre completo")
     email = models.EmailField(unique=True)
     # Campos opcionales
     second_name = models.CharField(max_length=30, blank=True, null=True)
@@ -51,7 +51,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
     objects = AdminModel()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name'] 
+    REQUIRED_FIELDS = ['nombre_completo']
 
     def __str__(self):
         return self.email
