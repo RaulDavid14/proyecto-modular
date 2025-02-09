@@ -1,23 +1,22 @@
 from django.db import models
+from catalogos.models import DatosGenerales
 
-class Catalogo(models.Model):
-    id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, verbose_name='Nombre')
-    abreviacion = models.CharField(max_length=5, verbose_name='Abreviación')
-    descripcion = models.TextField(verbose_name='Descripción')
-    
-    class Meta:
-        abstract = True
+class CatSituacionLaboral(models.Model):
+    nombre = models.CharField(max_length=100, verbose_name="Situación Laboral")
 
-# Create your models here.
-class CatSituacionLaboral(Catalogo): #herencia
-   class Meta:
-       verbose_name = 'Situacion Laboral' #especifica como mostrar en el panel de administrador.
-       verbose_name_plural = 'Tipos de situacion laboral' #especifica como mostrar el listado.
-       db_table = 'cat_situacion_laboral' #especifica el nombre el nombre de la tabla en la base de datos.
+    def __str__(self):
+        return self.nombre
 
-class CatIngresos(Catalogo):
-    class Meta:
-       verbose_name = 'Ingreso'
-       verbose_name_plural = 'Cantidad de ingresos'
-       db_table = 'cat_ingreso'
+class CatIngresos(models.Model):
+    nombre = models.CharField(max_length=100, verbose_name="Ingresos")
+
+    def __str__(self):
+        return self.nombre
+
+class DatosSocioeconomicos(models.Model):
+    datos_generales = models.OneToOneField(DatosGenerales, on_delete=models.CASCADE, verbose_name="Datos Generales")
+    ingresos = models.CharField(max_length=100, verbose_name="Ingresos")
+    situacion_laboral = models.CharField(max_length=100, verbose_name="Situación Laboral")
+
+    def __str__(self):
+        return f"{self.datos_generales} - {self.ingresos} - {self.situacion_laboral}"
