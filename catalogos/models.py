@@ -15,18 +15,24 @@ class CatSexo(CatalogoModel):
         db_table = 'catalogo_sexo'
         verbose_name = 'Sexo'
         verbose_name_plural = 'Sexos'
+    def __str__(self):
+        return self.nombre_largo
         
 class CatPoblacion(CatalogoModel):
     class Meta:
         db_table = 'catalogo_poblacion'
         verbose_name = 'Población'
         verbose_name_plural = 'Tipos de Población'
+    def __str__(self):
+        return self.nombre_largo
         
 class CatNivelEducativo(CatalogoModel):
     class Meta:
         db_table = 'catalogo_nivel_educativo'
         verbose_name = 'Nivel educativo'
         verbose_name_plural = 'Niveles educativos'
+    def __str__(self):
+        return self.nombre_largo
 
 class CatCuestionarios(CatalogoModel):
     class Meta:
@@ -45,4 +51,11 @@ class CatOpcionMultiple(CatalogoModel):
         db_table = 'opcion'
         verbose_name = 'opcion'
         verbose_name_plural = 'opciones'
-  
+
+class DatosGenerales(models.Model):
+    poblacion = models.CharField(max_length=30, verbose_name="Población")
+    sexo = models.CharField(max_length=30, verbose_name="Sexo")
+    nivel_educativo = models.CharField(max_length=30, verbose_name="Nivel Educativo")
+
+    def __str__(self):
+        return f"{self.poblacion} - {self.sexo} - {self.nivel_educativo}"

@@ -10,7 +10,8 @@
 <div class="container my-1">
     <div class="card shadow-lg">
         <div class="card-body">
-            <form id="datosForm" method="post" class="needs-validation" novalidate onsubmit="mostrarDatos(event)">
+            <!-- Formulario de Datos Generales -->
+            <form id="datosForm" method="post" class="needs-validation" novalidate {% if datos_guardados %}style="display:none;"{% endif %}>
                 {% csrf_token %}
 
                 <!-- Sección: Datos Personales -->
@@ -18,14 +19,13 @@
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">Datos Personales</h5>
                     </div>
-                    
                     <div class="card-body">
                         <div class="mb-4">
                             <h6>{{ form.poblacion.label }}</h6>
                             <select name="poblacion" id="poblacion" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
-                                {% for campo in form.poblacion %}
-                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
+                                {% for opcion in form.poblacion.field.choices %}
+                                <option value="{{ opcion.0 }}" {% if form.poblacion.value == opcion.0 %}selected{% endif %}>{{ opcion.1 }}</option>
                                 {% endfor %}
                             </select>
                             <div class="invalid-feedback">Por favor selecciona una opción.</div>
@@ -35,19 +35,19 @@
                             <h6>{{ form.sexo.label }}</h6>
                             <select name="sexo" id="sexo" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
-                                {% for campo in form.sexo %}
-                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
+                                {% for opcion in form.sexo.field.choices %}
+                                <option value="{{ opcion.0 }}" {% if form.sexo.value == opcion.0 %}selected{% endif %}>{{ opcion.1 }}</option>
                                 {% endfor %}
                             </select>
                             <div class="invalid-feedback">Por favor selecciona una opción.</div>
                         </div>
-                        
+
                         <div class="mb-4">
                             <h6>{{ form.nivel_educativo.label }}</h6>
                             <select name="nivel_educativo" id="nivel_educativo" class="form-select form-control-sm" required>
                                 <option value="" disabled selected>--Selecciona una opción--</option>
-                                {% for campo in form.nivel_educativo %}
-                                <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
+                                {% for opcion in form.nivel_educativo.field.choices %}
+                                <option value="{{ opcion.0 }}" {% if form.nivel_educativo.value == opcion.0 %}selected{% endif %}>{{ opcion.1 }}</option>
                                 {% endfor %}
                             </select>
                             <div class="invalid-feedback">Por favor selecciona una opción.</div>
@@ -66,8 +66,8 @@
                                 <h6>{{ economico.ingresos.label }}</h6>
                                 <select name="ingresos" id="ingresos" class="form-select form-control-sm" required>
                                     <option value="" disabled selected>--Selecciona una opción--</option>
-                                    {% for campo in economico.ingresos %}
-                                    <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
+                                    {% for opcion in economico.ingresos.field.choices %}
+                                    <option value="{{ opcion.0 }}" {% if economico.ingresos.value == opcion.0 %}selected{% endif %}>{{ opcion.1 }}</option>
                                     {% endfor %}
                                 </select>
                                 <div class="invalid-feedback">Por favor selecciona una opción.</div>
@@ -77,8 +77,8 @@
                                 <h6>{{ economico.situacion_laboral.label }}</h6>
                                 <select name="situacion_laboral" id="situacion_laboral" class="form-select form-control-sm" required>
                                     <option value="" disabled selected>--Selecciona una opción--</option>
-                                    {% for campo in economico.situacion_laboral %}
-                                    <option value="{{ campo.choice_value }}">{{ campo.choice_label }}</option>
+                                    {% for opcion in economico.situacion_laboral.field.choices %}
+                                    <option value="{{ opcion.0 }}" {% if economico.situacion_laboral.value == opcion.0 %}selected{% endif %}>{{ opcion.1 }}</option>
                                     {% endfor %}
                                 </select>
                                 <div class="invalid-feedback">Por favor selecciona una opción.</div>
@@ -94,15 +94,17 @@
             </form>
 
             <!-- Sección para mostrar los datos ingresados -->
-            <div id="datosIngresados" style="display: none;">
+            {% if datos_guardados %}
+            <div id="datosIngresados">
                 <h5 class="mt-4">Datos Ingresados</h5>
-                <p><strong>Población:</strong> <span id="confirmPoblacion"></span></p>
-                <p><strong>Sexo:</strong> <span id="confirmSexo"></span></p>
-                <p><strong>Nivel Educativo:</strong> <span id="confirmNivelEducativo"></span></p>
-                <p><strong>Ingresos:</strong> <span id="confirmIngresos"></span></p>
-                <p><strong>Situación Laboral:</strong> <span id="confirmSituacionLaboral"></span></p>
+                <p><strong>Población:</strong> {{ form.instance.poblacion }}</p>
+                <p><strong>Sexo:</strong> {{ form.instance.sexo }}</p>
+                <p><strong>Nivel Educativo:</strong> {{ form.instance.nivel_educativo }}</p>
+                <p><strong>Ingresos:</strong> {{ economico.instance.ingresos }}</p>
+                <p><strong>Situación Laboral:</strong> {{ economico.instance.situacion_laboral }}</p>
                 <button type="button" class="btn btn-secondary" onclick="editarDatos()">Editar Datos</button>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -113,7 +115,7 @@
         'use strict';
         window.addEventListener('load', function() {
             var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
+            Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
@@ -124,36 +126,6 @@
             });
         }, false);
     })();
-
-    function mostrarDatos(event) {
-        // Evitar el envío del formulario
-        event.preventDefault();
-
-        // Validar formulario antes de mostrar datos
-        var form = document.getElementById("datosForm");
-        if (form.checkValidity() === false) {
-            form.classList.add('was-validated');
-            return;
-        }
-
-        // Obtener valores seleccionados en el formulario
-        let poblacion = document.getElementById("poblacion").selectedOptions[0].text;
-        let sexo = document.getElementById("sexo").selectedOptions[0].text;
-        let nivelEducativo = document.getElementById("nivel_educativo").selectedOptions[0].text;
-        let ingresos = document.getElementById("ingresos").selectedOptions[0].text;
-        let situacionLaboral = document.getElementById("situacion_laboral").selectedOptions[0].text;
-
-        // Insertar valores en la sección de datos ingresados
-        document.getElementById("confirmPoblacion").innerText = poblacion;
-        document.getElementById("confirmSexo").innerText = sexo;
-        document.getElementById("confirmNivelEducativo").innerText = nivelEducativo;
-        document.getElementById("confirmIngresos").innerText = ingresos;
-        document.getElementById("confirmSituacionLaboral").innerText = situacionLaboral;
-
-        // Mostrar la sección de datos ingresados y ocultar el formulario
-        document.getElementById("datosForm").style.display = "none";
-        document.getElementById("datosIngresados").style.display = "block";
-    }
 
     function editarDatos() {
         // Mostrar el formulario y ocultar la sección de datos ingresados
