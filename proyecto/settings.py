@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'catalogos',
     'usuario',
     'cuestionario',
+    'panel_administrador',
 ]
 
 MIDDLEWARE = [
