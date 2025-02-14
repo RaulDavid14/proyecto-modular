@@ -4,23 +4,20 @@
 {% block title %}CFCA MX{% endblock title %}
 
 {% block links %}
-  <!-- Fuentes y estilos adicionales para la landing page -->
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
-  <!-- Scripts externos que se cargan en el head -->
   <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
   <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 {% endblock links %}
 
 {% block body %}
 <div class="body-wrap">
-  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <div class="site-header-inner">
         <div class="brand header-brand">
           <h1 class="m-0">
-            <a href="#">
+            <a href="{% url 'landing' %}">
                 <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
             </a>
           </h1>
@@ -30,7 +27,6 @@
     </div>
   </header>
 
-<!-- Sección Hero con el Título y Resumen del Proyecto -->
 <section class="hero">
     <div class="container">
       <div class="hero-inner">
@@ -46,7 +42,6 @@
             <a class="button" href="#iniciosesion" data-bs-toggle="modal">Iniciar Sesión</a>
           </div>
         </div>
-        <!-- Imagen añadida -->
         <div class="hero-image">
           <img src="{% static 'dist/images/Nutri1.jpg' %}" alt="Imagen decorativa" class="img-fluid">
         </div>
@@ -55,7 +50,6 @@
   </section>
   
 
-    <!-- Sección: Justificación -->
     <section class="project-justification section">
       <div class="container">
         <div class="section-inner">
@@ -67,7 +61,6 @@
       </div>
     </section>
 
-    <!-- Sección: Objetivos -->
     <section class="project-objectives section">
       <div class="container">
         <div class="section-inner">
@@ -86,7 +79,6 @@
       </div>
     </section>
 
-    <!-- Sección: Impacto Esperado -->
     <section class="project-impact section">
       <div class="container">
         <div class="section-inner">
@@ -99,7 +91,6 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="site-footer-inner">
