@@ -1,0 +1,16 @@
+{% extends "components/navbar.html" %}
+
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'vendor/css/home.css' %}">
+{% endblock links %}
+
+{% block titulo %}Editar cuestionario{% endblock titulo %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="mb-5" >Editar cuestionario</h2>
+        </div>
+    </div>    
+{% endblock body %}

@@ -1,0 +1,30 @@
+{% extends "components/navbar.html" %}
+
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'vendor/css/home.css' %}">
+{% endblock links %}
+
+{% block titulo %}Cuestionarios{% endblock titulo %}
+
+
+{% block body %}
+<div class="row">
+    <div class="col-12 text-center">
+        <h2 class="mb-5" >Cuestionarios disponibles</h2>
+        <table class="table tabla">
+            <tr>
+                <th>Cuestionario</th>
+                <th>Acciones</th>
+            </tr>
+            {% for cuestionario in cuestionarios %}
+                <tr>
+                    <td>{{cuestionario.nombre}}</td>
+                    <td>{{cuestionario.acciones|safe}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock body %}
+
