@@ -29,10 +29,6 @@ media/
 *.env
 .env
 
-# Django migrations
-*/migrations/*
-!*/migrations/__init__.py
-
 # If you are using macOS
 .DS_Store
 
@@ -41,3 +37,4 @@ media/
 
 # Ignore virtual environment folder
 venv/
+proyecto/settings.py

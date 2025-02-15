@@ -23,18 +23,18 @@
         <h2 class="title mb-5">Bienvenido</h2>
         <ul class="nav flex-column">
             <li class="nav-item mt-3">
-                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+                <a class="nav-link" href="{% url 'dasahboard_admin' %}">Inicio</a>
             </li>
             <li class="nav-item mt-3">
                 <div class="accordion" id="formAccordion">
-                    <a class="nav-link" href="{% url 'generales' %}">Datos Generales</a>
+                    <a class="nav-link" href="{% url 'dashboard_cuestionario' %}">Cuestionario</a>
                 </div>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link" href="#">Configuraciones</a>
+                <a class="nav-link" href="#">Estadisticas</a>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link" href="#">Ayuda</a>
+                <a class="nav-link" href="#">Staff</a>
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
@@ -47,8 +47,8 @@
         {% endblock body %}
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/js/jquery.js' %}"></script>
     {% block scripts %}
     {% endblock scripts %}
 </body>
