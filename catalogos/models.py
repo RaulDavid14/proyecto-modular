@@ -1,14 +1,14 @@
+from django.conf import settings
 from django.db import models
 
-# Create your models here.
 class CatalogoModel(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='ID')
     nombre_largo = models.CharField(verbose_name='Nombre Largo', max_length=30)
     abreviacion = models.CharField(verbose_name='Nombre Corto', max_length=5)
     descripcion = models.TextField(verbose_name='Descripción')
-    
+
     class Meta:
-        abstract = True    
+        abstract = True
 
 class CatSexo(CatalogoModel):
     class Meta:
@@ -17,7 +17,7 @@ class CatSexo(CatalogoModel):
         verbose_name_plural = 'Sexos'
     def __str__(self):
         return self.nombre_largo
-        
+
 class CatPoblacion(CatalogoModel):
     class Meta:
         db_table = 'catalogo_poblacion'
@@ -25,7 +25,7 @@ class CatPoblacion(CatalogoModel):
         verbose_name_plural = 'Tipos de Población'
     def __str__(self):
         return self.nombre_largo
-        
+
 class CatNivelEducativo(CatalogoModel):
     class Meta:
         db_table = 'catalogo_nivel_educativo'
@@ -39,7 +39,9 @@ class CatCuestionarios(CatalogoModel):
         db_table = 'catalogo_cuestionario'
         verbose_name = 'Cuestionario'
         verbose_name_plural = 'Cuestionarios'
-        
+    def __str__(self):
+        return self.nombre_largo
+
 class CatFrecuencia(CatalogoModel):
     class Meta:
         db_table = 'frecuencia'
@@ -53,9 +55,10 @@ class CatOpcionMultiple(CatalogoModel):
         verbose_name_plural = 'opciones'
 
 class DatosGenerales(models.Model):
-    poblacion = models.CharField(max_length=30, verbose_name="Población")
-    sexo = models.CharField(max_length=30, verbose_name="Sexo")
-    nivel_educativo = models.CharField(max_length=30, verbose_name="Nivel Educativo")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuario")
+    poblacion = models.ForeignKey(CatPoblacion, on_delete=models.CASCADE, verbose_name="Población")
+    sexo = models.ForeignKey(CatSexo, on_delete=models.CASCADE, verbose_name="Sexo")
+    nivel_educativo = models.ForeignKey(CatNivelEducativo, on_delete=models.CASCADE, verbose_name="Nivel Educativo")
 
     def __str__(self):
-        return f"{self.poblacion} - {self.sexo} - {self.nivel_educativo}"
+        return f"{self.user.username} - {self.poblacion.nombre_largo} - {self.sexo.nombre_largo} - {self.nivel_educativo.nombre_largo}"

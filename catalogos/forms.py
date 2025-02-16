@@ -8,6 +8,9 @@ class DatosGeneralesForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['sexo'].choices = [(sexo.nombre_largo, sexo.nombre_largo) for sexo in CatSexo.objects.all()]
-        self.fields['poblacion'].choices = [(poblacion.nombre_largo, poblacion.nombre_largo) for poblacion in CatPoblacion.objects.all()]
-        self.fields['nivel_educativo'].choices = [(nivel.nombre_largo, nivel.nombre_largo) for nivel in CatNivelEducativo.objects.all()]
+        self.fields['sexo'].queryset = CatSexo.objects.all()
+        self.fields['sexo'].empty_label = None
+        self.fields['poblacion'].queryset = CatPoblacion.objects.all()
+        self.fields['poblacion'].empty_label = None
+        self.fields['nivel_educativo'].queryset = CatNivelEducativo.objects.all()
+        self.fields['nivel_educativo'].empty_label = None

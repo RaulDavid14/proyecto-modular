@@ -2,8 +2,8 @@ from django import forms
 from .models import DatosSocioeconomicos, CatSituacionLaboral, CatIngresos
 
 class DatosSocioeconomicosForm(forms.ModelForm):
-    ingresos = forms.ChoiceField(choices=[(ingreso.nombre, ingreso.nombre) for ingreso in CatIngresos.objects.all()])
-    situacion_laboral = forms.ChoiceField(choices=[(situacion.nombre, situacion.nombre) for situacion in CatSituacionLaboral.objects.all()])
+    ingresos = forms.ModelChoiceField(queryset=CatIngresos.objects.all(), empty_label=None)
+    situacion_laboral = forms.ModelChoiceField(queryset=CatSituacionLaboral.objects.all(), empty_label=None)
 
     class Meta:
         model = DatosSocioeconomicos
