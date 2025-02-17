@@ -6,7 +6,7 @@ $(document).ready(function() {
     let currentPage = 1;
     const size = 5;  
     const apiUrl = document.getElementById("config").getAttribute("data-api-url"); 
-    // agregar url para reidirigir a la vista de editar pregunta. 
+    // agregar url para reidirigir a la vista de editar pregunta.
     function cargarPreguntas(page) {
         $.ajax({
             url: apiUrl,
@@ -20,10 +20,10 @@ $(document).ready(function() {
                         <td>${pregunta.id}</td>
                         <td>${pregunta.texto}</td>
                         <td>
-                            <a href="#" class="btn btn-primary d-block">
+                            <a href="${pregunta.url}" class="btn btn-outline-info d-block">
                                 <i class="bi bi-pencil"></i> 
                             </a>
-                            <a href="#" class="btn btn-danger d-block">
+                            <a href="#" class="btn btn-outline-danger d-block">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </td>
@@ -32,9 +32,10 @@ $(document).ready(function() {
 
                 $("#preguntas-lista").html(preguntasHtml);
                 $("#page-info").text(`Página ${response.page} de ${response.pages}`);
-
+                
                 $("#prev-btn").prop("disabled", !response.has_previous);
                 $("#next-btn").prop("disabled", !response.has_next);
+
 
                 currentPage = response.page;
             },

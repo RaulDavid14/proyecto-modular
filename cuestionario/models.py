@@ -7,6 +7,9 @@ class PreguntaModel(models.Model):
     sig_pregunta = models.JSONField(verbose_name='siguiente pregunta')
     tipo_cuestionario = models.IntegerField(verbose_name='tipo cuestionario')
 
+    def __str__(self):
+        return f"Pregunta {self.id}"
+    
     class Meta:
         db_table = 'preguntas'
         verbose_name = 'pregunta'

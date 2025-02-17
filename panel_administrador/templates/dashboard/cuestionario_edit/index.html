@@ -19,6 +19,7 @@
                         <i class="bi bi-arrow-left w-25"></i> Regresar
                     </a>
                 </div>
+
                 <div class="col-12 mb-5">
                     <label for="">Nombre</label>
                     <input type="text" class="form-control" placeholder="Nombre del cuestionario" value="{{ nombre }}">
@@ -50,6 +51,6 @@
 {% endblock body %}
 
 {% block scripts %}
-    <script id="config" data-api-url = "{% url 'mostrar_preguntas' %}"></script>
+    <script id="config" data-api-url = "{% url 'mostrar_preguntas' id_cuestionario=id%}"></script>
     <script src="{%static 'js/edit_pregunta.js'%}"></script>
 {% endblock scripts %}

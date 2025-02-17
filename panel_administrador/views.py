@@ -8,9 +8,20 @@ from cuestionario.models import PreguntaModel
 
 
 
+def editar_pregunta(request, id_pregunta):
+    pregunta = PreguntaModel.objects.get(id = id_pregunta)
+    cuestionario = CatCuestionarios.objects.get(id = pregunta.tipo_cuestionario)
+    
+    data = {
+        'pregunta' : pregunta,
+        'abreviacion' : cuestionario.abreviacion,
+    }
+    
+    return render(request, 'dashboard/pregunta_edit/index.html', context=data)
+
 #mostrar las preguntas que se encuentran en el cuestionario para editarlas
-def get_preguntas(request):
-    preguntas = PreguntaModel.objects.all()
+def get_preguntas(request, id_cuestionario):
+    preguntas = PreguntaModel.objects.filter(tipo_cuestionario = id_cuestionario)
     page_number = request.GET.get('page', 1)
     size_number = request.GET.get('size', 10)
     paginator = Paginator(preguntas, size_number)
@@ -22,6 +33,7 @@ def get_preguntas(request):
         preguntas_data.append({
             'id': pregunta.id,
             'texto': pregunta.texto,
+            'url' : reverse('editar_pregunta', args=[pregunta.id])
         })
     
     response_data = {
@@ -45,8 +57,8 @@ def index_cuestionario(request):
         editar_cuestionario = reverse('dashboard_editar_cuestionario', args=[cuestionario.abreviacion])
         eliminar_cuestionario = reverse('dashboard_eliminar_cuestionario', args=[cuestionario.abreviacion])
         acciones = f"""
-            <a class="btn btn-outline-success" href="{editar_cuestionario}">Editar</a>
-            <a class="btn btn-outline-danger" href="{eliminar_cuestionario}">Eliminar</a>
+            <a class="btn btn-outline-info w-25" href="{editar_cuestionario}"><i class="bi bi-pencil"></i></a>
+            <a class="btn btn-outline-danger w-25" href="{eliminar_cuestionario}"><i class="bi bi-trash"</a>
         """
         cuestionarios.append({
             'acciones': acciones,
@@ -59,6 +71,7 @@ def editar_cuestionario(request, cuestionario):
     cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
     
     data = {
+        'id': cuestionario.id,
         'nombre': cuestionario.nombre_largo,
         'descripcion': cuestionario.descripcion,
         'abreviacion': cuestionario.abreviacion,
