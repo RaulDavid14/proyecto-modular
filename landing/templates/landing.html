@@ -1,82 +1,176 @@
 {% extends 'layout.html' %}
-
-{% load static%}
+{% load static %}
 
 {% block title %}CFCA MX{% endblock title %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'vendor/css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+  <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 {% endblock links %}
 
 {% block body %}
-
-
-<div class="row">
-    {% include 'navbar_landing.html' %}
-</div>
-<div class="container mt-5">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8">
-            <div class="card border-primary">
-                <div class="card-header text-center">
-                    <h3>CFCA MX</h3>
-                </div>
-                <div class="card-body text-center">
-                    <p>Cuestionario de Frecuencia de Consumo de Alimentos Cuantitativo Autoadministrado en Línea para la Población Mexicana.</p>
-                    <a href="{% url 'register' %}" class="btn btn-primary">Comienza Aquí</a>
-                </div>
-            </div>
+<div class="body-wrap">
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header-inner">
+        <div class="brand header-brand">
+          <h1 class="m-0">
+            <a href="{% url 'landing' %}">
+                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+            </a>
+          </h1>
         </div>
+        {% include 'navbar_landing.html' %}
+      </div>
     </div>
+  </header>
 
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h4>Acerca del Proyecto</h4>
-                </div>
-                <div class="card-body">
-                    <p class="text-justify">
-                        Este cuestionario tiene como objetivo recopilar datos sobre la frecuencia de consumo de alimentos en la población mexicana. 
-                        Los resultados permitirán evaluar patrones de alimentación y contribuir a la investigación en salud pública y nutrición.
-                    </p>
-                    <p class="text-justify">
-                        Participar es fácil y rápido. Simplemente regístrate y accede al cuestionario. Tu información será tratada de manera confidencial y solo se utilizará con fines académicos y de investigación.
-                    </p>
-                </div>
-            </div>
+<section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1 class="hero-title mt-0">
+            Diseño, Validez y Reproducibilidad de un Cuestionario de Frecuencia de Consumo de Alimentos Cuantitativo Auto-administrado en Línea para Población Mexicana
+          </h1>
+          <p class="hero-paragraph">
+            Este proyecto busca desarrollar y evaluar un cuestionario autoadministrado en línea para medir la frecuencia de consumo de alimentos en la población mexicana. Con el aumento de las enfermedades relacionadas con la dieta, como la obesidad y la desnutrición, es fundamental contar con herramientas que permitan evaluar de manera precisa los patrones alimentarios para diseñar intervenciones eficaces. Este cuestionario se enfocará en la clasificación de alimentos según su nivel de procesamiento (utilizando el sistema NOVA) y permitirá recolectar datos de manera eficiente y accesible en tiempo real.
+          </p>
+          <div class="hero-cta">
+            <a class="button button-primary" href="{% url 'register' %}">Participa</a>
+            <a class="button" href="#iniciosesion" data-bs-toggle="modal">Iniciar Sesión</a>
+          </div>
         </div>
+        <div class="hero-image">
+          <img src="{% static 'dist/images/Nutri1.jpg' %}" alt="Imagen decorativa" class="img-fluid">
+        </div>
+      </div>
     </div>
+  </section>
+  
+
+    <section class="project-justification section">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-title">Justificación</h2>
+          <p>
+            México enfrenta un doble desafío nutricional: el sobrepeso y la obesidad en adultos, y la desnutrición crónica en niños. Las herramientas actuales para medir los hábitos alimenticios tienen limitaciones importantes, tales como la falta de ayudas visuales para estimar porciones y su aplicación tradicional en formato físico, lo que limita la recolección de datos a gran escala. Este proyecto busca superar esas barreras con una solución digital accesible que mejorará la precisión de los datos obtenidos, optimizando recursos y tiempos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-objectives section">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-title">Objetivos</h2>
+          <h3>Objetivo General</h3>
+          <p>
+            Desarrollar y evaluar la validez y reproducibilidad de un cuestionario cuantitativo autoadministrado en línea sobre la frecuencia de consumo de alimentos en población mexicana.
+          </p>
+          <h3>Objetivos Específicos</h3>
+          <ul>
+            <li>Crear el cuestionario adaptado a las necesidades culturales y alimenticias de la población mexicana.</li>
+            <li>Validar su contenido y compararlo con registros alimentarios.</li>
+            <li>Evaluar la reproducibilidad del cuestionario en un entorno de aplicación real.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-impact section">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-title">Impacto Esperado</h2>
+          <p>
+            Este instrumento no solo ayudará a los investigadores y profesionales de salud pública a analizar patrones dietéticos con mayor precisión, sino que también facilitará la creación de políticas públicas y programas de nutrición personalizados y basados en evidencia. Además, la digitalización del proceso contribuirá a una mayor inclusión en las zonas rurales y a la optimización de recursos para investigaciones epidemiológicas.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer-inner">
+        <div class="brand footer-brand">
+          <a href="#">
+            <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+          </a>
+        </div>
+        <ul class="footer-links list-reset">
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+        <ul class="footer-social-links list-reset">
+          <li>
+            <a href="#">
+              <span class="screen-reader-text">Facebook</span>
+              <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="screen-reader-text">Twitter</span>
+              <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#0270D7"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="screen-reader-text">Google</span>
+              <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z" fill="#0270D7"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <div class="footer-copyright">
+          &copy; 2023 CFCA MX. Todos los derechos reservados.
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
+<!-- Modal de inicio de sesión -->
 <div class="modal fade" id="iniciosesion" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>Iniciar Sesión</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{% url 'login' %}" method="post">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="username">Correo Electrónico <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" name="username" id="username">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password">Contraseña <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" name="password" id="password">
-                    </div>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
-                    </div>
-                </form>
-                <div class="text-center mt-3">
-                    <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
-                </div>
-            </div>
+      <div class="modal-content text-dark">
+        <div class="modal-header">
+          <h5 class="text-dark">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+              <label for="username">Correo Electrónico <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" name="username" id="username">
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Contraseña <span class="text-danger">*</span></label>
+              <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
+  </div>
+  
 {% endblock body %}
+
+{% block scripts %}
+  <script src="{% static 'dist/js/main.min.js' %}"></script>
+{% endblock scripts %}
