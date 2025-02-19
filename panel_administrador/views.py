@@ -50,6 +50,28 @@ def get_preguntas(request, id_cuestionario):
 def index(request):
     return render(request, 'dashboard/index.html')
 
+
+def update_cuestionario(request):
+    if request.method == 'POST':
+        id_cuestionario = request.POST.get('id')
+        nombre_largo  = request.POST.get('nombre')
+        abreviacion = request.POST.get('abreviacion')
+        descripcion = request.POST.get('descripcion')
+        
+        cuestionario = CatCuestionarios(
+            id = id_cuestionario,
+            nombre_largo = nombre_largo,
+            abreviacion = abreviacion,
+            descripcion = descripcion
+        )
+        
+        cuestionario.save()
+        response = JsonResponse({'mensaje': 'Cuestionario actualizado correctamente'})
+    else:
+        response = JsonResponse({'mensaje': 'Error al actualizar el cuestionario'})
+
+    return response
+
 # muestra la lista de cuestionarios que aparecen en el cuestionario
 def index_cuestionario(request):
     cuestionarios = []

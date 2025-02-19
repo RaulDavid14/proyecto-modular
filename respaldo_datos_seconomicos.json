@@ -147,7 +147,7 @@
     "model": "datos_socioeconomicos.catingresos",
     "pk": 13,
     "fields": {
-        "nombre": "mßs de $150,000",
+        "nombre": "mas de $150,000",
         "abreviacion": "",
         "descripcion": "$150,000 pesos o mßs"
     }
