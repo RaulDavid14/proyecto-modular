@@ -4,9 +4,12 @@ from django.db import models
 class PreguntaModel(models.Model):
     texto = models.TextField(verbose_name='Pregunta')
     tipo_respuesta = models.IntegerField('tipo de preguntas')
-    sig_pregunta = models.JSONField(verbose_name='siguiente pregunta')
+    sig_pregunta = models.JSONField(verbose_name='siguiente pregunta', null=True, blank=True)
     tipo_cuestionario = models.IntegerField(verbose_name='tipo cuestionario')
 
+    def __str__(self):
+        return f"Pregunta {self.id}"
+    
     class Meta:
         db_table = 'preguntas'
         verbose_name = 'pregunta'

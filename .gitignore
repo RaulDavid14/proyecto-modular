@@ -29,12 +29,19 @@ media/
 *.env
 .env
 
-# If you are using macOS
+# Migraciones de Django (ignorar archivos no esenciales)
+**/migrations/__pycache__/
+**/migrations/*.pyc
+**/migrations/*.pyo
+
+# Si usas macOS
 .DS_Store
 
-# VS Code settings
+# Configuración de VS Code
 .vscode/
 
-# Ignore virtual environment folder
+# Ignorar entorno virtual
 venv/
-proyecto/settings.py
+
+# Archivo de configuración sensible
+proyecto/settings.py 
