@@ -1,42 +1,49 @@
 {% extends "components/navbar.html" %}
 
-
+{% load static %}
 {% block links %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 {% endblock links %}
 
-{% block titulo %}Pregunta {% endblock titulo %}
-
+{% block titulo %}Pregunta{% endblock titulo %}
 
 {% block body %}
     <div class="row">
         <div class="col-12 text-center mt-5">
-            <h2 class="mb-5" >Detalle de pregunta</h2>
+            <h2 class="mb-5">Detalle de pregunta</h2>
         </div>
         <div class="col-12 text-end mb-5">
-            <a href="{% url 'dashboard_editar_cuestionario' cuestionario=abreviacion%}" class="btn btn-danger">
+            <a href="{% url 'dashboard_editar_cuestionario' cuestionario=abreviacion %}" class="btn btn-danger">
                 <i class="bi bi-arrow-left w-25"></i> Regresar
             </a>
         </div>
-        <div class="col-12 display-flex">
-            <div class="">
-                <label for="">Texto</label>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-12 form-floating mt-5">
+                <textarea class="form-control" name="texto" id="texto">{{ pregunta.texto }}</textarea>
+                <label for="texto">Texto</label>
             </div>
-            <div class="">
-                <textarea name="" id="">{{pregunta.texto}}</textarea>
+            <div class="col-12 form-floating mt-5">
+                <select id="tipo-pregunta" class="form-select" name="tipo_respuesta">
+                    <option value="1" {% if pregunta.tipo_respuesta == 1 %} selected {% endif %}>Frecuencia</option>
+                    <option value="2" {% if pregunta.tipo_respuesta == 2 %} selected {% endif %}>Opciones</option>
+                </select>
+                <label for="tipo">Tipo</label>
             </div>
-            <div class="">
-                <p>{{pregunta}}</p>
+            <div id="imagenes" class="col-12 mt-5 text-center">
+                {{ imagen_form.as_table }}
             </div>
-        </div>
-        <div class="col-12 display-flex text-center mt-5">
-            <button class="btn btn-primary w-25">
-                <i class="bi bi-save"></i> Guardar
-            </button>
-        </div>
+            <div class="col-12 display-flex text-center mt-5">
+                <button type="submit" id="enviar" class="btn btn-primary w-25">
+                    <i class="bi bi-save"></i> Guardar
+                </button>
+            </div>
+        </form>
     </div>
 {% endblock body %}
 
-
 {% block scripts %}
+    <script id="config" data-api-url=""></script>
+    <script src="{% static 'js/components/funciones.js' %}"></script>
+    <script src="{% static 'js/edit_pregunta.js' %}"></script>
 {% endblock scripts %}

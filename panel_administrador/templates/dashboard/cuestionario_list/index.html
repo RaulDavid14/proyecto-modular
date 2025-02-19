@@ -27,8 +27,10 @@
             </tr>
             {% for cuestionario in cuestionarios %}
                 <tr>
-                    <td>{{cuestionario.nombre}}</td>
-                    <td>{{cuestionario.acciones|safe}}</td>
+                    <td>{{ cuestionario.nombre }}</td>
+                    <td>
+                        {{cuestionario.acciones|safe}}
+                    </td>
                 </tr>
             {% endfor %}
         </table>

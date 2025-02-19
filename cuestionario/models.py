@@ -25,3 +25,8 @@ class RespuestaModel(models.Model):
         db_table = 'respuestas'
         verbose_name = 'Respuesta'
         verbose_name_plural = 'Respuestas'
+        
+class ImagenRespuestaModel(models.Model):
+    path = models.ImageField(verbose_name='imagen', null=True, blank=True, upload_to='imagenes/')
+    id_pregunta = models.ForeignKey(PreguntaModel, on_delete=models.CASCADE, related_name='imagenes')
+    id_respuesta = models.IntegerField(verbose_name='respuesta')

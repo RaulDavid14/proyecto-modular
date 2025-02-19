@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.urls import reverse
+from django.views.generic import TemplateView, ListView
 
 from catalogos.models import CatCuestionarios
 from cuestionario.models import PreguntaModel
 
+class EstadisticasView(TemplateView):
+    template_name = 'dashboard/index.html'
+    
 
 
 def editar_pregunta(request, id_pregunta):
@@ -21,7 +25,7 @@ def editar_pregunta(request, id_pregunta):
 
 #mostrar las preguntas que se encuentran en el cuestionario para editarlas
 def get_preguntas(request, id_cuestionario):
-    preguntas = PreguntaModel.objects.filter(tipo_cuestionario = id_cuestionario)
+    preguntas = PreguntaModel.objects.filter(tipo_cuestionario = id_cuestionario).order_by('id')
     page_number = request.GET.get('page', 1)
     size_number = request.GET.get('size', 10)
     paginator = Paginator(preguntas, size_number)
@@ -73,21 +77,25 @@ def update_cuestionario(request):
     return response
 
 # muestra la lista de cuestionarios que aparecen en el cuestionario
-def index_cuestionario(request):
-    cuestionarios = []
-    for cuestionario in CatCuestionarios.objects.all():
-        editar_cuestionario = reverse('dashboard_editar_cuestionario', args=[cuestionario.abreviacion])
-        eliminar_cuestionario = reverse('dashboard_eliminar_cuestionario', args=[cuestionario.abreviacion])
-        acciones = f"""
-            <a class="btn btn-outline-info w-25" href="{editar_cuestionario}"><i class="bi bi-pencil"></i></a>
-            <a class="btn btn-outline-danger w-25" href="{eliminar_cuestionario}"><i class="bi bi-trash"</a>
-        """
-        cuestionarios.append({
-            'acciones': acciones,
-            'nombre': cuestionario.nombre_largo
-        })
-    
-    return render(request, 'dashboard/cuestionario_list/index.html', context = {'cuestionarios': cuestionarios})
+class CuestionarioListView(ListView):
+    model = CatCuestionarios
+    template_name = 'dashboard/cuestionario_list/index.html'
+    context_object_name = 'cuestionarios'
+
+    def get_queryset(self):
+        cuestionarios = []
+        for cuestionario in CatCuestionarios.objects.all():
+            editar_cuestionario = reverse('dashboard_editar_cuestionario', args=[cuestionario.abreviacion])
+            eliminar_cuestionario = reverse('dashboard_eliminar_cuestionario', args=[cuestionario.abreviacion])
+            acciones = f"""
+                <a class="btn btn-outline-info w-25" href="{editar_cuestionario}"><i class="bi bi-pencil"></i></a>
+                <a class="btn btn-outline-danger w-25" href="{eliminar_cuestionario}"><i class="bi bi-trash"></i></a>
+            """
+            cuestionarios.append({
+                'acciones': acciones,
+                'nombre': cuestionario.nombre_largo
+            })
+        return cuestionarios
 
 def editar_cuestionario(request, cuestionario):
     cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
