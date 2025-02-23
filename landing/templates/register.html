@@ -1,47 +1,86 @@
 {% extends "layout.html" %}
 
+{% load static %}
+
 {% block titulo %}Nuevo Usuario{% endblock titulo %}
 
+{% block links %}
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+{% endblock links %}
+
 {% block body %}
-<div class="row">
-    {% include 'navbar_landing.html' %}
-</div>
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6"> 
-            <div class="card shadow"> 
-                <div class="card-body">
-                    <h2 class="text-center">Registro de Usuario</h2>
-                    <form action="{% url 'register' %}" method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="form-group col-12 mb-3">
-                                <label for="{{ form.nombre_completo.id_for_label }}">Nombre Completo <span class="text-danger">*</span></label>
-                                {{ form.nombre_completo }}
-                            </div>
-                            <div class="form-group col-12 mb-3">
-                                <label for="{{ form.email.id_for_label }}">Correo Electrónico <span class="text-danger">*</span></label>
-                                {{ form.email }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.password1.id_for_label }}">Contraseña <span class="text-danger">*</span></label>
-                                {{ form.password1 }}
-                            </div>
-                            <div class="form-group col-6 mb-3">
-                                <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña <span class="text-danger">*</span></label>
-                                {{ form.password2 }}
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-success w-50" type="submit">Registrar</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>.</p>
-                    </div>
-                </div>
-            </div>
+<div class="body-wrap">
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header-inner">
+        <div class="brand header-brand">
+          <h1 class="m-0">
+            <a href="{% url 'landing' %}">
+                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+            </a>
+          </h1>
         </div>
+        {% include 'navbar_landing.html' %}
+      </div>
     </div>
+  </header>
+
+  <!-- Registro Section -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6"> 
+        <div class="card shadow"> 
+          <div class="card-body">
+            <h2 class="text-center" style="color: black;">Registro de Usuario</h2>
+            <form action="{% url 'register' %}" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-12 mb-3">
+                  <label for="{{ form.nombre_completo.id_for_label }}">Nombre Completo <span class="text-danger">*</span></label>
+                  {{ form.nombre_completo }}
+                </div>
+                <div class="form-group col-12 mb-3">
+                  <label for="{{ form.email.id_for_label }}">Correo Electrónico <span class="text-danger">*</span></label>
+                  {{ form.email }}
+                </div>
+                <div class="form-group col-6 mb-3">
+                  <label for="{{ form.password1.id_for_label }}">Contraseña <span class="text-danger">*</span></label>
+                  {{ form.password1 }}
+                </div>
+                <div class="form-group col-6 mb-3">
+                  <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña <span class="text-danger">*</span></label>
+                  {{ form.password2 }}
+                </div>
+              </div>
+              
+              <!-- Aviso de privacidad -->
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacy_policy" name="privacy_policy" required>
+                  <label class="form-check-label" for="privacy_policy">
+                    He leído y acepto el <a href="{% static 'dist/pdf/aviso_de_privacidad.pdf' %}" target="_blank">Aviso de Privacidad</a>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <button class="btn btn-success w-50" type="submit">Registrar</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock body %}
+
+{% block scripts %}
+  <script src="{% static 'dist/js/main.min.js' %}"></script>
+{% endblock scripts %}
