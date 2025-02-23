@@ -1,20 +1,16 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg bg-transparent">
-    <a class="navbar-brand text-white" href="{% url 'landing' %}">
-    </a>
+    <a class="navbar-brand text-white" href="{% url 'landing' %}">Inicio</a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white" href="#main">Inicio</a>
+                <a class="nav-link text-white" href="{% url 'landing' %}#justificacion">Justificación</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#justificacion">Justificacion</a>
+                <a class="nav-link text-white" href="{% url 'landing' %}#objetivos">Objetivos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#objetivos">Objetivos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#impacto-esperado">Impacto Esperado</a>
+                <a class="nav-link text-white" href="{% url 'landing' %}#impacto-esperado">Impacto Esperado</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{% url 'register' %}">Regístrate</a>
