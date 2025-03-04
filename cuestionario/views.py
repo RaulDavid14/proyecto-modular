@@ -22,9 +22,6 @@ def reiniciar(request, cuestionario):
 @login_required
 def index(request, cuestionario):
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
-    preguntaSM.get_avance()
-    preguntaStateMachine = PreguntaStateMachine(request.user.id, cuestionario)
-    
     preguntaModel = preguntaSM.get_avance()
     
     if request.method == 'POST':
@@ -33,12 +30,10 @@ def index(request, cuestionario):
         print(f'Objeto pregunta {preguntaModel}')
             
     if preguntaModel.tipo_respuesta == 1:
-        print("Pasa por frecuencia")
         respuestas = CatFrecuencia.objects.all()
         template = 1
         
     elif preguntaModel.tipo_respuesta == 2:
-        print("Pasa por opciones")
         respuestas = CatOpcionMultiple.objects.all()
         template = 2
         
