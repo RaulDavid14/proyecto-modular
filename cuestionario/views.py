@@ -1,23 +1,25 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .models import PreguntaModel, RespuestaModel
-from catalogos.models import CatFrecuencia, CatOpcionMultiple
-from usuario.models import ProgresoModel
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from utils.cuestionario_sm import PreguntaStateMachine, PreguntaSM
-
+from django.contrib.auth.decorators import login_required
+from catalogos.models import CatFrecuencia, CatOpcionMultiple
+from utils.cuestionario_sm import PreguntaSM
+from utils.progreso_sm import ProgresoStateMachine
 """
-    contenido faltante para la vista
-    guardar la respuesta en la base de datos de respuestas
     falta definir funcionamiento para retornar a la pregunta anterior en caso de ser necesario
-    procedimiento para obtener el avance del cuestionario.
-    modificar script para cargar las respuestas en la base de datos
 """
 
 @login_required
-def reiniciar(request, cuestionario):
+def regresar_pregunta(request, cuestionario, pregunta):
     
-    return reverse('home')
+    return redirect('cuestionario', kwargs= {'cuestionario' : cuestionario})
+
+
+@login_required
+def reiniciar(request, cuestionario):
+
+    ProgresoStateMachine.reset_progreso(request.user.id, cuestionario)
+
+    return redirect('home')
     
 @login_required
 def index(request, cuestionario):
@@ -26,8 +28,6 @@ def index(request, cuestionario):
     
     if request.method == 'POST':
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
-        
-        print(f'Objeto pregunta {preguntaModel}')
             
     if preguntaModel.tipo_respuesta == 1:
         respuestas = CatFrecuencia.objects.all()
