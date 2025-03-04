@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'catalogos',
     'usuario',
     'cuestionario',
+    'panel_administrador',
 ]
 
 MIDDLEWARE = [
@@ -95,8 +96,8 @@ DATABASES = {
         'NAME': 'catalogos',
         'USER': user,
         'PASSWORD': password,
-        'HOST': host,  # o la dirección del servidor MySQL
-        'PORT': port,  # Puerto por defecto de MySQL
+        'HOST': host,  
+        'PORT': port,  
     },
 }
 
@@ -147,3 +148,10 @@ LOGIN_URL = '/usuarios/login/' #redigir en caso de no estar autenticado.
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Autenticación estándar de Django
+]
+
+# Configuración del backend de correo SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

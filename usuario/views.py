@@ -35,15 +35,22 @@ def login_view(request):
     if request.method == 'POST':
         form = UserLoginForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('username')  # Django usa 'username', pero nuestro modelo usa 'email'
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=email, password=password)
+
+            # Autenticamos usando el campo 'email'
+            user = authenticate(request, email=email, password=password)
+
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirigir a la página de inicio
+                return redirect('home')  # Redirigir a la página principal
+            else:
+                form.add_error(None, "Correo o contraseña incorrectos")
     else:
         form = UserLoginForm()
+    
     return render(request, 'login.html', {'form': form})
+
 
 def logout_view(request):
     logout(request)

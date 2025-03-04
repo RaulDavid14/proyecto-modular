@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% load static %}  <!-- Cargar el tag 'static' aquí -->
+
+{% block title %}Bienvenido{% endblock title %}
+
+{% block links %}
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+{% endblock links %}
+
+{% block body %}
+<div class="body-wrap">
+  <!-- Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header-inner">
+        <div class="brand header-brand">
+          <h1 class="m-0">
+            <a href="{% url 'landing' %}">
+                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+            </a>
+          </h1>
+        </div>
+        {% include 'navbar_landing.html' %}
+      </div>
+    </div>
+  </header>
+
+  <!-- Iniciar sesión Section -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-header text-center">
+            <h2 class="text-center" style="color: black;">Iniciar Sesión</h2>
+          </div>
+          <div class="card-body">
+            <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                <label for="username">Correo Electrónico <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" name="username" id="username">
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Contraseña <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" name="password" id="password">
+              </div>
+              <div class="text-center mt-4">
+                <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
+              </div>
+              <div class="text-center mt-3">
+                <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+                <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña? Restablécela aquí.</a></p>
+              </div>              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock body %}
+
+{% block scripts %}
+  <script src="{% static 'dist/js/main.min.js' %}"></script>
+{% endblock scripts %}

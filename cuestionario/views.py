@@ -21,6 +21,7 @@ def index(request, cuestionario):
     inicio = progreso_cuestionarios[cuestionario]['inicio']
     avance_actual = progreso_cuestionarios[cuestionario]['pregunta_actual']
     id_cuestionario = progreso_cuestionarios[cuestionario]['id_cuestionario']
+    print(f'id_cuestionario {id_cuestionario}')
     preguntaModel = PreguntaModel.objects.get(id=avance_actual)
       
     if request.method == 'POST':

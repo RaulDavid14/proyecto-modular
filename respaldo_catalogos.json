@@ -18,51 +18,6 @@
     }
 },
 {
-    "model": "catalogos.catestadocivil",
-    "pk": 1,
-    "fields": {
-        "nombre_largo": "soltero",
-        "abreviacion": "solt",
-        "descripcion": "Persona no casada que no ha tenido una unión formal"
-    }
-},
-{
-    "model": "catalogos.catestadocivil",
-    "pk": 2,
-    "fields": {
-        "nombre_largo": "casado",
-        "abreviacion": "casa",
-        "descripcion": "Persona unida en matrimonio"
-    }
-},
-{
-    "model": "catalogos.catestadocivil",
-    "pk": 3,
-    "fields": {
-        "nombre_largo": "viudo",
-        "abreviacion": "viudo",
-        "descripcion": "Persona cuya pareja ha fallecido"
-    }
-},
-{
-    "model": "catalogos.catestadocivil",
-    "pk": 4,
-    "fields": {
-        "nombre_largo": "unión libre",
-        "abreviacion": "unlib",
-        "descripcion": "Persona en una relación de convivencia sin matrimonio formal"
-    }
-},
-{
-    "model": "catalogos.catestadocivil",
-    "pk": 5,
-    "fields": {
-        "nombre_largo": "separado/divorciado",
-        "abreviacion": "se_di",
-        "descripcion": "Persona que ha terminado una relación matrimonial o de unión formal"
-    }
-},
-{
     "model": "catalogos.catpoblacion",
     "pk": 1,
     "fields": {
