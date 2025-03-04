@@ -1,18 +1,17 @@
 from catalogos.models import CatCuestionarios
 from usuario.models import ProgresoModel
-from cuestionario.models import PreguntaModel, RespuestaModel
-from django.db.models import Count
+from cuestionario.models import PreguntaModel
+from django.db.models import Min
 
 class ProgresoStateMachine():
     
     @staticmethod
     def  get_id_pregunta(id_cuestionario):
         dict_pregunta = {
-            p['tipo_cuestionario'] : p['total']
-            for p in PreguntaModel.objects.values('tipo_cuestionario').annotate(total = Count('id'))
+            p['tipo_cuestionario'] : p['id_min']
+            for p in PreguntaModel.objects.values('tipo_cuestionario').annotate(id_min = Min('id'))
         }
-        print(dict_pregunta)
-        return dict_pregunta[id_cuestionario]
+        return dict_pregunta.get(id_cuestionario, 0)
     
     @staticmethod
     def create_progres(user):
