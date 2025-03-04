@@ -4,7 +4,7 @@ from .models import PreguntaModel, RespuestaModel
 from catalogos.models import CatFrecuencia, CatOpcionMultiple
 from usuario.models import ProgresoModel
 from django.urls import reverse
-from utils.cuestionario_sm import PreguntaStateMachine
+from utils.cuestionario_sm import PreguntaStateMachine, PreguntaSM
 
 """
     contenido faltante para la vista
@@ -21,13 +21,14 @@ def reiniciar(request, cuestionario):
     
 @login_required
 def index(request, cuestionario):
-    preguntaStateMachine = PreguntaStateMachine(request.user.id, cuestionario)
-    preguntaModel = preguntaStateMachine.get_pregunta()
-          
+    preguntaSM = PreguntaSM(request.user.id, cuestionario)
+    preguntaModel = preguntaSM.get_avance()
+    
     if request.method == 'POST':
-        preguntaStateMachine.save_respuesta(request.POST.get('opcion'))
-        preguntaModel = preguntaStateMachine.get_pregunta()
+        preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
         
+        print(f'Objeto pregunta {preguntaModel}')
+            
     if preguntaModel.tipo_respuesta == 1:
         respuestas = CatFrecuencia.objects.all()
         template = 1
