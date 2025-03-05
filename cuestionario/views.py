@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from catalogos.models import CatFrecuencia, CatOpcionMultiple
 from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine
 """
-    falta definir funcionamiento para retornar a la pregunta anterior en caso de ser necesario
+    crear historial de recorrido de preguntas
+    revisar si es el inicio
+    obtener el numero de la pregunta previamente contestada
+    borrar la respuesta de la pregunta anterior
+    redireccionar a la pregunta anterior
 """
 
 @login_required
@@ -16,13 +19,12 @@ def regresar_pregunta(request, cuestionario, pregunta):
 
 @login_required
 def reiniciar(request, cuestionario):
-
     ProgresoStateMachine.reset_progreso(request.user.id, cuestionario)
-
     return redirect('home')
     
 @login_required
 def index(request, cuestionario):
+    progreso = ProgresoStateMachine.get_progreso(request.user.id)
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
     preguntaModel = preguntaSM.get_avance()
     
@@ -40,8 +42,9 @@ def index(request, cuestionario):
     data = {
         'cuestionario' : cuestionario
         ,'pregunta' : preguntaModel.texto
-        , 'respuestas' : respuestas
-        , 'template' : template
+        ,'respuestas' : respuestas
+        ,'template' : template
+        ,'inicio ' : progreso.cuestionarios[cuestionario]['inicio']
     }
     
     return render(request, 'index.html', data)
