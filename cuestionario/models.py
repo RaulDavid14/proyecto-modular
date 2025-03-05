@@ -1,11 +1,10 @@
 from django.db import models
 
-# Create your models here.
 class PreguntaModel(models.Model):
     texto = models.TextField(verbose_name='Pregunta')
     tipo_respuesta = models.IntegerField('tipo de preguntas')
     sig_pregunta = models.JSONField(verbose_name='siguiente pregunta', null=True, blank=True)
-    tipo_cuestionario = models.IntegerField(verbose_name='tipo cuestionario')
+    tipo_cuestionario = models.CharField(max_length=50, verbose_name='tipo cuestionario')  # Cambiado a CharField
 
     def __str__(self):
         return f"Pregunta {self.id}"
@@ -17,7 +16,7 @@ class PreguntaModel(models.Model):
 
 class RespuestaModel(models.Model):
     id_usuario = models.IntegerField(verbose_name='usuario')
-    id_cuestionario = models.IntegerField('cuestionario')
+    id_cuestionario = models.CharField(max_length=50, verbose_name='cuestionario')  # Cambiado a CharField
     id_pregunta = models.IntegerField('no. pregunta')
     id_respuesta = models.IntegerField('respuesta')
     

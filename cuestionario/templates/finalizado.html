@@ -1,0 +1,20 @@
+¿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Finalizado</title>
+    <script>
+        window.onload = function() {
+            if (confirm('¡Formulario finalizado! ¿Desea enviarlo?')) {
+                window.location.href = "{% url 'home' %}";
+            } else {
+                window.location.href = "{% url 'cuestionario_contestado' cuestionario=cuestionario %}";
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>¡Formulario finalizado!</h1>
+</body>
+</html>

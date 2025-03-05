@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="border p-4 rounded shadow-sm">
-        <form action="" method="post" id="formulario">
+        <form action="{% url 'cuestionario' cuestionario=cuestionario %}" method="post" id="formulario">
             {% csrf_token %}
             
             <div class="d-flex mb-4">
