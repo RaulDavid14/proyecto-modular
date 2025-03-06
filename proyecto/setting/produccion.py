@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://cfca.pythonanywhere.com/']
+ALLOWED_HOSTS = ['https://cfca.pythonanywhere.com']
 
 database = 'CFCA'
 user = 'root'
