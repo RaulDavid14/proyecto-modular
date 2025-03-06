@@ -1,8 +1,8 @@
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://cfca.pythonanywhere.com/']
 
 database = 'CFCA'
 user = 'root'
