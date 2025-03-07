@@ -5,27 +5,34 @@
     <link rel="stylesheet" href="{% static 'vendor/css/home.css' %}">
 {% endblock links %}
 
-{% block titulo %}Iinicio{% endblock titulo %}
+{% block titulo %}Inicio{% endblock titulo %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2 class="mb-5" >Cuestionarios disponibles</h2>
-            <table class="table tabla">
-                <tr>
-                    <th>Progreso</th>
-                    <th>Cuestionario</th>
-                    <th>Acción</th>
-                </tr>
-                
-                {% for cuestionario in cuestionarios %}
-                    <tr>
-                        <td>0%</td>
-                        <td>{{cuestionario.nombre_cuestionario}}</td>            
-                        <td>{{cuestionario.url|safe}}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-5">Cuestionarios disponibles</h2>
+                <div class="table-responsive">
+                    <table class="table tabla">
+                        <thead>
+                            <tr>
+                                <th>Progreso</th>
+                                <th>Cuestionario</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cuestionario in cuestionarios %}
+                                <tr>
+                                    <td>0%</td>
+                                    <td>{{cuestionario.nombre_cuestionario}}</td>            
+                                    <td>{{cuestionario.url|safe}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock body %}
