@@ -4,10 +4,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cfca.pythonanywhere.com']
 
-database = 'CFCA'
-user = 'root'
-password = '1234'
-host = 'localhost'
+database = 'cfca$general'
+user = 'cfca'
+password = 'Cuc31.2025'
+host = 'cfca.mysql.pythonanywhere-services.com'
 port = '3306'
 
 DATABASES = {
