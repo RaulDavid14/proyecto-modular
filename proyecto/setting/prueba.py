@@ -2,12 +2,12 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['cfca.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
-database = 'cfca$general'
-user = 'cfca'
-password = 'Cuc31.2025'
-host = 'cfca.mysql.pythonanywhere-services.com'
+database = 'CFCA'
+user = 'root'
+password = '1234'
+host = 'localhost'
 port = '3306'
 
 DATABASES = {

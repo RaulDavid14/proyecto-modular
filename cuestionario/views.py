@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from catalogos.models import CatFrecuencia, CatOpcionMultiple
 from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine
+
 """
     falta definir funcionamiento para retornar a la pregunta anterior en caso de ser necesario
 """
@@ -20,7 +19,7 @@ def reiniciar(request, cuestionario):
     ProgresoStateMachine.reset_progreso(request.user.id, cuestionario)
 
     return redirect('home')
-    
+
 @login_required
 def index(request, cuestionario):
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
@@ -28,14 +27,8 @@ def index(request, cuestionario):
     
     if request.method == 'POST':
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
-            
-    if preguntaModel.tipo_respuesta == 1:
-        respuestas = CatFrecuencia.objects.all()
-        template = 1
-        
-    elif preguntaModel.tipo_respuesta == 2:
-        respuestas = CatOpcionMultiple.objects.all()
-        template = 2
+
+    template, respuestas = preguntaSM.get_cuestionario(preguntaModel.id, preguntaModel.tipo_respuesta)
         
     data = {
         'cuestionario' : cuestionario

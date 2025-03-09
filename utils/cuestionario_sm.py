@@ -1,5 +1,6 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from catalogos.models import CatCuestionarios
+from catalogos.models import CatFrecuencia, CatOpcionMultiple
 from usuario.models import ProgresoModel
 
 
@@ -12,7 +13,30 @@ class PreguntaSM:
         self.avance = None
         self.id_cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
         self.preguntaModel = None
+    
+    def get_cuestionario(self, id_pregunta, tipo_respuesta):
+    
+        if tipo_respuesta == 1:
+            template = 1
+            respuestas = CatFrecuencia.objects.all()
+        elif tipo_respuesta == 2:
+            template = 2
+            respuestas = CatOpcionMultiple.objects.all()
+        elif tipo_respuesta == 3:
+            pregunta = PreguntaSM.get_next_question(id_pregunta)
+
+        elif tipo_respuesta == 4:
+            template = 2
+            respuestas = CatOpcionMultiple.objects.all()
             
+            template, respuestas = self.get_cuestionario(pregunta.id, pregunta.tipo_respuesta)
+        return template, respuestas    
+
+
+    
+    def get_next_question(self, id_pregunta):
+        return PreguntaModel.objects.filter(id__gt=id_pregunta).order_by('id').first()
+          
     def set_progreso_usuario(self, usuario): 
         self.progreso_cuestionario = ProgresoModel.objects.get(id_usuario = usuario)
         
