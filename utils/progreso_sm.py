@@ -6,6 +6,13 @@ from django.db.models import Min, Max
 class ProgresoStateMachine():
     
     @staticmethod
+    def is_complete_progres(usuario):
+        progreso = ProgresoStateMachine.get_progreso(usuario)
+        cuestionarios = CatCuestionarios.objects.get.all()
+        completo = False
+                
+    
+    @staticmethod
     def reset_progreso(usuario, cuestionario):
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
@@ -17,8 +24,11 @@ class ProgresoStateMachine():
         )
         RespuestaModel.objects.filter(id_usuario = usuario).delete()
         
-        
-        
+    @staticmethod
+    def get_progreso(usuario):
+        return ProgresoModel.objects.get(id=usuario)    
+    
+       
     @staticmethod
     def  get_id_pregunta(id_cuestionario):
         dict_pregunta = {
@@ -37,6 +47,7 @@ class ProgresoStateMachine():
                 'inicio' : False
                 ,'id_cuestionario' : cuestionario.id
                 ,'pregunta_actual' : ProgresoStateMachine.get_id_pregunta(cuestionario.id)
+                ,'completado' : False
             }
         progreso = ProgresoModel(id_usuario = user, cuestionarios = dictProgreso)
         progreso.save()    
@@ -45,6 +56,7 @@ class ProgresoStateMachine():
     def get_last_questions():
         return PreguntaModel.objects.values('tipo_cuestionario').annotate(ultimo_id=Max('id'))
 
+    
     @staticmethod
     def calcular_porcentaje(usuario):
         dict_porcentajes = ProgresoStateMachine.get_last_questions()

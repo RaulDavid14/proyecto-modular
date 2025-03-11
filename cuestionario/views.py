@@ -3,9 +3,6 @@ from django.contrib.auth.decorators import login_required
 from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine
 
-"""
-    falta definir funcionamiento para retornar a la pregunta anterior en caso de ser necesario
-"""
 
 @login_required
 def regresar_pregunta(request, cuestionario, pregunta):
@@ -23,11 +20,12 @@ def reiniciar(request, cuestionario):
 @login_required
 def index(request, cuestionario):
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
-    preguntaModel = preguntaSM.get_avance()
     
     if request.method == 'POST':
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
-
+    else:
+        preguntaModel = preguntaSM.get_avance()
+        
     template, respuestas = preguntaSM.get_cuestionario(preguntaModel.id, preguntaModel.tipo_respuesta)
         
     data = {
@@ -37,4 +35,4 @@ def index(request, cuestionario):
         , 'template' : template
     }
     
-    return render(request, 'index.html', data)
+    return render(request, 'index.html', data)``
