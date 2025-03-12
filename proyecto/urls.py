@@ -24,5 +24,6 @@ urlpatterns = [
     path('cuestionario/', include('cuestionario.urls')),
     path('', include('landing.urls')),
     path('datos/', include('catalogos.urls')),
-    path('panel/', include('panel_administrador.urls'))
+    path('panel/', include('panel_administrador.urls')),
+    path('cfca/api', include('cfca_api.urls')),
 ]
