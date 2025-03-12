@@ -4,17 +4,10 @@ from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine
 
 
-@login_required
-def regresar_pregunta(request, cuestionario, pregunta):
-    
-    return redirect('cuestionario', kwargs= {'cuestionario' : cuestionario})
-
 
 @login_required
 def reiniciar(request, cuestionario):
-
     ProgresoStateMachine.reset_progreso(request.user.id, cuestionario)
-
     return redirect('home')
 
 @login_required
@@ -35,4 +28,4 @@ def index(request, cuestionario):
         , 'template' : template
     }
     
-    return render(request, 'index.html', data)``
+    return render(request, 'index.html', data)

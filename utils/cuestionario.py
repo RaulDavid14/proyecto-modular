@@ -16,10 +16,12 @@ class Cuestionario:
         catCuestionarios = self.__catCuestionarios
         for c in catCuestionarios:
             cuestionario = {
-                'url': f"""
-                    <a href="{self.get_url('cuestionario',c.abreviacion)}" class="btn btn-outline-success w-50">Iniciar</a>
-                    <a href="{self.get_url('reiniciar_cuestionario', c.abreviacion)}" class="btn btn-outline-warning w-25">Reiniciar</a>
-                """,
+                   'url': f"""
+                        <div class="d-flex flex-column flex-md-row gap-2">
+                            <a href="{self.get_url('cuestionario', c.abreviacion)}" class="btn btn-outline-dark flex-fill">Iniciar</a>
+                            <a href="{self.get_url('reiniciar_cuestionario', c.abreviacion)}" class="btn btn-outline-primary flex-fill">Reiniciar</a>
+                        </div>
+                    """,
                 'nombre_cuestionario': c.nombre_largo
             }
             enlances.append(cuestionario)

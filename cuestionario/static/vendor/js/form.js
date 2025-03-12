@@ -5,10 +5,6 @@ document.getElementById('formulario').addEventListener('submit', function() {
     isSubmitting = true;
 });
 
-document.getElementById('anterior').addEventListener('click', function() {
-    isNavigating = true;
-});
-
 window.addEventListener('beforeunload', function (e) {
     if (isSubmitting || isNavigating) {
         return;
