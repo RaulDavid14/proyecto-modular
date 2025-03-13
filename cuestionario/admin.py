@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import PreguntaModel
+from .models import PreguntaModel, ImagenRespuestaModel
 # Register your models here.
 
+
+admin.site.register(ImagenRespuestaModel)
 
 @admin.register(PreguntaModel)
 class MiModeloAdmin(admin.ModelAdmin):
