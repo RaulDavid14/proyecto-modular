@@ -90,6 +90,87 @@
         }
     },
     {
+        "model": "catalogos.catcuestionarios",
+        "pk": 1,
+        "fields": {
+            "nombre_largo": "Productos lácteos",
+            "abreviacion": "LPL",
+            "descripcion": "Contiene todo lo relacionado sobre el consumo de productos lácteos"
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 2,
+        "fields": {
+            "nombre_largo": "Carnes y productos de origen animal",
+            "abreviacion": "CPOA",
+            "descripcion": "Contiene todo lo relacionado con el consumo de carnes."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 3,
+        "fields": {
+            "nombre_largo": "Verduras y Hortalizas",
+            "abreviacion": "VyH",
+            "descripcion": "Contiene todo lo relacionado sobre el consumo de verduras."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 4,
+        "fields": {
+            "nombre_largo": "Frutas y frutos Secos",
+            "abreviacion": "FyFC",
+            "descripcion": "Contiene todo lo relacionado sobre el consumo de frutas."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 5,
+        "fields": {
+            "nombre_largo": "Leguminosas, Cereales",
+            "abreviacion": "LyC",
+            "descripcion": "Contiene todo lo relacionado con las leguminosas y cereales."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 6,
+        "fields": {
+            "nombre_largo": "Productos de panadería",
+            "abreviacion": "PdP",
+            "descripcion": "Contiene todo lo relacionado sobre el consumo de productos fabricados con harina."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 7,
+        "fields": {
+            "nombre_largo": "Misceláneos",
+            "abreviacion": "Mice",
+            "descripcion": "Contiene todo lo relacionado sobre otro tipo de alimentos."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 8,
+        "fields": {
+            "nombre_largo": "Bebidas",
+            "abreviacion": "Bebid",
+            "descripcion": "Contiene todo lo relacionado sobre tipos de bebidas."
+        }
+    },
+    {
+        "model": "catalogos.catcuestionarios",
+        "pk": 9,
+        "fields": {
+            "nombre_largo": "Platillos preparados",
+            "abreviacion": "PP",
+            "descripcion": "Contiene todo lo relacionado sobre el consumo de platillos preparados."
+        }
+    },
+    {
         "model": "catalogos.catfrecuencia",
         "pk": 1,
         "fields": {
@@ -231,6 +312,114 @@
             "nombre_largo": "Menos de la opción D",
             "abreviacion": "",
             "descripcion": ""
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 1,
+        "fields": {
+            "nombre_largo": "más de la Opción A",
+            "abreviacion": "masA",
+            "descripcion": "Campo para mencionar que se consume mas de la opcion a."
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 2,
+        "fields": {
+            "nombre_largo": "opción A",
+            "abreviacion": "opca",
+            "descripcion": "Campo de opcion a"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 3,
+        "fields": {
+            "nombre_largo": "menos de la opción A",
+            "abreviacion": "menA",
+            "descripcion": "Campos para referenciar que hay menos de la opcion a"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 4,
+        "fields": {
+            "nombre_largo": "más de la opción B",
+            "abreviacion": "masb",
+            "descripcion": "campo para referenciar que sirve para definir mas de la opcion b"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 5,
+        "fields": {
+            "nombre_largo": "opción B",
+            "abreviacion": "opcb",
+            "descripcion": "campo b"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 6,
+        "fields": {
+            "nombre_largo": "menos de la opción B",
+            "abreviacion": "menB",
+            "descripcion": "menos b"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 7,
+        "fields": {
+            "nombre_largo": "mas de la opción C",
+            "abreviacion": "masc",
+            "descripcion": "Campo de mas opcion c"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 8,
+        "fields": {
+            "nombre_largo": "opción C",
+            "abreviacion": "opcC",
+            "descripcion": "opcion c"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 9,
+        "fields": {
+            "nombre_largo": "menos de la opción C",
+            "abreviacion": "menC",
+            "descripcion": "menos de la opción C"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 10,
+        "fields": {
+            "nombre_largo": "más de la opción D",
+            "abreviacion": "masD",
+            "descripcion": "mas de la opcion D"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 11,
+        "fields": {
+            "nombre_largo": "opcion D",
+            "abreviacion": "opcD",
+            "descripcion": "opcion D"
+        }
+    },
+    {
+        "model": "catalogos.catopcionmultipleespecial",
+        "pk": 12,
+        "fields": {
+            "nombre_largo": "menos de la opción D",
+            "abreviacion": "menD",
+            "descripcion": "menos de la opcion D"
         }
     }
 ]
