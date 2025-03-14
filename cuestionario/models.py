@@ -6,6 +6,8 @@ class PreguntaModel(models.Model):
     sig_pregunta = models.JSONField(verbose_name='siguiente pregunta', null=True, blank=True)
     tipo_cuestionario = models.IntegerField(verbose_name='tipo cuestionario')
     imagen_grupal = models.BooleanField(null=True, verbose_name='imagen grupal')
+    is_active = models.BooleanField(default=True, verbose_name='Activo', null=True)
+    no_pregunta = models.IntegerField(verbose_name='No. Pregunta', null=True)
     
     def __str__(self):
         return f"Pregunta {self.id} - Tipo Respuesta {self.tipo_respuesta}"
