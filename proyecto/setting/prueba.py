@@ -4,7 +4,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-database = 'CFCA'
+database = 'catalogos'
 user = 'root'
 password = '1234'
 host = 'localhost'
