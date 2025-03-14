@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('id_usuario', models.IntegerField(verbose_name='usuario')),
                 ('id_cuestionario', models.IntegerField(verbose_name='cuestionario')),
-                ('id_pregunta', models.IntegerField(verbose_name='no. pregunta')),
+                ('no_pregunta', models.IntegerField(verbose_name='no. pregunta')),
                 ('id_respuesta', models.IntegerField(verbose_name='respuesta')),
             ],
             options={

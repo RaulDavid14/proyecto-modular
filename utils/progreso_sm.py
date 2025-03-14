@@ -27,9 +27,8 @@ class ProgresoStateMachine():
     def get_progreso(usuario):
         return ProgresoModel.objects.get(id=usuario)    
     
-       
     @staticmethod
-    def  get_id_pregunta(id_cuestionario):
+    def get_id_pregunta(id_cuestionario):
         dict_pregunta = {
             p['tipo_cuestionario'] : p['id_min']
             for p in PreguntaModel.objects.values('tipo_cuestionario').annotate(id_min = Min('id'))
@@ -45,7 +44,7 @@ class ProgresoStateMachine():
             dictProgreso[cuestionario.abreviacion] = {
                 'inicio' : False
                 ,'id_cuestionario' : cuestionario.id
-                ,'pregunta_actual' : ProgresoStateMachine.get_id_pregunta(cuestionario.id)
+                ,'pregunta_actual' : 1
                 ,'completado' : False
             }
         progreso = ProgresoModel(id_usuario = user, cuestionarios = dictProgreso)

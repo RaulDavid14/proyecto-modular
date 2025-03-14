@@ -44,7 +44,7 @@ class ImagenRespuestaModel(models.Model):
 class RespuestaModel(models.Model):
     id_usuario = models.IntegerField(verbose_name='usuario')
     id_cuestionario = models.IntegerField('cuestionario')
-    id_pregunta = models.IntegerField('no. pregunta')
+    no_pregunta = models.IntegerField('no. pregunta')
     id_respuesta = models.IntegerField('respuesta')
     
     class Meta:
