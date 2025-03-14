@@ -16,7 +16,7 @@ class ProgresoStateMachine():
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
         
-        progreso.cuestionarios[cuestionario.abreviacion]['pregunta_actual'] = ProgresoStateMachine.get_last_question(cuestionario.id)
+        progreso.cuestionarios[cuestionario.abreviacion]['pregunta_actual'] = 1
         
         ProgresoModel.objects.filter(id_usuario = usuario).update(
             cuestionarios = progreso.cuestionarios
