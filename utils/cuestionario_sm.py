@@ -1,5 +1,6 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from usuario.models import ProgresoModel
+from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
 from catalogos.models import (
     CatFrecuencia
     , CatOpcionMultiple
@@ -19,8 +20,8 @@ class PreguntaSM:
         self.preguntaModel = None
     
     def get_cuestionario(self, preguntaModel):
-        print(f'Pregunta: {preguntaModel}')
         if preguntaModel is None:
+            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
             template = 0
             respuestas = None
         else:
@@ -76,9 +77,20 @@ class PreguntaSM:
 
     def save_respuesta(self, opcion):
         self.avance = self.get_avance()
-        
+
+        try:
+            respuesta = RespuestaModel(
+                id_usuario=self.id_usuario,
+                id_cuestionario=self.id_cuestionario.id,
+                id_respuesta=opcion,
+                no_pregunta=self.avance.no_pregunta    
+            )
+            respuesta.save()
+        except Exception as e:
+            print(f"Error al guardar la respuesta: {e}")
+            return None
+
         if self.avance is None or not hasattr(self.avance, 'sig_pregunta') or opcion not in self.avance.sig_pregunta:
-            print("entra aqui")
             return None  
         
         sig_pregunta = self.get_pregunta(self.avance.sig_pregunta[opcion])
@@ -96,18 +108,7 @@ class PreguntaSM:
             print(f"Error al actualizar el progreso: {e}")
             return None
         
-        try:
-            respuesta = RespuestaModel(
-                id_usuario=self.id_usuario,
-                id_cuestionario=self.id_cuestionario.id,
-                id_respuesta=opcion,
-                no_pregunta=self.avance.no_pregunta    
-            )
-            respuesta.save()
-        except Exception as e:
-            print(f"Error al guardar la respuesta: {e}")
-            return None
-
+        
         return sig_pregunta
         
         

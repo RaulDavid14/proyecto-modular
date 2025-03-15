@@ -27,7 +27,6 @@ def index(request, cuestionario):
             ,'template' : template
         }
     else:
-        print(f'Pregunta: {preguntaModel}')        
         data = {
             'cuestionario' : cuestionario
             ,'pregunta' : preguntaModel.texto
