@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from clustering.views import ClusteringView, clustering_template
 from django.urls import path, include
 
 urlpatterns = [
@@ -25,5 +26,8 @@ urlpatterns = [
     path('', include('landing.urls')),
     path('datos/', include('catalogos.urls')),
     path('panel/', include('panel_administrador.urls')),
-    path('cfca/api', include('cfca_api.urls')),
+    path('clustering/', include('clustering.urls')),
+
+
+    
 ]
