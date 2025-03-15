@@ -19,7 +19,7 @@ class PreguntaModel(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Pregunta {self.id} - Tipo Respuesta {self.tipo_respuesta}"
+        return f"Pregunta {self.no_pregunta} - Tipo Respuesta {self.tipo_respuesta}"
 
     class Meta:
         db_table = 'preguntas'

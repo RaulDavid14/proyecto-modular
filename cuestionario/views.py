@@ -18,14 +18,21 @@ def index(request, cuestionario):
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
     else:
         preguntaModel = preguntaSM.get_avance()
-        
-    template, respuestas = preguntaSM.get_cuestionario(preguntaModel.id, preguntaModel.tipo_respuesta)
-        
-    data = {
-        'cuestionario' : cuestionario
-        ,'pregunta' : preguntaModel.texto
-        , 'respuestas' : respuestas
-        , 'template' : template
-    }
+    
+    template, respuestas = preguntaSM.get_cuestionario(preguntaModel)
+    
+    if preguntaModel is None:
+        data = {
+            'cuestionario' : cuestionario
+            ,'template' : template
+        }
+    else:
+        print(f'Pregunta: {preguntaModel}')        
+        data = {
+            'cuestionario' : cuestionario
+            ,'pregunta' : preguntaModel.texto
+            , 'respuestas' : respuestas
+            , 'template' : template
+        }
     
     return render(request, 'index.html', data)
