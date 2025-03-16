@@ -26,7 +26,9 @@
                             {% if  cuestionarios %}
                                 {% for cuestionario in cuestionarios %}
                                     <tr>
-                                        <td> 0% </td>
+                                        <td>
+                                            {{cuestionario.progreso}}%
+                                        </td>
                                         <td>{{ cuestionario.nombre_cuestionario }}</td>
                                         <td>
                                             {{cuestionario.url|safe}}

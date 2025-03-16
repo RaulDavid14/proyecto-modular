@@ -1,5 +1,6 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from usuario.models import ProgresoModel
+from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
 from catalogos.models import (
     CatFrecuencia
     , CatOpcionMultiple
@@ -19,8 +20,8 @@ class PreguntaSM:
         self.preguntaModel = None
     
     def get_cuestionario(self, preguntaModel):
-        print(f'Pregunta: {preguntaModel}')
         if preguntaModel is None:
+            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
             template = 0
             respuestas = None
         else:
@@ -76,25 +77,9 @@ class PreguntaSM:
 
     def save_respuesta(self, opcion):
         self.avance = self.get_avance()
-        
-        if self.avance is None or not hasattr(self.avance, 'sig_pregunta') or opcion not in self.avance.sig_pregunta:
-            print("entra aqui")
-            return None  
-        
-        sig_pregunta = self.get_pregunta(self.avance.sig_pregunta[opcion])
 
-        if sig_pregunta is None:
-            return None  
-        
-        self.progreso_cuestionario[self.cuestionario]['pregunta_actual'] = sig_pregunta.no_pregunta
-        
-        try:
-            ProgresoModel.objects.filter(id_usuario=self.id_usuario).update(
-                cuestionarios=self.progreso_cuestionario
-            )
-        except Exception as e:
-            print(f"Error al actualizar el progreso: {e}")
-            return None
+        if self.progreso_cuestionario[self.cuestionario]['inicio'] is False:
+            self.progreso_cuestionario[self.cuestionario]['inicio'] = True
         
         try:
             respuesta = RespuestaModel(
@@ -108,6 +93,26 @@ class PreguntaSM:
             print(f"Error al guardar la respuesta: {e}")
             return None
 
+        if self.avance is None or not hasattr(self.avance, 'sig_pregunta') or opcion not in self.avance.sig_pregunta:
+            return None  
+        
+        sig_pregunta = self.get_pregunta(self.avance.sig_pregunta[opcion])
+
+        if sig_pregunta is None:
+            return None  
+        
+        self.progreso_cuestionario[self.cuestionario]['pregunta_actual'] = sig_pregunta.no_pregunta
+        
+        
+        try:
+            ProgresoModel.objects.filter(id_usuario=self.id_usuario).update(
+                cuestionarios=self.progreso_cuestionario
+            )
+        except Exception as e:
+            print(f"Error al actualizar el progreso: {e}")
+            return None
+        
+        
         return sig_pregunta
         
         
