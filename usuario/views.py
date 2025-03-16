@@ -22,12 +22,11 @@ def login_view(request):
             email = form.cleaned_data.get('username')  # Django usa 'username', pero nuestro modelo usa 'email'
             password = form.cleaned_data.get('password')
 
-            # Autenticamos usando el campo 'email'
             user = authenticate(request, email=email, password=password)
 
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirigir a la página principal
+                return redirect('home')
             else:
                 form.add_error(None, "Correo o contraseña incorrectos")
     else:
@@ -38,4 +37,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirigir a la página de inicio de sesión
+    return redirect('login')

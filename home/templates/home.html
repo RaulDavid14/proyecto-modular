@@ -8,31 +8,52 @@
 {% block titulo %}Inicio{% endblock titulo %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid p-4">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="mb-5">Cuestionarios disponibles</h2>
+                <h2 class="mb-3">Cuestionarios disponibles</h2>
+                <p class="mb-4 text-muted">Selecciona un cuestionario para comenzar.</p>
                 <div class="table-responsive">
-                    <table class="table tabla">
-                        <thead>
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
                             <tr>
-                                <th>Progreso</th>
-                                <th>Cuestionario</th>
-                                <th>Acción</th>
+                                <th scope="col" class="w-20">Progreso</th>
+                                <th scope="col" class="w-50">Cuestionario</th>
+                                <th scope="col" class="w-30">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for cuestionario in cuestionarios %}
+                            {% if  cuestionarios %}
+                                {% for cuestionario in cuestionarios %}
+                                    <tr>
+                                        <td>
+                                            {{cuestionario.progreso}}%
+                                        </td>
+                                        <td>{{ cuestionario.nombre_cuestionario }}</td>
+                                        <td>
+                                            {{cuestionario.url|safe}}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
                                 <tr>
-                                    <td>0%</td>
-                                    <td>{{cuestionario.nombre_cuestionario}}</td>            
-                                    <td>{{cuestionario.url|safe}}</td>
+                                    <td colspan="3" class="text-center">No hay cuestionarios disponibles.</td>
                                 </tr>
-                            {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <p class="text-muted">¿Necesitas ayuda? <a href="{% url 'ayuda' %}" class="text-primary">Consulta las instrucciones</a></p>
+            </div>
+        </div>
     </div>
 {% endblock body %}
+
+{% block scripts %}
+    <script src="{% static 'vendor/js/home.js' %}"></script>
+{% endblock scripts %}
+    
