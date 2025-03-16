@@ -5,6 +5,8 @@ class ProgresoModel(models.Model):
     id_usuario = models.IntegerField(verbose_name='id usuario')
     cuestionarios = models.JSONField(verbose_name='Cuestionarios disponibles')
 
+    def __str__(self):
+        return f'Progreso del usuario {self.id_usuario}'
     class Meta:
         db_table = 'progreso_usuario'
         verbose_name = 'progreso de usuario'
@@ -35,11 +37,8 @@ class AdminModel(BaseUserManager):
     
 
 class UserModel(AbstractBaseUser, PermissionsMixin):
-    # Campos obligatorios
-    # Campo combinado para nombre completo
     nombre_completo = models.CharField(max_length=255, verbose_name="Nombre completo")
     email = models.EmailField(unique=True)
-    # Campos opcionales
     second_name = models.CharField(max_length=30, blank=True, null=True)
     third_name = models.CharField(max_length=30, blank=True, null=True)
     last_name_maternal = models.CharField(max_length=30, blank=True, null=True)  # Apellido materno
