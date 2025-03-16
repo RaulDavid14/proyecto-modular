@@ -13,7 +13,8 @@ class Cuestionario:
     def get_quiz(self, usuario):
         enlances = []
         progreso = ProgresoSM.get_progreso(usuario)
-
+        avance = ProgresoSM.get_porcentaje_avance(usuario)
+        
         for c in self.__catCuestionarios:
             disabled = 'disabled' if progreso.cuestionarios[c.abreviacion]['completado'] else ''
             iniciar = f'<a href="{self.get_url('cuestionario', c.abreviacion)}" class="btn btn-outline-dark flex-fill {disabled}">Iniciar</a>'
@@ -24,8 +25,9 @@ class Cuestionario:
                             {iniciar}
                             <a href="{self.get_url('reiniciar_cuestionario', c.abreviacion)}" class="btn btn-outline-primary flex-fill">Reiniciar</a>
                         </div>
-                    """,
-                'nombre_cuestionario': c.nombre_largo
+                    """
+                ,'nombre_cuestionario': c.nombre_largo
+                ,'progreso': avance[c.abreviacion]
             }
             enlances.append(cuestionario)
         return enlances

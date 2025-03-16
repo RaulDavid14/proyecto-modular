@@ -78,6 +78,9 @@ class PreguntaSM:
     def save_respuesta(self, opcion):
         self.avance = self.get_avance()
 
+        if self.progreso_cuestionario[self.cuestionario]['inicio'] is False:
+            self.progreso_cuestionario[self.cuestionario]['inicio'] = True
+        
         try:
             respuesta = RespuestaModel(
                 id_usuario=self.id_usuario,
@@ -99,6 +102,7 @@ class PreguntaSM:
             return None  
         
         self.progreso_cuestionario[self.cuestionario]['pregunta_actual'] = sig_pregunta.no_pregunta
+        
         
         try:
             ProgresoModel.objects.filter(id_usuario=self.id_usuario).update(
