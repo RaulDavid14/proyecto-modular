@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('landing.urls')),
     path('datos/', include('catalogos.urls')),
     path('panel/', include('panel_administrador.urls')),
+    path('api/', include('cfca_api.api.urls')),
 ]
