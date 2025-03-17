@@ -9,7 +9,6 @@
 
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/css/navbar.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     {% block links %}{% endblock links %}
 
@@ -17,9 +16,8 @@
 </head>
 
 <body>
-
-    <button class="navbar-toggler text-white" type="button" id="sidebarToggle">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" id="sidebarToggle">
+        <span class="navbar-toggler-icon text-white"></span>
     </button>
 
     <div class="sidebar" id="sidebar">
