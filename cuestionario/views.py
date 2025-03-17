@@ -40,9 +40,36 @@ def index(request, cuestionario):
     
     return render(request, 'index.html', data)
 
-# Cargar el archivo JSON con la clasificación NOVA
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+@login_required
+def resultados_cuestionario(request, cuestionario):
+    respuestas = RespuestaModel.objects.filter(id_cuestionario=cuestionario, id_usuario=request.user.id)
+    
+    total_respuestas = respuestas.count()
+    if total_respuestas == 0:
+        porcentajes = {"minimamente_procesado": 0, "procesado": 0, "ultra_procesado": 0}
+    else:
+        # Aquí se deberían hacer los cálculos para los porcentajes según el JSON de NOVA
+        porcentajes = {
+            "minimamente_procesado": 50,  # Datos de prueba
+            "procesado": 30,
+            "ultra_procesado": 20,
+        }
+
+    return render(request, "cuestionario/resultados.html", {"porcentajes": porcentajes, "cuestionario": cuestionario})
+
+# Obtener la ruta absoluta del directorio `cuestionario`
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Construir la ruta del JSON correctamente
 JSON_PATH = os.path.join(BASE_DIR, "data", "nova.json")
+
+# Cargar el archivo JSON
+try:
+    with open(JSON_PATH, "r", encoding="utf-8") as file:
+        data_nova = json.load(file)
+except FileNotFoundError:
+    data_nova = {}  # Si el archivo no existe, evita el error
+    print(f"⚠️ Error: No se encontró el archivo nova.json en {JSON_PATH}")
 
 with open(JSON_PATH, "r", encoding="utf-8") as file:
     data_nova = json.load(file)
