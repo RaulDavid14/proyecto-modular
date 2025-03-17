@@ -11,14 +11,13 @@
 
 {% block body %}
 <div class="body-wrap">
-  <!-- Navbar -->
   <header class="site-header">
     <div class="container">
       <div class="site-header-inner">
         <div class="brand header-brand">
           <h1 class="m-0">
             <a href="{% url 'landing' %}">
-                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+              <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
             </a>
           </h1>
         </div>
@@ -27,51 +26,99 @@
     </div>
   </header>
 
-  <!-- Registro Section -->
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6"> 
-        <div class="card shadow"> 
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
           <div class="card-body">
             <h2 class="text-center" style="color: black;">Registro de Usuario</h2>
+            
+            <!-- Mostrar errores generales del formulario -->
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
             <form action="{% url 'register' %}" method="post">
               {% csrf_token %}
-              <div class="row">
-                <div class="form-group col-12 mb-3">
-                  <label for="{{ form.nombre_completo.id_for_label }}">Nombre Completo <span class="text-danger">*</span></label>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="{{ form.nombre_completo.id_for_label }}" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
                   {{ form.nombre_completo }}
+                  {% if form.nombre_completo.errors %}
+                    <div class="text-danger">
+                      {% for error in form.nombre_completo.errors %}
+                        <small>{{ error }}</small>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 </div>
-                <div class="form-group col-12 mb-3">
-                  <label for="{{ form.email.id_for_label }}">Correo Electrónico <span class="text-danger">*</span></label>
+
+                <div class="col-12">
+                  <label for="{{ form.email.id_for_label }}" class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
                   {{ form.email }}
+                  {% if form.email.errors %}
+                    <div class="text-danger">
+                      {% for error in form.email.errors %}
+                        <small>{{ error }}</small>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 </div>
-                <div class="form-group col-6 mb-3">
-                  <label for="{{ form.password1.id_for_label }}">Contraseña <span class="text-danger">*</span></label>
+
+                <div class="col-12 col-md-6">
+                  <label for="{{ form.password1.id_for_label }}" class="form-label">Contraseña <span class="text-danger">*</span></label>
                   {{ form.password1 }}
+                  {% if form.password1.errors %}
+                    <div class="text-danger">
+                      {% for error in form.password1.errors %}
+                        <small>{{ error }}</small>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 </div>
-                <div class="form-group col-6 mb-3">
-                  <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña <span class="text-danger">*</span></label>
+
+                <div class="col-12 col-md-6">
+                  <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
                   {{ form.password2 }}
                 </div>
-              </div>
-              
-              <!-- Aviso de privacidad -->
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="privacy_policy" name="privacy_policy" required>
-                  <label class="form-check-label" for="privacy_policy">
-                    He leído y acepto el <a href="{% static 'dist/pdf/aviso_de_privacidad.pdf' %}" target="_blank">Aviso de Privacidad</a>
-                  </label>
+                <div class="col-12">
+                  <div class="text-danger">
+                    {% if form.password1.errors %}
+                      {% for error in form.password1.errors %}
+                        <small>{{ error }}</small>
+                      {% endfor %}
+                    {% endif %}
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                      <small>{{ error }}</small>
+                    {% endfor %}
+                  {% endif %}
+
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="privacy_policy" name="privacy_policy" required>
+                    <label class="form-check-label" for="privacy_policy">
+                      He leído y acepto el <a href="{% static 'dist/pdf/aviso_de_privacidad.pdf' %}" target="_blank">Aviso de Privacidad</a>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-12 text-center">
+                  <button class="btn btn-success w-100 w-md-50" type="submit">Registrar</button>
                 </div>
               </div>
-              
-              <div class="text-center">
-                <button class="btn btn-success w-50" type="submit">Registrar</button>
-              </div>
             </form>
+
             <div class="text-center mt-3">
               <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>.</p>
             </div>
+
           </div>
         </div>
       </div>
