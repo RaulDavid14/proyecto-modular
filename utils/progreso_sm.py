@@ -13,6 +13,18 @@ class ProgresoStateMachine():
         return PreguntaModel.objects.values('tipo_cuestionario').annotate(ultima_pregunta = Max('no_pregunta'))
     
     @staticmethod
+    def is_completed_form(usuario):
+        completed = []
+        progreso = ProgresoModel.objects.get(id_usuario = usuario)
+        
+        for c in CatCuestionarios.objects.all():
+            completed.append(
+                progreso.cuestionarios[c.abreviacion]['completado']
+            )
+        
+        return all(completed)        
+    
+    @staticmethod
     def get_porcentaje_avance(usuario):
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         ultimas_preguntas = ProgresoStateMachine.get_last_questions()
