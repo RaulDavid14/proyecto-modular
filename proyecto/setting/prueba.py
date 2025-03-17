@@ -4,16 +4,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-APIS = {
-    'url' : 'http://127.0.0.1:8000/api/'
-    ,'timeout' : 10
-}
-
 database = 'CFCA'
 user = 'root'
-password = 'admi'
+password = '1234'
 host = 'localhost'
-port = '3307'
+port = '3306'
 
 DATABASES = {
     'default': {
