@@ -5,29 +5,9 @@
     <link rel="stylesheet" href="{% static 'vendor/css/home.css' %}">
 {% endblock links %}
 
-{% block titulo %}Iinicio{% endblock titulo %}
+{% block titulo %}Inicio{% endblock titulo %}
 
 {% block body %}
-<<<<<<< Updated upstream
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2 class="mb-5" >Cuestionarios disponibles</h2>
-            <table class="table tabla">
-                <tr>
-                    <th>Progreso</th>
-                    <th>Cuestionario</th>
-                    <th>Acción</th>
-                </tr>
-                
-                {% for cuestionario in cuestionarios %}
-                    <tr>
-                        <td>0%</td>
-                        <td>{{cuestionario.nombre_cuestionario}}</td>            
-                        <td>{{cuestionario.url|safe}}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-=======
     <div class="container-fluid p-4">
         <div class="row">
             <div class="col-12 text-center">
@@ -69,7 +49,11 @@
             <div class="col-12 text-center">
                 <p class="text-muted">¿Necesitas ayuda? <a href="{% url 'ayuda' %}" class="text-primary">Consulta las instrucciones</a></p>
             </div>
->>>>>>> Stashed changes
         </div>
     </div>
 {% endblock body %}
+
+{% block scripts %}
+    <script src="{% static 'vendor/js/home.js' %}"></script>
+{% endblock scripts %}
+    

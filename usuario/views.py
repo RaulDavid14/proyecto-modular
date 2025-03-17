@@ -1,31 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import UserRegistrationForm, UserLoginForm
-from catalogos.models import CatCuestionarios
-from .models import ProgresoModel, UserModel
-import json
+from utils.progreso_sm import ProgresoStateMachine
 
-
-def create_progres(user):
-    catCuestionarios = CatCuestionarios.objects.all()
-    dictProgreso = {}
-    
-    for cuestionario in catCuestionarios:
-        dictProgreso[cuestionario.abreviacion] = {
-            'inicio' : False
-            ,'id_cuestionario' : cuestionario.id
-            ,'pregunta_actual' : 1
-        }        
-    progreso = ProgresoModel(id_usuario = user, cuestionarios = dictProgreso)
-    progreso.save()
-    
     
 def signup(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            create_progres(user.id)
+            ProgresoStateMachine.create_progres(user.id)
             return redirect('login') 
     else:
         form = UserRegistrationForm()
@@ -38,12 +22,11 @@ def login_view(request):
             email = form.cleaned_data.get('username')  # Django usa 'username', pero nuestro modelo usa 'email'
             password = form.cleaned_data.get('password')
 
-            # Autenticamos usando el campo 'email'
             user = authenticate(request, email=email, password=password)
 
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Redirigir a la página principal
+                return redirect('home')
             else:
                 form.add_error(None, "Correo o contraseña incorrectos")
     else:
@@ -54,4 +37,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirigir a la página de inicio de sesión
+    return redirect('login')

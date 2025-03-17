@@ -2,21 +2,22 @@
 {% block title %}{{cuestionario}}{% endblock title %}
 
 {% block body %}
-    <div class="d-flex justify-content-between mt-5 mb-5">
-        <div class="">
-            <label class="" for="progress-bar">Progreso:</label>
-            <progress class="" id="progress-bar" value="70" max="100"></progress>
-        </div>
-            <a href="{% url 'home' %}" class="btn btn-outline-danger w-25">Salir</a>
-    </div>
-
     {% if template == 1 %}
         {% include 'form_frecuency.html' %}
     {% elif template == 2 %}
         {% include 'form_images.html' %}
     {% endif %}
-{% endblock body %}
+    {% if template == 3 %}
+
+    {% endif %}
+    {% if template == 4 %}
+        
+    {% endif %}
+    
+    {% if template == 0 %}
+        {% include 'terminado.html' %}
+    {% endif %}
+
+    {% endblock body %}
 {% block scripts %}
-    {% load static %}
-    <script src="{% static 'vendor/js/form.js' %}"></script>
 {% endblock scripts %}

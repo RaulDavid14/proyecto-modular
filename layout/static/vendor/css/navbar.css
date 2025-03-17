@@ -1,13 +1,16 @@
-.title{
-    color: #fff;
+/* Estilos base del título */
+.title {
+  color: #fff;
 }
 
-.nav-link{
-    font-size: large;
-    text-decoration: none;
-    color: #fff;
+/* Estilos de los enlaces */
+.nav-link {
+  font-size: large;
+  text-decoration: none;
+  color: #fff;
 }
 
+/* Estilos base del sidebar */
 .sidebar {
   height: 100vh; /* Altura completa de la ventana */
   width: 250px; /* Ancho del sidebar */
@@ -16,12 +19,16 @@
   left: 0;
   background-color: #343a40; /* Color oscuro */
   padding: 15px;
+  transition: transform 0.3s ease; /* Transición suave */
+  z-index: 1000; /* Asegura que el sidebar esté por encima del contenido */
 }
 
+/* Estilos de los enlaces dentro del sidebar */
 .sidebar a {
   text-decoration: none;
 }
 
+/* Estilos de los elementos del menú */
 .sidebar .menu-item {
   background-color: #f7f8fa;
   color: #fff;
@@ -33,11 +40,51 @@
   transition: background-color 0.3s;
 }
 
+/* Efecto hover para los elementos del menú */
 .sidebar .menu-item:hover {
   background-color: #1285ea;
 }
 
+/* Estilos del contenido principal */
 .content {
   margin-left: 270px; /* Dejar espacio para el sidebar */
   padding: 20px;
+  transition: margin-left 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para el botón de hamburguesa */
+.navbar-toggler {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1100; /* Asegura que el botón esté por encima del sidebar */
+  background-color: #343a40;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .sidebar {
+      transform: translateX(-100%); /* Oculta el sidebar en móviles */
+  }
+
+  .sidebar.active {
+      transform: translateX(0); /* Muestra el sidebar cuando está activo */
+  }
+
+  .content {
+      margin-left: 0; /* El contenido ocupa todo el ancho en móviles */
+  }
+
+  .content.active {
+      margin-left: 250px; /* Desplaza el contenido cuando el sidebar está activo */
+  }
+
+  .navbar-toggler {
+      display: block; /* Muestra el botón de hamburguesa en móviles */
+  }
 }

@@ -6,6 +6,10 @@ SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-
 
 
 INSTALLED_APPS = [
+    'cfca_webhook',
+    'cfca_api',
+    'rest_framework',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -20,6 +24,7 @@ INSTALLED_APPS = [
     'usuario',
     'cuestionario',
     'panel_administrador',
+    'clustering',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +78,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -91,12 +96,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Autenticación estándar de Django
 ]
-
-# EMAIL PARA RESTABLECIMIENTO DE PASS
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'in-v3.mailjet.com'  # El servidor SMTP de Mailjet
-EMAIL_PORT = 587  # Puerto de Mailjet para enviar correos
-EMAIL_USE_TLS = True  # Usar TLS para la conexión segura
-EMAIL_HOST_USER = '8a96bb0570d94c3ded9da36ab0a14ff9'  # API Key pública
-EMAIL_HOST_PASSWORD = '827be7ad9f037070ac104ae50e62f4a5' # API Key Secreta
-DEFAULT_FROM_EMAIL = 'mxcfca@gmail.com'  # La dirección de correo desde la que enviarás los correos

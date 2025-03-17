@@ -18,8 +18,12 @@
 
 <body>
 
-    <div class="sidebar">
-        <img src="{% static 'vendor/img/logo.png' %}" alt="Logo" class="logo mb-3" width="150">
+    <button class="navbar-toggler text-white" type="button" id="sidebarToggle">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="sidebar" id="sidebar">
+        <img src="{% static 'vendor/img/logo.png' %}" alt="Logo" class="logo img-fluid mb-3" width="150">
         <h2 class="title mb-5">Bienvenido</h2>
         <ul class="nav flex-column">
             <li class="nav-item mt-3">
@@ -31,10 +35,10 @@
                 </div>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link" href="#">Configuraciones</a>
+                <a class="nav-link" href="{% url 'informe_nutricional' %}">Informe Nutricional</a>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link" href="#">Ayuda</a>
+                <a class="nav-link" href="{% url 'ayuda' %}">Ayuda</a>
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
@@ -42,13 +46,21 @@
         </ul>
     </div>
 
-    <div class="content">
+    <div class="content" id="content">
         {% block body %}
         {% endblock body %}
     </div>
 
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'vendor/js/jquery.js' %}"></script>
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var content = document.getElementById('content');
+            sidebar.classList.toggle('active');
+            content.classList.toggle('active');
+        });
+    </script>
     {% block scripts %}
     {% endblock scripts %}
 </body>
