@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+<<<<<<< Updated upstream
 from .models import PreguntaModel, RespuestaModel
 from catalogos.models import CatFrecuencia, CatOpcionMultiple
 from usuario.models import ProgresoModel
+=======
+from utils.cuestionario_sm import PreguntaSM
+from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
+>>>>>>> Stashed changes
 
 """
     contenido faltante para la vista
@@ -14,6 +19,7 @@ from usuario.models import ProgresoModel
 
 
 @login_required
+<<<<<<< Updated upstream
 def index(request, cuestionario):
     progresoModel = ProgresoModel.objects.get(id_usuario = request.user.id)
     
@@ -48,5 +54,35 @@ def index(request, cuestionario):
         , 'respuestas' : respuestas
         , 'template' : template
     }
+=======
+def reiniciar(request, cuestionario):
+    ProgresoSM.reset_progreso(request.user.id, cuestionario)
+    return redirect('home')
+
+@login_required
+def index(request, cuestionario):
+    preguntaSM = PreguntaSM(request.user.id, cuestionario)
+    avance = ProgresoSM.get_porcentaje_avance(request.user.id)
+    if request.method == 'POST':
+        preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
+    else:
+        preguntaModel = preguntaSM.get_avance()
+    
+    template, respuestas = preguntaSM.get_cuestionario(preguntaModel)
+    
+    if preguntaModel is None:
+        data = {
+            'cuestionario' : cuestionario
+            ,'template' : template
+        }
+    else:
+        data = {
+            'porcentaje' : avance[cuestionario] 
+            ,'cuestionario' : cuestionario
+            ,'pregunta' : preguntaModel.texto
+            , 'respuestas' : respuestas
+            , 'template' : template
+        }
+>>>>>>> Stashed changes
     
     return render(request, 'index.html', data)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class PreguntaModel(models.Model):
@@ -25,3 +26,15 @@ class RespuestaModel(models.Model):
         db_table = 'respuestas'
         verbose_name = 'Respuesta'
         verbose_name_plural = 'Respuestas'
+        
+class Alimento(models.Model):
+    nombre = models.CharField(max_length=255, unique=True)
+    PROCESAMIENTO_CHOICES = [
+        ('minimamente_procesado', 'Mínimamente Procesado'),
+        ('procesado', 'Procesado'),
+        ('ultra_procesado', 'Ultra Procesado'),
+    ]
+    tipo_procesamiento = models.CharField(max_length=30, choices=PROCESAMIENTO_CHOICES)
+
+    def __str__(self):
+        return f"{self.nombre} - {self.get_tipo_procesamiento_display()}"

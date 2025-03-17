@@ -91,3 +91,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Autenticación estándar de Django
 ]
+
+# EMAIL PARA RESTABLECIMIENTO DE PASS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'  # El servidor SMTP de Mailjet
+EMAIL_PORT = 587  # Puerto de Mailjet para enviar correos
+EMAIL_USE_TLS = True  # Usar TLS para la conexión segura
+EMAIL_HOST_USER = '8a96bb0570d94c3ded9da36ab0a14ff9'  # API Key pública
+EMAIL_HOST_PASSWORD = '827be7ad9f037070ac104ae50e62f4a5' # API Key Secreta
+DEFAULT_FROM_EMAIL = 'mxcfca@gmail.com'  # La dirección de correo desde la que enviarás los correos

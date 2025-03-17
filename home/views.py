@@ -11,7 +11,7 @@ def index(request):
     cuestionario = Cuestionario()
     
     datos = {
-        'cuestionarios': cuestionario.get_quiz(),
+        'cuestionarios': cuestionario.get_quiz(request.user.id),
         'nombre_completo': request.user.nombre_completo
     }
 
