@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'usuario',
     'cuestionario',
     'panel_administrador',
-    'clustering',
 ]
 
 MIDDLEWARE = [
