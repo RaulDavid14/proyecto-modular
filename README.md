@@ -19,10 +19,13 @@ Si quieres utilizar los registros de la base de datos sigue estos pasos
 
 
 
-## Nota
+## Nota de instalación
 
-El caso de hacer un nuevo modelo y que necesite datos es necesario crear un nuevo archivo json para 
+.- El caso de hacer un nuevo modelo y que necesite datos es necesario crear un nuevo archivo json para 
 que todos los integrantes puedan tener tus cambios
 
 usa el comando python manage.py dumpdata nombre_de_la_aplicacion > respaldo.json para crear los archivos
 
+.- Se está utilizando un sistema para alojar las imágenes de las respuestas, van a necesitar usar este comando en el entorno virtual
+
+pip install cloudinary
