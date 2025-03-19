@@ -5,7 +5,7 @@ class PreguntaModel(models.Model):
     tipo_respuesta = models.IntegerField('tipo de preguntas')
     sig_pregunta = models.JSONField(verbose_name='siguiente pregunta', null=True, blank=True)
     tipo_cuestionario = models.IntegerField(verbose_name='tipo cuestionario')
-    imagen_grupal = models.BooleanField(null=True, verbose_name='imagen grupal')
+    imagen_grupal = models.BooleanField(null=True, verbose_name='imagen grupal') # tiene imagen
     is_active = models.BooleanField(default=True, verbose_name='Activo', null=True)
     no_pregunta = models.IntegerField(verbose_name='No. Pregunta', null=True, blank=True)
 
@@ -19,7 +19,7 @@ class PreguntaModel(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Pregunta {self.no_pregunta} - Tipo Respuesta {self.tipo_respuesta}"
+        return f"id Pregunta {self.id} - Tipo Respuesta {self.tipo_respuesta} cuestionario {self.tipo_cuestionario}"
 
     class Meta:
         db_table = 'preguntas'
