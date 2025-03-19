@@ -3,4 +3,7 @@ from .models import ImagenModel
 
 
 # Register your models here.
-admin.site.register(ImagenModel)
+
+@admin.register(ImagenModel)
+class ImagenAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['pregunta']
