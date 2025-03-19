@@ -45,3 +45,5 @@ venv/
 
 # Archivo de configuración sensible
 proyecto/settings.py 
+
+manage.py

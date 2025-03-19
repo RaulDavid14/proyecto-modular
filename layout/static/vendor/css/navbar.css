@@ -17,7 +17,7 @@
   position: fixed; /* Fijo en la página */
   top: 0;
   left: 0;
-  background-color: #343a40; /* Color oscuro */
+  background-color: #657b8a; /* Nuevo color más oscuro */
   padding: 15px;
   transition: transform 0.3s ease; /* Transición suave */
   z-index: 1000; /* Asegura que el sidebar esté por encima del contenido */
@@ -31,7 +31,7 @@
 /* Estilos de los elementos del menú */
 .sidebar .menu-item {
   background-color: #f7f8fa;
-  color: #fff;
+  color: #000; /* Cambiado a negro para mejor contraste */
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -42,7 +42,8 @@
 
 /* Efecto hover para los elementos del menú */
 .sidebar .menu-item:hover {
-  background-color: #1285ea;
+  background-color: #657b8a;
+  color: white;
 }
 
 /* Estilos del contenido principal */
@@ -59,25 +60,30 @@
   top: 10px;
   left: 10px;
   z-index: 1100; /* Asegura que el botón esté por encima del sidebar */
-  background-color: #343a40;
+  background-color: #657b8a; /* Ahora combina con la barra de navegación */
   border: none;
   color: white;
-  padding: 10px;
+  padding: 10px 15px;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.navbar-toggler:hover {
+  background-color: #818486;
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .sidebar {
-      transform: translateX(-100%); /* Oculta el sidebar en móviles */
+      transform: translateX(-100%); 
   }
 
   .sidebar.active {
-      transform: translateX(0); /* Muestra el sidebar cuando está activo */
+      transform: translateX(0); 
   }
 
   .content {
-      margin-left: 0; /* El contenido ocupa todo el ancho en móviles */
+      margin-left: 0; 
   }
 
   .content.active {
