@@ -6,6 +6,7 @@ SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-
 
 
 INSTALLED_APPS = [
+    'imagenes',
     'cfca_webhook',
     'cfca_api',
     'rest_framework',
