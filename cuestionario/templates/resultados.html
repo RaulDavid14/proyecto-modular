@@ -1,0 +1,31 @@
+{% extends "navbar.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Cuestionario</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h2>Resultados del Cuestionario: {{ cuestionario }}</h2>
+    <canvas id="grafica"></canvas>
+
+    <script>
+        var ctx = document.getElementById('grafica').getContext('2d');
+        var data = {{ porcentajes|safe }};  // Convertimos los datos de Django a JSON
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Mínimamente Procesados', 'Procesados', 'Ultra Procesados'],
+                datasets: [{
+                    data: [data.minimamente_procesado, data.procesado, data.ultra_procesado],
+                    backgroundColor: ['green', 'yellow', 'red']
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
