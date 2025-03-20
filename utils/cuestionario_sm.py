@@ -1,6 +1,7 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from usuario.models import ProgresoModel
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
+from imagenes.models import ImagenModel
 from catalogos.models import (
     CatFrecuencia
     , CatOpcionMultiple
@@ -8,6 +9,11 @@ from catalogos.models import (
     ,CatOpcionMultipleEspecial
 )
 
+"""
+agregar preguntas perzonalizadas
+agregar validacion para mostrar imagen en base a la pregunta
+
+"""
 
 class PreguntaSM:
     def __init__(self, id_usuario, cuestionario):
@@ -40,7 +46,10 @@ class PreguntaSM:
             
         return template, respuestas    
 
-
+    def get_imagenes_pregunta(self, id_pregunta):
+        imagenes = ImagenModel.objects.filter(pregunta_id = id_pregunta)
+        print(imagenes)
+        
     
     def get_next_question(self, id_pregunta):
         return PreguntaModel.objects.filter(id__gt=id_pregunta).order_by('id').first()

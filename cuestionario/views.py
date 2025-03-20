@@ -35,4 +35,4 @@ def index(request, cuestionario):
             , 'template' : template
         }
     
-    return render(request, 'index.html', data)
+        return render(request, 'index.html', data)
