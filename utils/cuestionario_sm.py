@@ -4,7 +4,7 @@ from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
 from imagenes.models import ImagenModel
 from catalogos.models import (
     CatFrecuencia
-    , CatOpcionMultiple
+    ,CatOpcionMultiple
     ,CatCuestionarios
     ,CatOpcionMultipleEspecial
 )
@@ -15,7 +15,7 @@ agregar validacion para mostrar imagen en base a la pregunta
 
 """
 
-class PreguntaSM:
+class PreguntaSM():
     def __init__(self, id_usuario, cuestionario):
         self.id_usuario = id_usuario
         self.cuestionario = cuestionario
@@ -46,10 +46,27 @@ class PreguntaSM:
             
         return template, respuestas    
 
-    def get_imagenes_pregunta(self, id_pregunta):
-        imagenes = ImagenModel.objects.filter(pregunta_id = id_pregunta)
-        print(imagenes)
+    #puede tener imagen y no puede tener imangen
+    def get_imagenes_pregunta(self, no_pregunta):
+        tipo_cuestionario = CatCuestionarios.objects.filter(abreviacion = self.cuestionario).first()
+        pregunta = PreguntaModel.objects.filter(no_pregunta = no_pregunta, tipo_cuestionario = tipo_cuestionario.id).first()
+        dictImagen = {}
         
+        if pregunta is not None:
+            imagenes = []
+            if pregunta.imagen_grupal:
+                imagen = ImagenModel.objects.filter(pregunta__id = pregunta.id).first()
+                dictImagen['grupal'] = False
+                dictImagen['imagen_list'] = imagen.url
+            else:
+                dictImagen['grupal'] = True
+                
+                for imagen in ImagenModel.objects.filter(pregunta__id = pregunta.id):
+                    imagenes.append(imagen.url)
+                dictImagen['imagen_list'] = imagenes
+            return dictImagen
+        else:
+            return None
     
     def get_next_question(self, id_pregunta):
         return PreguntaModel.objects.filter(id__gt=id_pregunta).order_by('id').first()
