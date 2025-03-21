@@ -1,9 +1,28 @@
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-'
 
+#CLOUDINARY_URL=cloudinary://743488436471177:-vVeNLPnyiJa6TMSFBl31VKw6Kc@dqqoht6ge
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqqoht6ge',
+    'API_KEY': '743488436471177',
+    'API_SECRET': '-vVeNLPnyiJa6TMSFBl31VKw6Kc',
+}
+
+cloudinary.config( 
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],  
+    api_key=CLOUDINARY_STORAGE['API_KEY'],  
+    api_secret=CLOUDINARY_STORAGE['API_SECRET']  
+)
 
 INSTALLED_APPS = [
     'imagenes',
