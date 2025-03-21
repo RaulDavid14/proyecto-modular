@@ -13,8 +13,7 @@ def aplicar_clustering():
         # Preprocesar los datos
         datos_procesados = preprocesar_datos(datos)
         print("Datos procesados:", datos_procesados)
-        
-        
+
         # Limpiar los datos
         datos_limpios = limpiar_datos(datos)
         print("Datos limpios:", datos_limpios)
@@ -56,9 +55,8 @@ def aplicar_clustering():
         return {"clustering": resultados}
     
     except Exception as e:
-        print(" Error en aplicar_clustering:", e)
+        print("Error en aplicar_clustering:", e)
         return {"error": str(e)}
 
 def guardar_resultados():
     return aplicar_clustering()
-
