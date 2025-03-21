@@ -2,6 +2,7 @@ import cloudinary.uploader
 from cuestionario.models import ImagenRespuestaModel
 from imagenes.models import ImagenModel  
 
+ImagenModel.objects.all().delete()
 imagenes_a_migrar = ImagenRespuestaModel.objects.all()
 
 for imagen_respuesta in imagenes_a_migrar:
