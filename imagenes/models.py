@@ -43,6 +43,8 @@ class ImagenModel(models.Model):
             return self.url.replace("/upload/", f"/upload/w_{width},h_{height}/")
         return None
 
+    def __str__(self):
+        return f'Imagen: {self.nombre}'
     class Meta:
         db_table = 'imagen_url'
         verbose_name = 'imagen'
