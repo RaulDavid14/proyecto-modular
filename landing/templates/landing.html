@@ -15,13 +15,6 @@
   <header class="site-header">
     <div class="container">
       <div class="site-header-inner">
-        <div class="brand header-brand">
-          <h1 class="m-0">
-            <a href="{% url 'landing' %}">
-                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
-            </a>
-          </h1>
-        </div>
         {% include 'navbar_landing.html' %}
       </div>
     </div>
@@ -164,6 +157,7 @@
           </form>
           <div class="text-center mt-3">
             <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>.</p>
+            <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña? Restablécela aquí.</a></p>
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['cfca.pythonanywhere.com']
 
-database = 'cfca$cfca'
+database = 'cfca$general'
 user = 'cfca'
 password = 'Cuc31.2025'
 host = 'cfca.mysql.pythonanywhere-services.com'

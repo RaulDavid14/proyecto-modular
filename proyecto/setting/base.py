@@ -1,11 +1,31 @@
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-'
 
+#CLOUDINARY_URL=cloudinary://743488436471177:-vVeNLPnyiJa6TMSFBl31VKw6Kc@dqqoht6ge
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqqoht6ge',
+    'API_KEY': '743488436471177',
+    'API_SECRET': '-vVeNLPnyiJa6TMSFBl31VKw6Kc',
+}
+
+cloudinary.config( 
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],  
+    api_key=CLOUDINARY_STORAGE['API_KEY'],  
+    api_secret=CLOUDINARY_STORAGE['API_SECRET']  
+)
 
 INSTALLED_APPS = [
+    'imagenes',
     'cfca_webhook',
     'cfca_api',
     'rest_framework',
@@ -24,6 +44,7 @@ INSTALLED_APPS = [
     'usuario',
     'cuestionario',
     'panel_administrador',
+    'clustering',
 ]
 
 MIDDLEWARE = [
@@ -95,3 +116,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Autenticación estándar de Django
 ]
+
+# EMAIL PARA RESTABLECIMIENTO DE PASS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'  # El servidor SMTP de Mailjet
+EMAIL_PORT = 587  # Puerto de Mailjet para enviar correos
+EMAIL_USE_TLS = True  # Usar TLS para la conexión segura
+EMAIL_HOST_USER = '8a96bb0570d94c3ded9da36ab0a14ff9'  # API Key pública
+EMAIL_HOST_PASSWORD = '827be7ad9f037070ac104ae50e62f4a5' # API Key Secreta
+DEFAULT_FROM_EMAIL = 'mxcfca@gmail.com'  # La dirección de correo desde la que enviarás los correos

@@ -26,3 +26,6 @@ que todos los integrantes puedan tener tus cambios
 
 usa el comando python manage.py dumpdata nombre_de_la_aplicacion > respaldo.json para crear los archivos
 
+
+## Nota Reestablecer pass
+pip install mailjet-rest para el correo
