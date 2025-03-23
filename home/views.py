@@ -6,6 +6,7 @@ from django.views.decorators.cache import cache_control
 from utils.cuestionario import Cuestionario
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
 from datos_socioeconomicos.models import RespuestasDatosgenerales as Respuestas
+from usuario.models import UserModel
 from catalogos.models import (
     CatIngresos
     ,CatNivelEducativo
@@ -39,8 +40,9 @@ def informe_nutricional(request):
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def datos_generales(request):
     respuestas = Respuestas.objects.filter(usuario=request.user.id).first()  
-
+    usuario = UserModel.objects.get(id = request.user.id)
     if request.method == 'POST':
+        nombre_completo = request.POST.get('nombre')
         situacion_laboral = request.POST.get('situacionlaboral')
         ingresos = request.POST.get('ingresos')
         poblacion = request.POST.get('poblacion')
@@ -48,6 +50,7 @@ def datos_generales(request):
         nivel_educativo = request.POST.get('niveleducativo')
 
         if respuestas:
+            usuario.nombre_completo = nombre_completo
             respuestas.situacion_laboral = situacion_laboral
             respuestas.ingresos = ingresos
             respuestas.poblacion = poblacion
@@ -63,6 +66,7 @@ def datos_generales(request):
                 nivel_educativo=nivel_educativo
             )
         respuestas.save()
+        usuario.save()
 
     datos = {
         'respuestas': respuestas,  
@@ -71,7 +75,7 @@ def datos_generales(request):
         'nivel_educativo': CatNivelEducativo.objects.all(),
         'ingresos': CatIngresos.objects.all(),
         'poblacion': CatPoblacion.objects.all(),
-        'nombre': request.user.nombre_completo
+        'nombre': usuario.nombre_completo
     }
 
     return render(request, 'datos_generales.html', datos)
