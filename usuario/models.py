@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 from django.db import models
 
 class ProgresoModel(models.Model):
@@ -21,6 +22,8 @@ class AdminModel(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        from utils.progreso_sm import ProgresoStateMachine        
+        ProgresoStateMachine.create_progres(user.id)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):

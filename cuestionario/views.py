@@ -22,6 +22,7 @@ def index(request, cuestionario):
     else:
         preguntaModel = preguntaSM.get_avance()
     
+    resultado = preguntaSM.get_imagenes_pregunta(no_pregunta=preguntaModel.no_pregunta)
     template, respuestas = preguntaSM.get_cuestionario(preguntaModel)
     
     if preguntaModel is None:
@@ -31,7 +32,9 @@ def index(request, cuestionario):
         }
     else:
         data = {
-            'porcentaje' : avance[cuestionario] 
+            'imagenes' : resultado['imagen_list'] if resultado is not None else None
+            ,'grupal' : resultado['grupal'] if resultado is not None else None
+            ,'porcentaje' : avance[cuestionario] 
             ,'cuestionario' : cuestionario
             ,'pregunta' : preguntaModel.texto
             , 'respuestas' : respuestas

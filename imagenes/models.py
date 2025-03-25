@@ -44,7 +44,7 @@ class ImagenModel(models.Model):
         return None
 
     def __str__(self):
-        return f'Imagen: {self.nombre}'
+        return f'Imagen {self.nombre}'
     class Meta:
         db_table = 'imagen_url'
         verbose_name = 'imagen'

@@ -56,7 +56,21 @@ class CatOpcionMultipleEspecial(CatalogoModel):
         db_table = 'opciones_especial'
         verbose_name = 'opción especial'
         verbose_name_plural = 'opciones especiales'
-        
+    
+
+class CatSituacionLaboral(CatalogoModel):
+
+    class Meta:
+        db_table = 'situacion_laboral'
+        verbose_name = 'situación laboral'
+        verbose_name_plural = 'situaciones laborales'
+
+class CatIngresos(CatalogoModel):
+    class Meta:
+        db_table = 'ingresos'
+        verbose_name = 'ingreso'
+        verbose_name_plural = 'ingresos'
+
 class DatosGenerales(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuario")
     poblacion = models.ForeignKey(CatPoblacion, on_delete=models.CASCADE, verbose_name="Población")

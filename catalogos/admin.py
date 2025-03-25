@@ -6,8 +6,9 @@ CatSexo
 , CatCuestionarios
 , CatFrecuencia
 , CatOpcionMultiple
-, DatosGenerales
 , CatOpcionMultipleEspecial
+, CatIngresos
+, CatSituacionLaboral
 )
 
 admin.site.register(CatSexo)
@@ -17,3 +18,5 @@ admin.site.register(CatCuestionarios)
 admin.site.register(CatFrecuencia)
 admin.site.register(CatOpcionMultiple)
 admin.site.register(CatOpcionMultipleEspecial)
+admin.site.register(CatSituacionLaboral)
+admin.site.register(CatIngresos)
