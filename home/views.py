@@ -84,3 +84,22 @@ def datos_generales(request):
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def ayuda(request):
     return render(request, 'ayuda.html')
+
+@login_required
+@cache_control(no_store=True, no_cache=True, must_revalidate=True)
+def informe_nutricional(request):
+    is_completed = ProgresoSM.is_completed_form(request.user.id)
+
+    if not is_completed:
+        return render(request, 'informe.html', {'is_completed': False})
+
+    puntaje = calcular_puntaje_usuario(request.user.id)
+    clasificacion = clasificar_puntaje_nova(puntaje)
+
+    context = {
+        'is_completed': True,
+        'puntaje': puntaje,
+        'clasificacion': clasificacion,
+    }
+
+    return render(request, 'informe.html', context)

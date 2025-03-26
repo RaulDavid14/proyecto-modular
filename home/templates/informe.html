@@ -1,33 +1,104 @@
 {% extends "navbar.html" %}
-
 {% load static %}
-{% block links %}
-{% endblock links %}
-    
 
 {% block titulo %}Informe Nutricional{% endblock titulo %}
 
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/informe.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock links %}
 
-{% block body  %}
-    <div class="container-fluid p-4">
-        <div class="row">
-            <div class="col-12 text-center">
-                {% if is_completed is False %}
-                    <div class="col-12 text-center">
-                        <h3>Completa la encuesta para poder visualizar el resultado</h3>
-                        <p>Debes completar cada apartado de la encuesta para ver tu resultado.</p>
-                    </div>                
-                {% else %}
-                    <div class="col-12 text-center">
-                        <h2 class="mb-3">Informe Nutricional de encuenta</h2>
-                        <p class="mb-4 text-muted">Aquí se muestra un resumen de tu consumo alimenticio basado en la clasificacion NOVA.</p>
-                    </div>
-                {% endif %}
-                    
+{% block body %}
+<div class="container py-5">
+
+    {% if is_completed is False %}
+        <div class="text-center">
+            <h3>Completa la encuesta para poder visualizar el resultado</h3>
+            <p class="text-muted">Debes completar cada apartado de la encuesta para ver tu informe nutricional.</p>
+        </div>
+    {% else %}
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-4 text-center">
+                <canvas id="novaChart" width="250" height="250"></canvas>
+                <h1 class="mt-3">{{ puntaje }}</h1>
+                <h5 class="text-muted">Puntaje NOVA</h5>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                <div>
+                    <h2>
+                        {% if clasificacion == 'saludable' %} ¡Felicidades! Alimentación Saludable
+                        {% elif clasificacion == 'necesita_mejorar' %} Necesita Mejorar
+                        {% else %} Atención: Cambios Necesarios ⚠️
+                        {% endif %}
+                    </h2>
+                    <p class="text-muted">
+                        {% if clasificacion == 'saludable' %}
+                            Tu dieta ha sido evaluada según la clasificación NOVA, y los resultados indican que priorizas alimentos naturales y mínimamente procesados.
+                            <br><br>✅ Predomina el consumo de frutas, verduras, legumbres y cereales integrales.<br>
+                            ✅ Tu ingesta de productos ultraprocesados es baja, lo que favorece tu salud y bienestar.<br>
+                            🔹 Sigue así y continúa eligiendo alimentos naturales.
+                        {% elif clasificacion == 'necesita_mejorar' %}
+                            Actualmente, tu dieta incluye una cantidad moderada de alimentos ultraprocesados.
+                            <br><br>✅ Prioriza alimentos naturales y mínimamente procesados como frutas, verduras, legumbres y cereales integrales.<br>
+                            ⚠️ Reduce el consumo de productos ultraprocesados como embutidos, bebidas azucaradas, pan industrializado y snacks comerciales.
+                        {% else %}
+                            Tu dieta indica un alto consumo de alimentos ultraprocesados, lo que puede afectar tu salud.
+                            <br><br>❌ Predominan snacks, comida rápida y bebidas azucaradas.<br>
+                            ✔️ Aumenta la ingesta de alimentos frescos y naturales.<br>
+                            ✔️ Reduce el consumo de productos con alto contenido de azúcares y aditivos.
+                        {% endif %}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-{% endblock body  %}
+
+        <div class="row text-center mt-4">
+            <div class="col">
+                <h5>Leyenda de Clasificación</h5>
+                <div class="d-flex justify-content-center">
+                    <div class="mx-3"><span class="dot" style="background-color: #4CAF50;"></span> ≥ 80 Saludable</div>
+                    <div class="mx-3"><span class="dot" style="background-color: #FFC107;"></span> 50-79 Mejorable</div>
+                    <div class="mx-3"><span class="dot" style="background-color: #F44336;"></span> < 50 Pobre</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock body %}
 
 {% block scripts %}
+<script>
+    const puntaje = {{ puntaje|default:0 }};
+    const ctx = document.getElementById('novaChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Puntaje', 'Resto'],
+            datasets: [{
+                data: [puntaje, 100 - puntaje],
+                backgroundColor: [
+                    puntaje >= 80 ? '#4CAF50' : (puntaje >= 50 ? '#FFC107' : '#F44336'),
+                    '#E0E0E0'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            cutout: '80%',
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+</script>
+<style>
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+</style>
 {% endblock scripts %}
