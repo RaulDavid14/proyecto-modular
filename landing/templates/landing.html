@@ -5,7 +5,7 @@
 
 {% block links %}
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'landing/dist/css/style.css' %}">
   <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
   <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 {% endblock links %}
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="hero-image">
-          <img src="{% static 'dist/images/Nutri1.jpg' %}" alt="Imagen decorativa" class="img-fluid">
+          <img src="{% static 'landing/dist/images/Nutri1.jpg' %}" alt="Imagen decorativa" class="img-fluid">
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@
       <div class="site-footer-inner">
         <div class="brand footer-brand">
           <a href="#">
-            <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+            <img class="header-logo-image img-fluid" src="{% static 'landing/dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
           </a>
         </div>
         <ul class="footer-links list-reset">
@@ -167,5 +167,5 @@
 {% endblock body %}
 
 {% block scripts %}
-  <script src="{% static 'dist/js/main.min.js' %}"></script>
+  <script src="{% static 'layout/bootstrap/js/bootstrap.min.js' %}"></script>
 {% endblock scripts %}
