@@ -10,7 +10,7 @@ class PreguntaAdmin(admin.ModelAdmin):
     ordering = ['id']
     search_fields = ('tipo_cuestionario', 'id', 'texto')
     sortable_by = ('id', 'tipo_cuestionario')
-    list_per_page = 10
+    list_per_page = 20
 
 @admin.register(ImagenRespuestaModel)
 class ImagenAdmin(admin.ModelAdmin):
