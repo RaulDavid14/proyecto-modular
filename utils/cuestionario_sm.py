@@ -41,12 +41,14 @@ class PreguntaSM():
                 pregunta = PreguntaSM.get_next_question(preguntaModel.no_pregunta)
                 template, respuestas = self.get_cuestionario(pregunta.no_pregunta, pregunta.tipo_respuesta)
             elif preguntaModel.tipo_respuesta == 4:
+                listrespuestas = []
+                for key, value in preguntaModel.sig_pregunta.items():
+                    listrespuestas.append(key)
+                respuestas = CatOpcionMultipleEspecial.objects.filter(id__in=listrespuestas)
                 template = 2
-                respuestas = CatOpcionMultiple.objects.all()
             
         return template, respuestas    
 
-    #puede tener imagen y no puede tener imangen
     def get_imagenes_pregunta(self, no_pregunta):
         tipo_cuestionario = CatCuestionarios.objects.filter(abreviacion = self.cuestionario).first()
         pregunta = PreguntaModel.objects.filter(no_pregunta = no_pregunta, tipo_cuestionario = tipo_cuestionario.id).first()
@@ -103,7 +105,6 @@ class PreguntaSM():
 
     def save_respuesta(self, opcion):
         self.avance = self.get_avance()
-
         if self.progreso_cuestionario[self.cuestionario]['inicio'] is False:
             self.progreso_cuestionario[self.cuestionario]['inicio'] = True
         

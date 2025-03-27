@@ -2,6 +2,8 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,6 +60,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'proyecto.urls'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 TEMPLATES = [
     {

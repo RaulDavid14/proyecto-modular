@@ -22,7 +22,9 @@ def index(request, cuestionario):
     else:
         preguntaModel = preguntaSM.get_avance()
     
-    resultado = preguntaSM.get_imagenes_pregunta(no_pregunta=preguntaModel.no_pregunta)
+    if preguntaModel is not None:
+        resultado = preguntaSM.get_imagenes_pregunta(no_pregunta=preguntaModel.no_pregunta)
+    
     template, respuestas = preguntaSM.get_cuestionario(preguntaModel)
     
     if preguntaModel is None:
@@ -51,11 +53,58 @@ def resultados_cuestionario(request, cuestionario):
     if total_respuestas == 0:
         porcentajes = {"minimamente_procesado": 0, "procesado": 0, "ultra_procesado": 0}
     else:
-        # Aquí se deberían hacer los cálculos para los porcentajes según el JSON de NOVA
         porcentajes = {
             "minimamente_procesado": 50,  # Datos de prueba
             "procesado": 30,
             "ultra_procesado": 20,
+        }
+
+    return render(request, "cuestionario/resultados.html", {"porcentajes": porcentajes, "cuestionario": cuestionario})
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+JSON_PATH = os.path.join(BASE_DIR, "data", "nova.json")
+
+try:
+    with open(JSON_PATH, "r", encoding="utf-8") as file:
+        data_nova = json.load(file)
+except FileNotFoundError:
+    data_nova = {}  # Si el archivo no existe, evita el error
+    print(f"Error: No se encontró el archivo nova.json en {JSON_PATH}")
+
+with open(JSON_PATH, "r", encoding="utf-8") as file:
+    data_nova = json.load(file)
+
+# Convertir el JSON en un diccionario {id_nova: clasificacion}
+clasificacion_nova = {int(item["id_nova"]): item["clas_nova"].strip().lower() for item in data_nova if item["id_nova"]}
+
+@login_required
+def resultados_cuestionario(request, cuestionario):
+    respuestas = RespuestaModel.objects.filter(id_usuario=request.user.id)
+
+    total_respuestas = respuestas.count()
+    if total_respuestas == 0:
+        porcentajes = {"minimamente_procesado": 0, "procesado": 0, "ultra_procesado": 0}
+    else:
+        procesados = 0
+        ultra_procesados = 0
+        minimos = 0
+
+        for respuesta in respuestas:
+            id_pregunta = respuesta.id_pregunta
+            if id_pregunta in clasificacion_nova:
+                tipo_procesamiento = clasificacion_nova[id_pregunta]
+                if "ultraprocesado" in tipo_procesamiento:
+                    ultra_procesados += 1
+                elif "procesado" in tipo_procesamiento:
+                    procesados += 1
+                else:
+                    minimos += 1
+
+        porcentajes = {
+            "minimamente_procesado": (minimos / total_respuestas) * 100,
+            "procesado": (procesados / total_respuestas) * 100,
+            "ultra_procesado": (ultra_procesados / total_respuestas) * 100,
         }
 
     return render(request, "cuestionario/resultados.html", {"porcentajes": porcentajes, "cuestionario": cuestionario})

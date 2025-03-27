@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
 
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'layout/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'layout/vendor/css/navbar.css' %}">
 
     {% block links %}{% endblock links %}
 
@@ -21,7 +21,7 @@
     </button>
 
     <div class="sidebar" id="sidebar">
-        <img src="{% static 'vendor/img/logo.png' %}" alt="Logo" class="logo img-fluid mb-3" width="150">
+        <img src="{% static 'layout/vendor/img/logo.png' %}" alt="Logo" class="logo img-fluid mb-3" width="150">
         <h2 class="title mb-5">Bienvenido</h2>
         <ul class="nav flex-column">
             <li class="nav-item mt-3">
@@ -49,8 +49,8 @@
         {% endblock body %}
     </div>
 
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/js/jquery.js' %}"></script>
+    <script src="{% static 'layout/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'layout/vendor/js/jquery.js' %}"></script>
     <script>
         document.getElementById('sidebarToggle').addEventListener('click', function() {
             var sidebar = document.getElementById('sidebar');
