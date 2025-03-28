@@ -6,11 +6,11 @@ from .models import PreguntaModel, ImagenRespuestaModel
 
 @admin.register(PreguntaModel)
 class PreguntaAdmin(admin.ModelAdmin):
-    list_display = ('texto', 'id', 'tipo_cuestionario')
+    list_display = ('texto', 'id', 'tipo_cuestionario','no_pregunta')
     ordering = ['id']
     search_fields = ('tipo_cuestionario', 'id', 'texto')
     sortable_by = ('id', 'tipo_cuestionario')
-    list_per_page = 20
+    list_per_page = 10
 
 @admin.register(ImagenRespuestaModel)
 class ImagenAdmin(admin.ModelAdmin):
