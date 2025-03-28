@@ -4,7 +4,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cfca.pythonanywhere.com']
 
-database = 'cfca$general'
+database = 'cfca$cfca'
 user = 'cfca'
 password = 'Cuc31.2025'
 host = 'cfca.mysql.pythonanywhere-services.com'
