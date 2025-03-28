@@ -103,6 +103,23 @@ class PreguntaSM():
             print(f"Error en get_avance: {e}")
             return None
 
+    def get_avances(self):
+        try:
+            self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
+            progreso = self.progresoModel.cuestionarios
+            self.progreso_cuestionario = progreso
+
+            if self.cuestionario not in progreso or 'pregunta_actual' not in progreso[self.cuestionario]:
+                return None  
+            
+            return None #self.get_pregunta(progreso[self.cuestionario]['pregunta_actual'])
+        except ProgresoModel.DoesNotExist:
+            return None  
+        except Exception as e:
+            print(f"Error en get_avance: {e}")
+            return None
+
+    
     def save_respuesta(self, opcion):
         self.avance = self.get_avance()
         if self.progreso_cuestionario[self.cuestionario]['inicio'] is False:
