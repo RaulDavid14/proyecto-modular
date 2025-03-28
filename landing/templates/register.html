@@ -15,19 +15,11 @@
   <header class="site-header">
     <div class="container">
       <div class="site-header-inner">
-        <div class="brand header-brand">
-          <h1 class="m-0">
-            <a href="{% url 'landing' %}">
-                <img class="header-logo-image img-fluid" src="{% static 'dist/images/logo.png' %}" alt="Logo" style="max-width: 150px;">
-            </a>
-          </h1>
-        </div>
         {% include 'navbar_landing.html' %}
       </div>
     </div>
   </header>
 
-  <!-- Registro Section -->
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6"> 
@@ -82,5 +74,5 @@
 {% endblock body %}
 
 {% block scripts %}
-  <script src="{% static 'dist/js/main.min.js' %}"></script>
+  <script src="{% static 'layout/bootstrap/js/bootstrap.min.js' %}"></script>
 {% endblock scripts %}
