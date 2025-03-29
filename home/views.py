@@ -48,7 +48,14 @@ def datos_generales(request):
         poblacion = request.POST.get('poblacion')
         sexo = request.POST.get('sexo')
         nivel_educativo = request.POST.get('niveleducativo')
-
+        
+        print(f'Respuestas nombre completo: {nombre_completo}')
+        print(f'Respuestas situacion laboral: {situacion_laboral}')
+        print(f'Respuestas ingresos: {ingresos}')
+        print(f'Respuestas poblacion: {poblacion}')
+        print(f'Respuestas sexo {sexo}')
+        print(f'Respuestas nivel educativo {nivel_educativo}')
+        
         if respuestas:
             usuario.nombre_completo = nombre_completo
             respuestas.situacion_laboral = situacion_laboral
