@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from datetime import datetime
+import random
 
 from utils.cuestionario import Cuestionario
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
@@ -95,18 +97,29 @@ def ayuda(request):
 @login_required
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def informe_nutricional(request):
-    is_completed = ProgresoSM.is_completed_form(request.user.id)
+    # ⚠️ Validación desactivada por motivos de demo
+    # is_completed = ProgresoSM.is_completed_form(request.user.id)
 
-    if not is_completed:
-        return render(request, 'informe.html', {'is_completed': False})
+    # if not is_completed:
+    #     return render(request, 'informe.html', {'is_completed': False})
 
-    puntaje = calcular_puntaje_usuario(request.user.id)
-    clasificacion = clasificar_puntaje_nova(puntaje)
+    # 🔄 Datos aleatorios simulados
+    puntaje = random.randint(0, 100)
+
+    if puntaje >= 80:
+        clasificacion = 'saludable'
+    elif puntaje >= 50:
+        clasificacion = 'necesita_mejorar'
+    else:
+        clasificacion = 'riesgo'
 
     context = {
         'is_completed': True,
         'puntaje': puntaje,
         'clasificacion': clasificacion,
+        'now': datetime.now() 
     }
 
     return render(request, 'informe.html', context)
+
+
