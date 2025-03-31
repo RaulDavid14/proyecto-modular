@@ -3,32 +3,9 @@
 {% block titulo %}Informe Nutricional{% endblock titulo %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/informe.css' %}">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-    }
-    .report-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        border-bottom: 2px solid #ccc;
-        padding-bottom: 10px;
-    }
-    .nova-score {
-        font-size: 4rem;
-        font-weight: bold;
-    }
-    .dot {
-        height: 15px;
-        width: 15px;
-        border-radius: 50%;
-        display: inline-block;
-    }
-</style>
+    <link rel="stylesheet" href="{% static 'home/vendor/css/informe.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock links %}
 
 {% block body %}
