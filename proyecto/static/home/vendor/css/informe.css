@@ -1,0 +1,21 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+.nova-score {
+    font-size: 4rem;
+    font-weight: bold;
+}
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
