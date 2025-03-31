@@ -1,36 +1,215 @@
 {% extends "navbar.html" %}
-
 {% load static %}
-{% block links %}
-{% endblock links %}
-    
-
 {% block titulo %}Informe Nutricional{% endblock titulo %}
 
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/informe.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+    }
+    .report-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 10px;
+    }
+    .nova-score {
+        font-size: 4rem;
+        font-weight: bold;
+    }
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+</style>
+{% endblock links %}
 
-{% block body  %}
-    <div class="container-fluid p-4">
-        <div class="row">
-            <div class="col-12 text-center">
-                {% if is_completed is False %}
-                    <div class="col-12 text-center mb-5">
-                        <h3>Completa la encuesta para poder visualizar el resultado</h3>
-                        <p>Debes completar cada apartado de la encuesta para ver tu resultado.</p>
-                    </div>
-                    <div class="col-12 text-center mt-5">
-                        <a class="btn btn-outline-primary w-50" href="{% url 'home'%}">Regresar</a>
-                    </div>
-                {% else %}
-                    <div class="col-12 text-center">
-                        <h2 class="mb-3">Informe Nutricional de encuenta</h2>
-                        <p class="mb-4 text-muted">Aquí se muestra un resumen de tu consumo alimenticio basado en la clasificacion NOVA.</p>
-                    </div>
-                {% endif %}
-                    
+{% block body %}
+<div class="container py-5">
+
+    {% if is_completed is False %}
+        <div class="text-center">
+            <h3>Completa la encuesta para poder visualizar el resultado</h3>
+            <p class="text-muted">Debes completar cada apartado de la encuesta para ver tu informe nutricional.</p>
+        </div>
+    {% else %}
+        <div class="report-header">
+            <div>
+                <strong>{{ request.user.nombre_completo|default:"Usuario" }}</strong><br>
+                <span style="text-transform: uppercase; font-size: 0.85rem;">Nombre</span>
+            </div>
+            <div>
+                <strong>{{ now|date:"m/d/Y" }}</strong><br>
+                <span style="text-transform: uppercase; font-size: 0.85rem;">Fecha del Informe</span>
             </div>
         </div>
+
+    <div class="mb-4 text-muted" style="font-size: 0.95rem;">
+        La clasificación <strong>NOVA</strong> se basa en el grado de procesamiento de los alimentos. Esta clasificación agrupa los alimentos en cuatro categorías: <em>naturales o mínimamente procesados</em>, <em>procesados</em>, <em>ingredientes culinarios procesados</em> y <em>ultraprocesados</em>. La puntuación va de 0 a 100, donde un puntaje más alto indica un menor consumo de alimentos ultraprocesados y una mayor preferencia por alimentos naturales.
     </div>
-{% endblock body  %}
+    
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-4 text-center">
+                <canvas id="novaChart" width="250" height="250"></canvas>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="alert alert-info">
+                    {% if clasificacion == 'saludable' %}
+                        <p>
+                            Tu dieta ha sido evaluada según la clasificación NOVA, y los resultados indican que priorizas alimentos naturales y mínimamente procesados.
+                            <br><br>
+                            ✅ Predomina el consumo de frutas, verduras, legumbres y cereales integrales.<br>
+                            ✅ Tu ingesta de productos ultraprocesados es baja, lo que favorece tu salud y bienestar.<br>
+                            🔹 Sigue así y continúa eligiendo alimentos naturales.<br>
+                            🔹 Pequeñas mejoras como diversificar tus fuentes de proteína o incluir más alimentos ricos en fibra pueden potenciar aún más tu nutrición.<br><br>
+                            <strong>¡Excelente trabajo!</strong> Mantener una alimentación basada en productos naturales es clave para tu salud a largo plazo. 🥦🥑💪🏼
+                        </p>
+                    {% elif clasificacion == 'necesita_mejorar' %}
+                        <p>
+                            Tu alimentación ha sido evaluada según la clasificación NOVA, que agrupa los alimentos según su grado de procesamiento.
+                            <br><br>
+                            🔹 Actualmente, tu dieta incluye una cantidad moderada de alimentos ultraprocesados.<br>
+                            🔹 Pequeños cambios pueden mejorar tu alimentación y tu salud en general.<br><br>
+                            Para mejorar tu puntaje NOVA:<br>
+                            ✅ Prioriza alimentos naturales y mínimamente procesados como frutas, verduras, legumbres y cereales integrales.<br>
+                            ⚠️ Reduce el consumo de productos ultraprocesados como embutidos, bebidas azucaradas, pan industrializado y snacks comerciales.<br><br>
+                            Pequeñas modificaciones en tu dieta pueden hacer una gran diferencia en tu bienestar. <strong>¡Tú puedes lograrlo!</strong> 💪🏼🥦🥑
+                        </p>
+                    {% else %}
+                        <p>
+                            Tu dieta ha sido evaluada según la clasificación NOVA, y los resultados indican un alto consumo de alimentos ultraprocesados, lo que puede afectar tu salud.
+                            <br><br>
+                            ❌ Los productos ultraprocesados, como bebidas azucaradas, comida rápida, embutidos y snacks industriales, predominan en tu alimentación.<br>
+                            ❌ El consumo de alimentos naturales como frutas, verduras y legumbres es bajo.<br><br>
+                            🔹 Pequeños cambios pueden marcar una gran diferencia.<br>
+                            ✔️ Aumenta la ingesta de alimentos frescos y naturales.<br>
+                            ✔️ Reduce el consumo de productos industrializados con alto contenido de azúcares, grasas y aditivos.<br>
+                            ✔️ Introduce hábitos saludables poco a poco para lograr un cambio sostenible.<br><br>
+                            <strong>Tu alimentación es clave para tu bienestar.</strong> ¡Cada paso cuenta para mejorar tu salud! 💪🏼🥗🥑
+                        </p>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h5 class="text-center mb-3" style="color: #0056b3;">PUNTUACION</h5>
+        
+                <div class="mb-2 d-flex align-items-center rounded-pill px-3 py-2" style="background-color: #dcedc8;">
+                    <span class="dot me-2" style="background-color: #7cb342;"></span>
+                    <strong>&gt; 80 </strong> -Bueno
+                </div>
+        
+                <div class="mb-2 d-flex align-items-center rounded-pill px-3 py-2" style="background-color: #ffecb3;">
+                    <span class="dot me-2" style="background-color: #ff9800;"></span>
+                    <strong>&gt; 50 and ≤ 80 </strong> -Puedes Mejorar
+                </div>
+        
+                <div class="d-flex align-items-center rounded-pill px-3 py-2" style="background-color: #ffcdd2;">
+                    <span class="dot me-2" style="background-color: #d32f2f;"></span>
+                    <strong>≤ 50 </strong> -Mala
+                </div>
+            </div>
+        </div>
+        
+    {% endif %}
+
+</div>
+{% endblock body %}
 
 {% block scripts %}
+<script>
+    const puntaje = {{ puntaje|default:0 }};
+const ctx = document.getElementById('novaChart').getContext('2d');
+
+const data = {
+    labels: ['Pobre', 'Mejorable', 'Saludable'],
+    datasets: [{
+        data: [180, 108, 72],
+        backgroundColor: ['#F44336', '#FFC107', '#4CAF50'],
+        borderWidth: 0
+    }]
+};
+
+function calcularAngulo(puntaje) {
+    return (puntaje / 100) * 360;
+}
+
+const agujaPlugin = {
+    id: 'agujaPlugin',
+    afterDraw(chart) {
+        const {ctx, chartArea: {top, bottom, left, right}} = chart;
+        const meta = chart.getDatasetMeta(0);
+        const centerX = (left + right) / 2;
+        const centerY = (top + bottom) / 2;
+
+        const outerRadius = meta.data[0].outerRadius;
+
+        const angleDeg = calcularAngulo(puntaje) - 90;
+        const angle = angleDeg * Math.PI / 180;
+
+        const radiusStart = outerRadius * 0.4; 
+        const radiusEnd = outerRadius * 0.9;  
+
+        const xStart = centerX + radiusStart * Math.cos(angle);
+        const yStart = centerY + radiusStart * Math.sin(angle);
+
+        const xEnd = centerX + radiusEnd * Math.cos(angle);
+        const yEnd = centerY + radiusEnd * Math.sin(angle);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(xStart, yStart); 
+        ctx.lineTo(xEnd, yEnd);
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = '#333';
+        ctx.stroke();
+        ctx.restore();
+    }
+};
+
+const textoCentroPlugin = {
+    id: 'textoCentroPlugin',
+    beforeDraw(chart) {
+        const {ctx, chartArea: {left, right, top, bottom}} = chart;
+        const centerX = (left + right) / 2;
+        const centerY = (top + bottom) / 2;
+
+        ctx.save();
+        ctx.font = 'bold 100px Open Sans';
+        ctx.fillStyle = '#222';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(puntaje, centerX, centerY);
+        ctx.restore();
+    }
+};
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+        rotation: 0,
+        circumference: 360,
+        cutout: '80%',
+        plugins: {
+            legend: { display: false }
+        }
+    },
+    plugins: [agujaPlugin, textoCentroPlugin]
+});
+
+    
+</script>
 {% endblock scripts %}
+
