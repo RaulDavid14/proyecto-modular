@@ -7,15 +7,9 @@
 {% block body %}
 <div class="container-fluid p-4">
     <div class="row">
-        <div class="col-12 text-fluid text-center">
-            <h2 class="mb-3">Haz terminado el cuestionario</h2>
-            <p class="mb-4 text-muted">Selecciona salir para continuar con el resto del cuestionario</p>
-            <a href="{% url 'resultados' cuestionario %}" class="btn btn-primary">Ver Resultados</a>
-        </div>
         <div class="col-12 text-center">
-            <a class="btn btn-outline-primary" href="{% url 'home'%}">Regresar</a>
+            <a class="btn btn-outline-primary w-50" href="{% url 'home'%}">Regresar</a>
         </div>
-
     </div>
 </div>
 {% endblock body %}
