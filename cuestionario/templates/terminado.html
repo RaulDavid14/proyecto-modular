@@ -1,0 +1,15 @@
+{% extends "navbar.html" %}
+
+
+{% block titulo %}Cuestionario terminado{% endblock titulo %}
+
+
+{% block body %}
+<div class="container-fluid p-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a class="btn btn-outline-primary w-50" href="{% url 'home'%}">Regresar</a>
+        </div>
+    </div>
+</div>
+{% endblock body %}
