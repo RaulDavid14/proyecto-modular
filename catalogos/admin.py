@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (
 CatSexo
+, DatosGenerales
 , CatPoblacion
 , CatNivelEducativo
 , CatCuestionarios
@@ -20,3 +21,4 @@ admin.site.register(CatOpcionMultiple)
 admin.site.register(CatOpcionMultipleEspecial)
 admin.site.register(CatSituacionLaboral)
 admin.site.register(CatIngresos)
+admin.site.register(DatosGenerales)
