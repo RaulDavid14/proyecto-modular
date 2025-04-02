@@ -10,4 +10,5 @@ urlpatterns = [
     path('datos/', include('catalogos.urls')),
     path('panel/', include('panel_administrador.urls')),
     path('api/', include('cfca_api.api.urls')),
+    path('clustering/', include('clustering.urls')),
 ]
