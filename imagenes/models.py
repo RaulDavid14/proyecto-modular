@@ -3,6 +3,7 @@ import cloudinary.uploader
 from cloudinary.models import CloudinaryField
 from cuestionario.models import PreguntaModel
 import re  # Para extraer el public_id de la URL
+from .managers import ImagenManager
 
 class ImagenModel(models.Model):
     nombre = models.CharField(verbose_name='nombre imagen', max_length=70)
@@ -11,6 +12,8 @@ class ImagenModel(models.Model):
     grupal = models.BooleanField(verbose_name='imagen grupal', default=False, null=True)
     id_respuesta = models.IntegerField(verbose_name='respuesta', null=True, blank=True)
     pregunta = models.ForeignKey(PreguntaModel, on_delete=models.CASCADE, related_name='imagenes_preguntas', null=True)
+
+    objects = ImagenManager()
 
     def save(self, *args, **kwargs):
         if self.imagen and not self.url:  

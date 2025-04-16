@@ -2,10 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
-import json
-import os
 from django.shortcuts import render
-from .models import RespuestaModel
 
 
 @login_required

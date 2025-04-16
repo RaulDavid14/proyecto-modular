@@ -1,5 +1,5 @@
 from django.db import models
-
+from .managers import PreguntaManager
 class PreguntaModel(models.Model):
     texto = models.TextField(verbose_name='Pregunta')
     tipo_respuesta = models.IntegerField('tipo de preguntas')
@@ -8,6 +8,8 @@ class PreguntaModel(models.Model):
     imagen_grupal = models.BooleanField(null=True, verbose_name='imagen grupal') # tiene imagen
     is_active = models.BooleanField(default=True, verbose_name='Activo', null=True)
     no_pregunta = models.IntegerField(verbose_name='No. Pregunta', null=True, blank=True)
+
+    objects = PreguntaManager()
 
     def save(self, *args, **kwargs):
         if self.no_pregunta is None:  
