@@ -1,8 +1,7 @@
 from django.db import models
 import cloudinary.uploader
-from cloudinary.models import CloudinaryField
 from cuestionario.models import PreguntaModel
-import re  # Para extraer el public_id de la URL
+import re  
 from .managers import ImagenManager
 
 class ImagenModel(models.Model):

@@ -1,19 +1,18 @@
 {% extends 'navbar.html' %}
-{% block title %}{{cuestionario}}{% endblock title %}
+{% block titulo %} Cuestionario {{cuestionario}} {% endblock titulo %}
 
 {% block body %}
+    
     {% if template == 1 %}
         {% include 'form_frecuency.html' %}
     {% elif template == 2 %}
         {% include 'form_images.html' %}
     {% endif %}
-    {% if template == 4 %}
-        
-    {% endif %}
     {% if template == 0 %}
         {% include 'terminado.html' %}
     {% endif %}
 
-    {% endblock body %}
+{% endblock body %}
+
 {% block scripts %}
 {% endblock scripts %}

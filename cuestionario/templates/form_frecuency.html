@@ -12,7 +12,7 @@
                 <select class="form-control" id="opcionesSelect" name="opcion" required>
                     <option value="" disabled selected>Selecciona una respuesta</option>
                     {% for respuesta in respuestas %}
-                        <option value="{{ respuesta.id }}">{{ respuesta.nombre_largo }}</option>
+                        <option value="{{ respuesta.id }}">{{ respuesta.texto }}</option>
                     {% endfor %}
                 </select>
             </div>

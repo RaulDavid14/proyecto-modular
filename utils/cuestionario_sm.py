@@ -24,60 +24,16 @@ class PreguntaSM():
         self.avance = None
         self.id_cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
         self.preguntaModel = None
-    
-    def get_cuestionario(self, preguntaModel):
-        if preguntaModel is None:
-            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
-            template = 0
-            respuestas = None
-        else:
-            if preguntaModel.tipo_respuesta == 1:
-                template = 1
-                respuestas = CatFrecuencia.objects.all()
-            elif preguntaModel.tipo_respuesta == 2:
-                template = 2
-                respuestas = CatOpcionMultiple.objects.all()
-            elif preguntaModel.tipo_respuesta == 4:
-                listrespuestas = []
-                for key, value in preguntaModel.sig_pregunta.items():
-                    listrespuestas.append(key)
-                respuestas = CatOpcionMultipleEspecial.objects.filter(id__in=listrespuestas)
-                template = 2
-            
-        return template, respuestas    
-
-    def get_imagenes_pregunta(self, no_pregunta):
-        tipo_cuestionario = CatCuestionarios.objects.filter(abreviacion = self.cuestionario).first()
-        pregunta = PreguntaModel.objects.filter(no_pregunta = no_pregunta, tipo_cuestionario = tipo_cuestionario.id).first()
-        dictImagen = {}
         
-        if pregunta is not None:
-            imagenes = []
-            if pregunta.imagen_grupal:
-                imagen = ImagenModel.objects.filter(pregunta__id = pregunta.id).first()
-                dictImagen['grupal'] = False
-                dictImagen['imagen_list'] = imagen.url
-            else:
-                dictImagen['grupal'] = True
-                
-                for imagen in ImagenModel.objects.filter(pregunta__id = pregunta.id):
-                    imagenes.append(imagen.url)
-                dictImagen['imagen_list'] = imagenes
-            return dictImagen
-        else:
-            return None
-
-    def get_pregunta(self, pregunta):
+    # REVISAR POR QUE SE SALTA HASTA EL FINAL
+    def get_pregunta(self, no_pregunta):
         try:
-            preguntaModel = PreguntaModel.objects.filter(
-                no_pregunta = pregunta
-                , tipo_cuestionario = self.id_cuestionario.id
-            ).first()
+            preguntaModel = PreguntaModel.objects.get_pregunta(no_pregunta, self.id_cuestionario.id)
             
             if preguntaModel.is_active is True:
                 return preguntaModel
             else:
-                return self.get_pregunta(pregunta + 1)
+                return self.get_pregunta(no_pregunta + 1)
             
         except PreguntaModel.DoesNotExist:
             print("La pregunta no fue encontrada")
@@ -85,7 +41,73 @@ class PreguntaSM():
         except Exception as exception:
             print(f"Error interno del servidor {str(exception)}")
             return None
-    
+    """
+        TODO:
+        -   Revisar el template para ver si se mandan las imagenes
+        -   Ver como se mandan las imagenes desde la vista.
+        -   Revisar si la pregunta no tiene grupal nulo y se encuentra activa. 
+    """
+    def get_pregunta_completa(self, no_pregunta):
+        tipo_cuestionario = CatCuestionarios.objects.get_abreviacion(self.cuestionario)
+        pregunta = PreguntaModel.objects.get_pregunta(no_pregunta, tipo_cuestionario.id)
+
+        if pregunta is None:
+            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
+            return {
+                'template': 0,
+                'pregunta_id': None,
+                'texto_pregunta': None,
+                'imagen_grupal': None,
+                'respuestas': []
+            }
+
+        TIPOS_RESPUESTA = {
+            1: {
+                'template': 1,
+                'respuestas': lambda: CatFrecuencia.objects.all(),
+            },
+            2: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultiple.objects.all(),
+            },
+            4: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultipleEspecial.objects.filter(
+                    id__in=list(pregunta.sig_pregunta.keys()) if pregunta.sig_pregunta else []
+                )
+            }
+        }
+
+        config = TIPOS_RESPUESTA[pregunta.tipo_respuesta]
+        respuestas_raw = config['respuestas']()
+
+        imagen_grupal = None
+        imagenes_por_respuesta = {}
+
+        for imagen in pregunta.imagenes_preguntas.all():
+            if pregunta.imagen_grupal:
+                imagen_grupal = imagen.url
+            elif imagen.id_respuesta:
+                imagenes_por_respuesta[imagen.id_respuesta] = imagen.url
+
+        respuestas_formateadas = []
+        for r in respuestas_raw:
+            respuesta = {
+                "id": r.id,
+                "texto": getattr(r, "texto", getattr(r, "nombre_largo", str(r)))
+            }
+            if pregunta.tipo_respuesta == 4 and r.id in imagenes_por_respuesta:
+                respuesta["imagen"] = imagenes_por_respuesta[r.id]
+            respuestas_formateadas.append(respuesta)
+
+        return {
+            'template': config['template'],
+            'pregunta_id': pregunta.id,
+            'texto_pregunta': pregunta.texto,
+            'imagen_grupal': imagen_grupal,
+            'respuestas': respuestas_formateadas
+        }
+
     def get_avance(self):
         try:
             self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
@@ -157,5 +179,3 @@ class PreguntaSM():
         
         
         return sig_pregunta
-        
-        
