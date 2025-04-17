@@ -29,20 +29,6 @@ class PreguntaModel(models.Model):
         verbose_name_plural = 'preguntas'
 
 
-class ImagenRespuestaModel(models.Model):
-    nombre = models.CharField(verbose_name= 'nombre imagen', max_length=70)
-    imagen = models.ImageField(upload_to='imagen_respuesta/')
-    pregunta = models.ForeignKey(PreguntaModel, on_delete=models.CASCADE, related_name='imagenes', null=True)
-    id_respuesta = models.IntegerField(verbose_name='ID de respuesta', null=True)
-    
-    def __str__(self):
-        return f'{self.nombre}'
-    
-    class Meta:
-        db_table = 'imagenes'
-        verbose_name = 'imagen'
-        verbose_name_plural = 'imagenes'
-
 class RespuestaModel(models.Model):
     id_usuario = models.IntegerField(verbose_name='usuario')
     id_cuestionario = models.IntegerField('cuestionario')
