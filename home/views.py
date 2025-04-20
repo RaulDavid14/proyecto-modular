@@ -94,6 +94,20 @@ def datos_generales(request):
 def ayuda(request):
     return render(request, 'ayuda.html')
 
+def obtener_resultado_simulado(user_id):
+    puntaje = random.randint(0, 100)
+    if puntaje >= 80:
+        clasificacion = 'saludable'
+    elif puntaje >= 50:
+        clasificacion = 'necesita_mejorar'
+    else:
+        clasificacion = 'riesgo'
+
+    return {
+        'puntaje': puntaje,
+        'clasificacion': clasificacion
+    }
+
 @login_required
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def informe_nutricional(request):
@@ -103,23 +117,17 @@ def informe_nutricional(request):
     # if not is_completed:
     #     return render(request, 'informe.html', {'is_completed': False})
 
-    # 🔄 Datos aleatorios simulados
-    puntaje = random.randint(0, 100)
-
-    if puntaje >= 80:
-        clasificacion = 'saludable'
-    elif puntaje >= 50:
-        clasificacion = 'necesita_mejorar'
-    else:
-        clasificacion = 'riesgo'
+    resultado = obtener_resultado_simulado(request.user.id)#Aqui se obtiene el resultado de la api
 
     context = {
         'is_completed': True,
-        'puntaje': puntaje,
-        'clasificacion': clasificacion,
-        'now': datetime.now() 
+        'puntaje': resultado['puntaje'],
+        'clasificacion': resultado['clasificacion'],
+        'now': datetime.now()
     }
 
     return render(request, 'informe.html', context)
+
+
 
 
