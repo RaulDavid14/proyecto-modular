@@ -1,7 +1,7 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from usuario.models import ProgresoModel
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
-from imagenes.models import ImagenModel
+from utils.containers.respuesta import Respuesta
 from catalogos.models import (
     CatFrecuencia
     ,CatOpcionMultiple
@@ -12,7 +12,6 @@ from catalogos.models import (
 """
 agregar preguntas perzonalizadas
 agregar validacion para mostrar imagen en base a la pregunta
-
 """
 
 class PreguntaSM():
@@ -29,7 +28,6 @@ class PreguntaSM():
     def get_pregunta(self, no_pregunta):
         try:
             preguntaModel = PreguntaModel.objects.get_pregunta(no_pregunta, self.id_cuestionario.id)
-            
             if preguntaModel.is_active is True:
                 return preguntaModel
             else:
@@ -39,27 +37,45 @@ class PreguntaSM():
             print("La pregunta no fue encontrada")
             return None
         except Exception as exception:
-            print(f"Error interno del servidor {str(exception)}")
+            print(f"Error en PreguntaSM.get_pregunta: {str(exception)}")
             return None
-    """
-        TODO:
-        -   Revisar el template para ver si se mandan las imagenes
-        -   Ver como se mandan las imagenes desde la vista.
-        -   Revisar si la pregunta no tiene grupal nulo y se encuentra activa. 
-    """
+    
+    
+    def get_cuerpo_pregunta(self, no_pregunta):
+        tipo_cuestionario = CatCuestionarios.objects.get_abreviacion(self.cuestionario)
+        pregunta = PreguntaModel.objects.get_pregunta(no_pregunta, tipo_cuestionario.id)
+        
+        if pregunta == None:
+            ProgresoModel.set_complete(self.id_usuario, self.cuestionario)
+        
+        TIPOS_RESPUESTA = {
+            1: {
+                'template': 1,
+                'respuestas': lambda: CatFrecuencia.objects.all(),
+            },
+            2: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultiple.objects.all(),
+            },
+            4: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultipleEspecial.objects.filter(
+                    id__in=list(pregunta.sig_pregunta.keys()) if pregunta.sig_pregunta else []
+                )
+            }
+        }
+        
+        respuesta = Respuesta(self.cuestionario, pregunta, TIPOS_RESPUESTA[pregunta.tipo_respuesta])
+        
+        return respuesta.get_pregunta()
+        
     def get_pregunta_completa(self, no_pregunta):
         tipo_cuestionario = CatCuestionarios.objects.get_abreviacion(self.cuestionario)
         pregunta = PreguntaModel.objects.get_pregunta(no_pregunta, tipo_cuestionario.id)
 
-        if pregunta is None:
+        if pregunta == None:
             ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
-            return {
-                'template': 0,
-                'pregunta_id': None,
-                'texto_pregunta': None,
-                'imagen_grupal': None,
-                'respuestas': []
-            }
+            return respuesta.get_complete()
 
         TIPOS_RESPUESTA = {
             1: {
@@ -77,7 +93,9 @@ class PreguntaSM():
                 )
             }
         }
-
+        
+        respuesta = Respuesta(self.cuestionario, pregunta, TIPOS_RESPUESTA[pregunta.tipo_respuesta])
+        respuesta.repsuesta_list()
         config = TIPOS_RESPUESTA[pregunta.tipo_respuesta]
         respuestas_raw = config['respuestas']()
 
@@ -118,22 +136,6 @@ class PreguntaSM():
                 return None  
             
             return self.get_pregunta(progreso[self.cuestionario]['pregunta_actual'])
-        except ProgresoModel.DoesNotExist:
-            return None  
-        except Exception as e:
-            print(f"Error en get_avance: {e}")
-            return None
-
-    def get_avances(self):
-        try:
-            self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
-            progreso = self.progresoModel.cuestionarios
-            self.progreso_cuestionario = progreso
-
-            if self.cuestionario not in progreso or 'pregunta_actual' not in progreso[self.cuestionario]:
-                return None  
-            
-            return None #self.get_pregunta(progreso[self.cuestionario]['pregunta_actual'])
         except ProgresoModel.DoesNotExist:
             return None  
         except Exception as e:
