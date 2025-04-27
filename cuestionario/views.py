@@ -13,13 +13,14 @@ def reiniciar(request, cuestionario):
 def index_pregunta(request, cuestionario):
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
     avance = ProgresoSM.get_porcentaje_avance(request.user.id)
-    
+    print(f'avance del usuario {avance}')
     if request.method == 'POST':
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
     else:
         preguntaModel = preguntaSM.get_avance()
     
     cuerpo_pregunta = preguntaSM.get_cuerpo_pregunta(preguntaModel.no_pregunta) if preguntaModel else None
+    
     if cuerpo_pregunta is None:
         data = {
             'cuestionario': cuestionario,

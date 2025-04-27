@@ -1,5 +1,5 @@
 from django.db import models
-from .managers import PreguntaManager
+from .managers import PreguntaManager, RespuestaManager
 class PreguntaModel(models.Model):
     texto = models.TextField(verbose_name='Pregunta')
     tipo_respuesta = models.IntegerField('tipo de preguntas')
@@ -34,6 +34,8 @@ class RespuestaModel(models.Model):
     id_cuestionario = models.IntegerField('cuestionario')
     no_pregunta = models.IntegerField('no. pregunta')
     id_respuesta = models.IntegerField('respuesta')
+    
+    objects = RespuestaManager()
     
     class Meta:
         db_table = 'respuestas'

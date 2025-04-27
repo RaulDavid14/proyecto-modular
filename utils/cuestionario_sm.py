@@ -24,15 +24,18 @@ class PreguntaSM():
         self.id_cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
         self.preguntaModel = None
         
-    # REVISAR POR QUE SE SALTA HASTA EL FINAL
     def get_pregunta(self, no_pregunta):
         try:
             preguntaModel = PreguntaModel.objects.get_pregunta(no_pregunta, self.id_cuestionario.id)
-            if preguntaModel.is_active is True:
-                return preguntaModel
-            else:
-                return self.get_pregunta(no_pregunta + 1)
             
+            if preguntaModel != None:            
+                if preguntaModel.is_active is True:
+                    return preguntaModel
+                else:
+                    return self.get_pregunta(no_pregunta + 1)
+            else:
+                return None
+                        
         except PreguntaModel.DoesNotExist:
             print("La pregunta no fue encontrada")
             return None
@@ -40,13 +43,8 @@ class PreguntaSM():
             print(f"Error en PreguntaSM.get_pregunta: {str(exception)}")
             return None
     
-    
     def get_cuerpo_pregunta(self, no_pregunta):
-        tipo_cuestionario = CatCuestionarios.objects.get_abreviacion(self.cuestionario)
-        pregunta = PreguntaModel.objects.get_pregunta(no_pregunta, tipo_cuestionario.id)
-        
-        if pregunta == None:
-            ProgresoModel.set_complete(self.id_usuario, self.cuestionario)
+        pregunta = self.get_pregunta(no_pregunta)
         
         TIPOS_RESPUESTA = {
             1: {
@@ -69,63 +67,6 @@ class PreguntaSM():
         
         return respuesta.get_pregunta()
         
-    def get_pregunta_completa(self, no_pregunta):
-        tipo_cuestionario = CatCuestionarios.objects.get_abreviacion(self.cuestionario)
-        pregunta = PreguntaModel.objects.get_pregunta(no_pregunta, tipo_cuestionario.id)
-
-        if pregunta == None:
-            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
-            return respuesta.get_complete()
-
-        TIPOS_RESPUESTA = {
-            1: {
-                'template': 1,
-                'respuestas': lambda: CatFrecuencia.objects.all(),
-            },
-            2: {
-                'template': 2,
-                'respuestas': lambda: CatOpcionMultiple.objects.all(),
-            },
-            4: {
-                'template': 2,
-                'respuestas': lambda: CatOpcionMultipleEspecial.objects.filter(
-                    id__in=list(pregunta.sig_pregunta.keys()) if pregunta.sig_pregunta else []
-                )
-            }
-        }
-        
-        respuesta = Respuesta(self.cuestionario, pregunta, TIPOS_RESPUESTA[pregunta.tipo_respuesta])
-        respuesta.repsuesta_list()
-        config = TIPOS_RESPUESTA[pregunta.tipo_respuesta]
-        respuestas_raw = config['respuestas']()
-
-        imagen_grupal = None
-        imagenes_por_respuesta = {}
-
-        for imagen in pregunta.imagenes_preguntas.all():
-            if pregunta.imagen_grupal:
-                imagen_grupal = imagen.url
-            elif imagen.id_respuesta:
-                imagenes_por_respuesta[imagen.id_respuesta] = imagen.url
-
-        respuestas_formateadas = []
-        for r in respuestas_raw:
-            respuesta = {
-                "id": r.id,
-                "texto": getattr(r, "texto", getattr(r, "nombre_largo", str(r)))
-            }
-            if pregunta.tipo_respuesta == 4 and r.id in imagenes_por_respuesta:
-                respuesta["imagen"] = imagenes_por_respuesta[r.id]
-            respuestas_formateadas.append(respuesta)
-
-        return {
-            'template': config['template'],
-            'pregunta_id': pregunta.id,
-            'texto_pregunta': pregunta.texto,
-            'imagen_grupal': imagen_grupal,
-            'respuestas': respuestas_formateadas
-        }
-
     def get_avance(self):
         try:
             self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
@@ -166,6 +107,7 @@ class PreguntaSM():
         sig_pregunta = self.get_pregunta(self.avance.sig_pregunta[opcion])
 
         if sig_pregunta is None:
+            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
             return None  
         
         self.progreso_cuestionario[self.cuestionario]['pregunta_actual'] = sig_pregunta.no_pregunta
@@ -178,6 +120,5 @@ class PreguntaSM():
         except Exception as e:
             print(f"Error al actualizar el progreso: {e}")
             return None
-        
         
         return sig_pregunta
