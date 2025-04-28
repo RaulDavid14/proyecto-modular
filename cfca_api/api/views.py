@@ -6,5 +6,5 @@ from cuestionario.models import PreguntaModel
 
 @api_view()
 def total_preguntas(request):
-    total = PreguntaModel.objects.count()
+    total = PreguntaModel.objects.get_total_preguntas_activas()
     return Response({'total' : total}, status= status.HTTP_200_OK)

@@ -10,7 +10,8 @@ class PreguntaManager(models.Manager):
     def ultimas_preguntas(self):
         return self.values('tipo_cuestionario').annotate(ultima_pregunta = models.Max('no_pregunta'))
 
-
+    def get_total_preguntas_activas(self):
+        return self.filter(is_active = True).count()
     
 class RespuestaManager(models.Manager):
     def borrar_respuestas(self, id_usuario, id_cuestionario):
