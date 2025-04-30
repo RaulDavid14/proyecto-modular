@@ -2,11 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from utils.cuestionario_sm import PreguntaSM
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
-import json
-import os
 from django.shortcuts import render
-from .models import RespuestaModel
-
 
 @login_required
 def reiniciar(request, cuestionario):
@@ -14,33 +10,29 @@ def reiniciar(request, cuestionario):
     return redirect('home')
 
 @login_required
-def index(request, cuestionario):
+def index_pregunta(request, cuestionario):
     preguntaSM = PreguntaSM(request.user.id, cuestionario)
     avance = ProgresoSM.get_porcentaje_avance(request.user.id)
+    print(f'avance del usuario {avance}')
     if request.method == 'POST':
         preguntaModel = preguntaSM.save_respuesta(request.POST.get('opcion'))
     else:
         preguntaModel = preguntaSM.get_avance()
     
-    if preguntaModel is not None:
-        resultado = preguntaSM.get_imagenes_pregunta(no_pregunta=preguntaModel.no_pregunta)
+    cuerpo_pregunta = preguntaSM.get_cuerpo_pregunta(preguntaModel.no_pregunta) if preguntaModel else None
     
-    template, respuestas = preguntaSM.get_cuestionario(preguntaModel)
-    
-    if preguntaModel is None:
+    if cuerpo_pregunta is None:
         data = {
-            'cuestionario' : cuestionario
-            ,'template' : template
+            'cuestionario': cuestionario,
+            'template': 0
         }
     else:
         data = {
-            'imagenes' : resultado['imagen_list'] if resultado is not None else None
-            ,'grupal' : resultado['grupal'] if resultado is not None else None
-            ,'porcentaje' : avance[cuestionario] 
+            'porcentaje' : avance[cuestionario]
             ,'cuestionario' : cuestionario
-            ,'pregunta' : preguntaModel.texto
-            , 'respuestas' : respuestas
-            , 'template' : template
+            ,'texto_pregunta' : cuerpo_pregunta['texto_pregunta']
+            ,'template' : cuerpo_pregunta['template']
+            ,'respuestas' : cuerpo_pregunta['respuestas']
+            ,'imagen_grupal' : cuerpo_pregunta['imagen_grupal']
         }
-    
     return render(request, 'index.html', data)

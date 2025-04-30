@@ -1,0 +1,40 @@
+{% include 'components/progressbar.html' %}
+
+<div class="row justify-content-center">
+    <div class="col-12 text-center mb-4">
+        <h4>{{ texto_pregunta }}</h4>
+    </div>
+
+    {% if imagen_grupal %}
+        <div class="col-12 text-center mb-4">
+            <img src="{{ respuestas.imagen }}" alt="Imagen grupal" 
+                class="img-fluid rounded shadow" 
+                style="max-width: 300px; max-height: 300px; object-fit: contain;">
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            {% for respuesta in respuestas.respuestas %}
+                <div class="d-flex align-items-center border rounded p-2 shadow-sm" style="width: 200px; height: 60px;">
+                    <input class="form-check-input me-2" type="radio" value="{{ respuesta.id_respuesta }}" id="respuesta_{{ respuesta.id_respuesta }}" name="opcion" required>
+                    <label class="form-check-label" for="respuesta_{{ respuesta.id_respuesta }}">
+                        {{ respuesta.texto_respuesta }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
+            {% for respuesta in respuestas.respuestas %}
+                <div class="d-flex flex-column align-items-center border rounded p-2 shadow-sm" style="width: 180px;">
+                    <div class="form-check">
+                        <input class="form-check-input me-2" type="radio" value="{{ respuesta.id_respuesta }}" id="respuesta_{{ respuesta.id_respuesta }}" name="opcion" required>
+                        <label class="form-check-label" for="respuesta_{{ respuesta.id_respuesta }}">
+                            <img src="{{ respuesta.url_imagen }}" alt="" class="img-fluid rounded mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                            {{ respuesta.texto_respuesta }}
+                        </label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

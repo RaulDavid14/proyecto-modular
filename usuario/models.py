@@ -1,11 +1,14 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 from django.db import models
+from .managers import ProgresoManager
 
 class ProgresoModel(models.Model):
     id_usuario = models.IntegerField(verbose_name='id usuario')
     cuestionarios = models.JSONField(verbose_name='Cuestionarios disponibles')
 
+    objects = ProgresoManager()
+    
     def __str__(self):
         return f'Progreso del usuario {self.id_usuario}'
     class Meta:

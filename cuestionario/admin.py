@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PreguntaModel, ImagenRespuestaModel
+from .models import PreguntaModel
 # Register your models here.
 
 
@@ -11,7 +11,3 @@ class PreguntaAdmin(admin.ModelAdmin):
     search_fields = ('tipo_cuestionario', 'id', 'texto')
     sortable_by = ('id', 'tipo_cuestionario')
     list_per_page = 10
-
-@admin.register(ImagenRespuestaModel)
-class ImagenAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['pregunta']

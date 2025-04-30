@@ -10,7 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-'
 
-#CLOUDINARY_URL=cloudinary://743488436471177:-vVeNLPnyiJa6TMSFBl31VKw6Kc@dqqoht6ge
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -28,7 +27,6 @@ cloudinary.config(
 
 INSTALLED_APPS = [
     'imagenes',
-    'cfca_webhook',
     'cfca_api',
     'rest_framework',
     'jazzmin',
@@ -46,7 +44,6 @@ INSTALLED_APPS = [
     'usuario',
     'cuestionario',
     'panel_administrador',
-    'clustering',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 

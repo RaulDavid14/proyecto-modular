@@ -1,7 +1,7 @@
 from cuestionario.models import PreguntaModel, RespuestaModel
 from usuario.models import ProgresoModel
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
-from imagenes.models import ImagenModel
+from utils.containers.respuesta import Respuesta
 from catalogos.models import (
     CatFrecuencia
     ,CatOpcionMultiple
@@ -12,7 +12,6 @@ from catalogos.models import (
 """
 agregar preguntas perzonalizadas
 agregar validacion para mostrar imagen en base a la pregunta
-
 """
 
 class PreguntaSM():
@@ -24,68 +23,50 @@ class PreguntaSM():
         self.avance = None
         self.id_cuestionario = CatCuestionarios.objects.get(abreviacion = cuestionario)
         self.preguntaModel = None
-    
-    def get_cuestionario(self, preguntaModel):
-        if preguntaModel is None:
-            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
-            template = 0
-            respuestas = None
-        else:
-            if preguntaModel.tipo_respuesta == 1:
-                template = 1
-                respuestas = CatFrecuencia.objects.all()
-            elif preguntaModel.tipo_respuesta == 2:
-                template = 2
-                respuestas = CatOpcionMultiple.objects.all()
-            elif preguntaModel.tipo_respuesta == 4:
-                listrespuestas = []
-                for key, value in preguntaModel.sig_pregunta.items():
-                    listrespuestas.append(key)
-                respuestas = CatOpcionMultipleEspecial.objects.filter(id__in=listrespuestas)
-                template = 2
-            
-        return template, respuestas    
-
-    def get_imagenes_pregunta(self, no_pregunta):
-        tipo_cuestionario = CatCuestionarios.objects.filter(abreviacion = self.cuestionario).first()
-        pregunta = PreguntaModel.objects.filter(no_pregunta = no_pregunta, tipo_cuestionario = tipo_cuestionario.id).first()
-        dictImagen = {}
         
-        if pregunta is not None:
-            imagenes = []
-            if pregunta.imagen_grupal:
-                imagen = ImagenModel.objects.filter(pregunta__id = pregunta.id).first()
-                dictImagen['grupal'] = False
-                dictImagen['imagen_list'] = imagen.url
-            else:
-                dictImagen['grupal'] = True
-                
-                for imagen in ImagenModel.objects.filter(pregunta__id = pregunta.id):
-                    imagenes.append(imagen.url)
-                dictImagen['imagen_list'] = imagenes
-            return dictImagen
-        else:
-            return None
-
-    def get_pregunta(self, pregunta):
+    def get_pregunta(self, no_pregunta):
         try:
-            preguntaModel = PreguntaModel.objects.filter(
-                no_pregunta = pregunta
-                , tipo_cuestionario = self.id_cuestionario.id
-            ).first()
+            preguntaModel = PreguntaModel.objects.get_pregunta(no_pregunta, self.id_cuestionario.id)
             
-            if preguntaModel.is_active is True:
-                return preguntaModel
+            if preguntaModel != None:            
+                if preguntaModel.is_active is True:
+                    return preguntaModel
+                else:
+                    return self.get_pregunta(no_pregunta + 1)
             else:
-                return self.get_pregunta(pregunta + 1)
-            
+                return None
+                        
         except PreguntaModel.DoesNotExist:
             print("La pregunta no fue encontrada")
             return None
         except Exception as exception:
-            print(f"Error interno del servidor {str(exception)}")
+            print(f"Error en PreguntaSM.get_pregunta: {str(exception)}")
             return None
     
+    def get_cuerpo_pregunta(self, no_pregunta):
+        pregunta = self.get_pregunta(no_pregunta)
+        
+        TIPOS_RESPUESTA = {
+            1: {
+                'template': 1,
+                'respuestas': lambda: CatFrecuencia.objects.all(),
+            },
+            2: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultiple.objects.all(),
+            },
+            4: {
+                'template': 2,
+                'respuestas': lambda: CatOpcionMultipleEspecial.objects.filter(
+                    id__in=list(pregunta.sig_pregunta.keys()) if pregunta.sig_pregunta else []
+                )
+            }
+        }
+        
+        respuesta = Respuesta(self.cuestionario, pregunta, TIPOS_RESPUESTA[pregunta.tipo_respuesta])
+        
+        return respuesta.get_pregunta()
+        
     def get_avance(self):
         try:
             self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
@@ -96,22 +77,6 @@ class PreguntaSM():
                 return None  
             
             return self.get_pregunta(progreso[self.cuestionario]['pregunta_actual'])
-        except ProgresoModel.DoesNotExist:
-            return None  
-        except Exception as e:
-            print(f"Error en get_avance: {e}")
-            return None
-
-    def get_avances(self):
-        try:
-            self.progresoModel = ProgresoModel.objects.get(id_usuario=self.id_usuario)
-            progreso = self.progresoModel.cuestionarios
-            self.progreso_cuestionario = progreso
-
-            if self.cuestionario not in progreso or 'pregunta_actual' not in progreso[self.cuestionario]:
-                return None  
-            
-            return None #self.get_pregunta(progreso[self.cuestionario]['pregunta_actual'])
         except ProgresoModel.DoesNotExist:
             return None  
         except Exception as e:
@@ -142,6 +107,7 @@ class PreguntaSM():
         sig_pregunta = self.get_pregunta(self.avance.sig_pregunta[opcion])
 
         if sig_pregunta is None:
+            ProgresoSM.set_complete(self.id_usuario, self.cuestionario)
             return None  
         
         self.progreso_cuestionario[self.cuestionario]['pregunta_actual'] = sig_pregunta.no_pregunta
@@ -155,7 +121,4 @@ class PreguntaSM():
             print(f"Error al actualizar el progreso: {e}")
             return None
         
-        
         return sig_pregunta
-        
-        
