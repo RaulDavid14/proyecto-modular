@@ -4,6 +4,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
+
+APIS = {
+    'cfca_api_url' : 'http://127.0.0.1:8001/api'
+    ,'timeout' : 10
+}
+
+
 database = 'catalogos'
 user = 'root'
 password = '1234'

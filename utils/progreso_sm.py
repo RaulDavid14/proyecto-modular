@@ -1,6 +1,7 @@
 from catalogos.models import CatCuestionarios
 from usuario.models import ProgresoModel
 from cuestionario.models import RespuestaModel, PreguntaModel
+from clients.client import Client
 
 class ProgresoStateMachine():
     @staticmethod
@@ -58,6 +59,7 @@ class ProgresoStateMachine():
     
     @staticmethod
     def create_progres(user):
+        cliente = Client()
         catCuestionarios = CatCuestionarios.objects.all()
         dictProgreso = {}
 
@@ -69,5 +71,6 @@ class ProgresoStateMachine():
                 ,'completado' : False
             }
         progreso = ProgresoModel(id_usuario = user, cuestionarios = dictProgreso)
+        cliente.create_progres(user)
         progreso.save()    
     
