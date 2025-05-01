@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from datetime import datetime
 import random
+import requests
 
 from utils.cuestionario import Cuestionario
 from utils.progreso_sm import ProgresoStateMachine as ProgresoSM
@@ -111,23 +112,47 @@ def obtener_resultado_simulado(user_id):
 @login_required
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def informe_nutricional(request):
-    # ⚠️ Validación desactivada por motivos de demo
-    # is_completed = ProgresoSM.is_completed_form(request.user.id)
+    try:
+        # Endpoint de la API (ajústalo si estás en producción)
+        url = 'http://127.0.0.1:8000/api/clustering/'  # ← Este debe apuntar a tu backend
 
-    # if not is_completed:
-    #     return render(request, 'informe.html', {'is_completed': False})
+        response = requests.get(url)
+        data = response.json()
 
-    resultado = obtener_resultado_simulado(request.user.id)#Aqui se obtiene el resultado de la api
+        # Buscar el resultado correspondiente al usuario actual
+        resultados = data.get("clustering", [])
+        resultado_usuario = next((r for r in resultados if r["user_id"] == request.user.id), None)
 
-    context = {
-        'is_completed': True,
-        'puntaje': resultado['puntaje'],
-        'clasificacion': resultado['clasificacion'],
-        'now': datetime.now()
-    }
+        if not resultado_usuario:
+            return render(request, 'informe.html', {'is_completed': False})
+
+        nivel = resultado_usuario["cluster"]
+
+        # Convertimos a puntaje aproximado según el cluster
+        puntaje_map = {
+            "Bajo": 30,
+            "Moderado": 60,
+            "Normal": 80,
+            "Excesivo": 95
+        }
+        puntaje = puntaje_map.get(nivel, 0)
+
+        if puntaje >= 80:
+            clasificacion = 'saludable'
+        elif puntaje >= 50:
+            clasificacion = 'necesita_mejorar'
+        else:
+            clasificacion = 'riesgo'
+
+        context = {
+            'is_completed': True,
+            'puntaje': puntaje,
+            'clasificacion': clasificacion,
+            'now': datetime.now()
+        }
+
+    except Exception as e:
+        print(f"Error al consumir la API: {e}")
+        context = {'is_completed': False}
 
     return render(request, 'informe.html', context)
-
-
-
-
