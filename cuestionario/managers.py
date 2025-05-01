@@ -16,3 +16,8 @@ class PreguntaManager(models.Manager):
 class RespuestaManager(models.Manager):
     def borrar_respuestas(self, id_usuario, id_cuestionario):
         self.filter(id_usuario = id_usuario, id_cuestionario = id_cuestionario).delete()
+    
+    def getRespuestasCuestionario(self, id_usuario, id_cuestionario):
+        return self.filter(
+            id_usuario=id_usuario, id_cuestionario=id_cuestionario
+        ).values('no_pregunta', 'id_respuesta')

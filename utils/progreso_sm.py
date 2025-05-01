@@ -6,7 +6,7 @@ from clients.client import Client
 class ProgresoStateMachine():
     @staticmethod
     def get_progreso(usuario):
-        return ProgresoModel.objects.get(id=usuario)    
+        return ProgresoModel.objects.get(id_usuario=usuario)    
     
    
     @staticmethod
@@ -40,16 +40,22 @@ class ProgresoStateMachine():
     
     @staticmethod
     def set_complete(usuario, cuestionario):
+        client = Client()
         progresoObject = ProgresoStateMachine.get_progreso(usuario)
         progresoObject.cuestionarios[cuestionario]['completado'] = True
-        
+        id_cuestionario = progresoObject.cuestionarios[cuestionario]['id_cuestionario']
+
+        respuestas = list(RespuestaModel.objects.getRespuestasCuestionario(usuario, id_cuestionario))
+        client.save_respuesta(usuario, id_cuestionario, respuestas)
+
         ProgresoModel.objects.actualizar_progreso(usuario, progresoObject.cuestionarios)
         
     @staticmethod
     def reset_progreso(usuario, cuestionario):
+        cliente = Client()
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         cuestionarioModel = CatCuestionarios.objects.get(abreviacion = cuestionario)
-        
+        cliente.delete_respuesta(usuario, cuestionarioModel.id)        
         progreso.cuestionarios[cuestionarioModel.abreviacion]['pregunta_actual'] = 1
         progreso.cuestionarios[cuestionarioModel.abreviacion]['completado'] = False
         progreso.cuestionarios[cuestionarioModel.abreviacion]['inicio'] = False
