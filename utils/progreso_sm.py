@@ -46,7 +46,7 @@ class ProgresoStateMachine():
         id_cuestionario = progresoObject.cuestionarios[cuestionario]['id_cuestionario']
 
         respuestas = list(RespuestaModel.objects.getRespuestasCuestionario(usuario, id_cuestionario))
-        client.save_respuesta(usuario, id_cuestionario, respuestas)
+        client.save_respuesta(usuario, id_cuestionario, cuestionario , respuestas)
 
         ProgresoModel.objects.actualizar_progreso(usuario, progresoObject.cuestionarios)
         

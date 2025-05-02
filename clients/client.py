@@ -17,12 +17,13 @@ class Client():
             return response.json()
         elif response.status_code == 404:
             return None
-    
-    def save_respuesta(self, id_usuario, id_cuestionario, respuestas):
+
+    def save_respuesta(self, id_usuario, id_cuestionario, abreviacion, respuestas):
         data = {
-            'id_usuario' : id_usuario
-            ,'id_cuestionario' : id_cuestionario
-            ,'respuestas' : respuestas
+            'id_usuario': id_usuario,
+            'id_cuestionario': id_cuestionario,
+            'abreviacion' : abreviacion,
+            'respuestas': respuestas
         }
         requests.post(url = self.get_url('/respuestas/crear/'), json = data)
     
