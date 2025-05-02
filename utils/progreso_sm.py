@@ -1,17 +1,14 @@
 from catalogos.models import CatCuestionarios
 from usuario.models import ProgresoModel
 from cuestionario.models import RespuestaModel, PreguntaModel
-from django.db.models import Max
+from clients.client import Client
 
 class ProgresoStateMachine():
     @staticmethod
     def get_progreso(usuario):
-        return ProgresoModel.objects.get(id=usuario)    
+        return ProgresoModel.objects.get(id_usuario=usuario)    
     
-    @staticmethod
-    def get_last_questions():
-        return PreguntaModel.objects.values('tipo_cuestionario').annotate(ultima_pregunta = Max('no_pregunta'))
-    
+   
     @staticmethod
     def is_completed_form(usuario):
         completed = []
@@ -27,7 +24,7 @@ class ProgresoStateMachine():
     @staticmethod
     def get_porcentaje_avance(usuario):
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
-        ultimas_preguntas = ProgresoStateMachine.get_last_questions()
+        ultimas_preguntas = PreguntaModel.objects.ultimas_preguntas()
         avance = {}
         for c in CatCuestionarios.objects.all():
             ultima_pregunta = ultimas_preguntas.get(tipo_cuestionario = c.id)
@@ -43,28 +40,32 @@ class ProgresoStateMachine():
     
     @staticmethod
     def set_complete(usuario, cuestionario):
+        client = Client()
         progresoObject = ProgresoStateMachine.get_progreso(usuario)
         progresoObject.cuestionarios[cuestionario]['completado'] = True
+        id_cuestionario = progresoObject.cuestionarios[cuestionario]['id_cuestionario']
+
+        respuestas = list(RespuestaModel.objects.getRespuestasCuestionario(usuario, id_cuestionario))
+        client.save_respuesta(usuario, id_cuestionario, respuestas)
+
+        ProgresoModel.objects.actualizar_progreso(usuario, progresoObject.cuestionarios)
         
-        ProgresoModel.objects.filter(id_usuario = usuario).update(
-            cuestionarios = progresoObject.cuestionarios
-        )
-    
     @staticmethod
     def reset_progreso(usuario, cuestionario):
+        cliente = Client()
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         cuestionarioModel = CatCuestionarios.objects.get(abreviacion = cuestionario)
-        
+        cliente.delete_respuesta(usuario, cuestionarioModel.id)        
         progreso.cuestionarios[cuestionarioModel.abreviacion]['pregunta_actual'] = 1
         progreso.cuestionarios[cuestionarioModel.abreviacion]['completado'] = False
         progreso.cuestionarios[cuestionarioModel.abreviacion]['inicio'] = False
-        ProgresoModel.objects.filter(id_usuario = usuario).update(
-            cuestionarios = progreso.cuestionarios
-        )
-        RespuestaModel.objects.filter(id_usuario = usuario, id_cuestionario = cuestionarioModel.id).delete()
+        
+        ProgresoModel.objects.actualizar_progreso(usuario, progreso.cuestionarios)
+        RespuestaModel.objects.borrar_respuestas(usuario, cuestionarioModel.id)
     
     @staticmethod
     def create_progres(user):
+        cliente = Client()
         catCuestionarios = CatCuestionarios.objects.all()
         dictProgreso = {}
 
@@ -76,5 +77,6 @@ class ProgresoStateMachine():
                 ,'completado' : False
             }
         progreso = ProgresoModel(id_usuario = user, cuestionarios = dictProgreso)
+        cliente.create_progres(user)
         progreso.save()    
     

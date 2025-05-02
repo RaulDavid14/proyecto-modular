@@ -1,19 +1,28 @@
 {% extends 'navbar.html' %}
-{% block title %}{{cuestionario}}{% endblock title %}
+{% block titulo %} Cuestionario {{cuestionario}} {% endblock titulo %}
 
 {% block body %}
-    {% if template == 1 %}
-        {% include 'form_frecuency.html' %}
-    {% elif template == 2 %}
-        {% include 'form_images.html' %}
-    {% endif %}
-    {% if template == 4 %}
-        
-    {% endif %}
-    {% if template == 0 %}
-        {% include 'terminado.html' %}
-    {% endif %}
+    <div class="container mt-4">
+        <div class="border p-4 rounded shadow-sm">
+            <form action="" method="post" id="formulario">
+                {% csrf_token %}
+                
+                {% if template == 1 %}
+                    {% include 'form_frecuency.html' %}
+                {% elif template == 2 %}
+                    {% include 'form_image.html' %}
+                {% endif %}
+                {% if template == 0 %}
+                    {% include 'terminado.html' %}
+                {% endif %}
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-outline-primary w-100">Siguiente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock body %}
 
-    {% endblock body %}
 {% block scripts %}
 {% endblock scripts %}

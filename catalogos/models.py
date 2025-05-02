@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from .managers import CatalogoManager, CatOpcionMultipleEspecialManager
 
 class CatalogoModel(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='ID')
@@ -7,6 +8,7 @@ class CatalogoModel(models.Model):
     abreviacion = models.CharField(verbose_name='Nombre Corto', max_length=5)
     descripcion = models.TextField(verbose_name='Descripción')
 
+    objects = CatalogoManager()
     class Meta:
         abstract = True
     
@@ -52,6 +54,8 @@ class CatOpcionMultiple(CatalogoModel):
         verbose_name_plural = 'opciones'
 
 class CatOpcionMultipleEspecial(CatalogoModel):
+    
+    objects = CatOpcionMultipleEspecialManager()
     class Meta:
         db_table = 'opciones_especial'
         verbose_name = 'opción especial'

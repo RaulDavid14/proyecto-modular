@@ -17,7 +17,7 @@ class Cuestionario:
         
         for c in self.__catCuestionarios:
             disabled = 'disabled' if progreso.cuestionarios[c.abreviacion]['completado'] else ''
-            iniciar = f'<a href="{self.get_url("cuestionario", c.abreviacion)}" class="btn btn-outline-dark flex-fill {disabled}">Iniciar</a>'
+            iniciar = f'<a href="{self.get_url("index_cuestionario", c.abreviacion)}" class="btn btn-outline-dark flex-fill {disabled}">Iniciar</a>'
             
             cuestionario = {
                    'url': f"""
