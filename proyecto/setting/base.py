@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-$!w2v!_z*q21u8-7q-!4z^)d-8gyuq2e$wi&7(b!!ltu=wcns-'
 
-
+LOGIN_URL = 'login'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
@@ -109,7 +109,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = '/usuarios/login/' #redigir en caso de no estar autenticado.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
