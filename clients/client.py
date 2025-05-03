@@ -28,34 +28,20 @@ class Client():
             print(f'Error en GET {endpoint}: {e}')
             return None
 
-    def save_respuesta(self, id_usuario, id_cuestionario, respuestas):
+    def save_respuesta(self, id_usuario, id_cuestionario, abreviacion, respuestas):
         data = {
             'id_usuario': id_usuario,
             'id_cuestionario': id_cuestionario,
+            'abreviacion' : abreviacion,
             'respuestas': respuestas
         }
-        try:
-            response = requests.post(
-                url=self.get_url('/respuestas/crear/'), 
-                json=data,
-                timeout=self.timeout
-            )
-            if response.status_code != 200:
-                print(f'Error al guardar respuesta: código {response.status_code}')
-        except requests.exceptions.RequestException as e:
-            print(f'Error al guardar respuesta: {e}')
-
-    def delete_respuesta(self, id_usuario, id_cuestionario):
-        try:
-            response = requests.delete(
-                self.get_url(f'/respuestas/delete/{id_usuario}/{id_cuestionario}'),
-                timeout=self.timeout
-            )
-            if response.status_code != 200:
-                print(f'Error al eliminar respuesta: código {response.status_code}')
-        except requests.exceptions.RequestException as e:
-            print(f'Error al eliminar respuesta: {e}')
-
+        requests.post(url = self.get_url('/respuestas/crear/'), json = data)
+    
+    
+    def delete_respuesta(self, id_usuario, abreviacion):
+        requests.delete(self.get_url(f'/respuestas/delete/{id_usuario}/{abreviacion}'))
+    
+    
     def create_progres(self, id_usuario):
         body = {
             'id_usuario': id_usuario
