@@ -38,8 +38,8 @@ class Client():
         requests.post(url = self.get_url('/respuestas/crear/'), json = data)
     
     
-    def delete_respuesta(self, id_usuario, abreviacion):
-        requests.delete(self.get_url(f'/respuestas/delete/{id_usuario}/{abreviacion}'))
+    def delete_respuesta(self, id_usuario, id_cuestionario, abreviacion):
+        requests.delete(self.get_url(f'/respuestas/delete/{id_usuario}/{id_cuestionario}/{abreviacion}'))
     
     
     def create_progres(self, id_usuario):

@@ -55,7 +55,7 @@ class ProgresoStateMachine():
         cliente = Client()
         progreso = ProgresoModel.objects.get(id_usuario = usuario)
         cuestionarioModel = CatCuestionarios.objects.get(abreviacion = cuestionario)
-        cliente.delete_respuesta(usuario, cuestionario)        
+        cliente.delete_respuesta(usuario,cuestionarioModel.id, cuestionario)        
         progreso.cuestionarios[cuestionarioModel.abreviacion]['pregunta_actual'] = 1
         progreso.cuestionarios[cuestionarioModel.abreviacion]['completado'] = False
         progreso.cuestionarios[cuestionarioModel.abreviacion]['inicio'] = False

@@ -18,7 +18,7 @@
                     <select class="form-select" name="sexo" id="sexo" required>
                         <option value="" disabled {% if not respuestas %}selected{% endif %}>--Seleccione una opción--</option>
                         {% for s in sexo %}
-                            <option value="{{ s.id }}" {% if respuestas and respuestas.sexo.id == s.id %}selected{% endif %}>
+                            <option value="{{ s.id }}" {% if respuestas and respuestas.sexo == s.id %}selected{% endif %}>
                                 {{ s.nombre_largo }}
                             </option>
                         {% endfor %}
@@ -30,7 +30,7 @@
                     <select class="form-select" name="situacionlaboral" id="situacionlaboral" required>
                         <option value="" disabled {% if not respuestas %}selected{% endif %}>--Seleccione una opción--</option>
                         {% for sl in situacion_laboral %}
-                            <option value="{{ sl.id }}" {% if respuestas and respuestas.situacion_laboral.id == sl.id %}selected{% endif %}>
+                            <option value="{{ sl.id }}" {% if respuestas and respuestas.situacion_laboral == sl.id %}selected{% endif %}>
                                 {{ sl.nombre_largo }}
                             </option>
                         {% endfor %}
@@ -42,7 +42,7 @@
                     <select class="form-select" name="ingresos" id="ingresos" required>
                         <option value="" disabled {% if not respuestas %}selected{% endif %}>--Seleccione una opción--</option>
                         {% for i in ingresos %}
-                            <option value="{{ i.id }}" {% if respuestas and respuestas.ingresos.id == i.id %}selected{% endif %}>
+                            <option value="{{ i.id }}" {% if respuestas and respuestas.ingresos == i.id %}selected{% endif %}>
                                 {{ i.nombre_largo }}
                             </option>
                         {% endfor %}
@@ -54,7 +54,7 @@
                     <select class="form-select" name="niveleducativo" id="niveleducativo" required>
                         <option value="" disabled {% if not respuestas %}selected{% endif %}>--Seleccione una opción--</option>
                         {% for ne in nivel_educativo %}
-                            <option value="{{ ne.id }}" {% if respuestas and respuestas.nivel_educativo.id == ne.id %}selected{% endif %}>
+                            <option value="{{ ne.id }}" {% if respuestas and respuestas.nivel_educativo == ne.id %}selected{% endif %}>
                                 {{ ne.nombre_largo }}
                             </option>
                         {% endfor %}
@@ -66,7 +66,7 @@
                     <select class="form-select" name="poblacion" id="poblacion" required>
                         <option value="" disabled {% if not respuestas %}selected{% endif %}>--Seleccione una opción--</option>
                         {% for p in poblacion %}
-                            <option value="{{ p.id }}" {% if respuestas and respuestas.poblacion.id == p.id %}selected{% endif %}>
+                            <option value="{{ p.id }}" {% if respuestas and respuestas.poblacion == p.id %}selected{% endif %}>
                                 {{ p.nombre_largo }}
                             </option>
                         {% endfor %}

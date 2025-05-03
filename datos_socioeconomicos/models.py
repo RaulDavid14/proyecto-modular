@@ -25,6 +25,9 @@ class RespuestasDatosgenerales(models.Model):
     poblacion = models.IntegerField()
     nivel_educativo = models.IntegerField()
     
+    def __str__(self):
+        return f'respuestas del usuario {self.usuario}'
+    
     class Meta: 
         db_table = 'respuestas_datos_generales'
 
