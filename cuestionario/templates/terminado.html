@@ -5,10 +5,11 @@
 
 
 {% block body %}
-<div class="container-fluid p-4">
-    <h2>Cuestionario terminado</h2>
-    <hr>
-    <div class="row">
+<div class="container-fluid">
+    <div class="alert alert-success text-center">
+        <h4 class="alert-heading">El cuestionario ha sido completado</h4>
+        <p>Regresa el menú principal para terminal los cuestionarios faltantes</p>
+        <hr>
         <div class="col-12 text-center">
             <a class="btn btn-outline-primary w-50" href="{% url 'home'%}">Regresar</a>
         </div>

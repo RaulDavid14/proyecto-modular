@@ -40,24 +40,17 @@ def informe_nutricional(request):
 
 
 @login_required
-@cache_control(no_store=True, no_cache=True, must_revalidate=True)
 def datos_generales(request):
     respuestas = Respuestas.objects.filter(usuario=request.user.id).first()  
     usuario = UserModel.objects.get(id = request.user.id)
     if request.method == 'POST':
-        nombre_completo = request.POST.get('nombre')
-        situacion_laboral = request.POST.get('situacionlaboral')
-        ingresos = request.POST.get('ingresos')
-        poblacion = request.POST.get('poblacion')
-        sexo = request.POST.get('sexo')
-        nivel_educativo = request.POST.get('niveleducativo')
+        nombre_completo = request.POST.get('nombre', '').upper()
+        situacion_laboral = int(request.POST.get('situacionlaboral'))
+        ingresos = int(request.POST.get('ingresos'))
+        poblacion = int(request.POST.get('poblacion'))
+        sexo = int(request.POST.get('sexo'))
+        nivel_educativo = int(request.POST.get('niveleducativo'))
         
-        print(f'Respuestas nombre completo: {nombre_completo}')
-        print(f'Respuestas situacion laboral: {situacion_laboral}')
-        print(f'Respuestas ingresos: {ingresos}')
-        print(f'Respuestas poblacion: {poblacion}')
-        print(f'Respuestas sexo {sexo}')
-        print(f'Respuestas nivel educativo {nivel_educativo}')
         
         if respuestas:
             usuario.nombre_completo = nombre_completo
