@@ -41,7 +41,35 @@ class Client():
     def delete_respuesta(self, id_usuario, id_cuestionario, abreviacion):
         requests.delete(self.get_url(f'/respuestas/delete/{id_usuario}/{id_cuestionario}/{abreviacion}'))
     
+    def save_datos_generales(
+        self, id_usuario, situacion_laboral, ingresos, sexo, poblacion, nivel_educativo 
+    ):
+        body = {
+            "usuario" : id_usuario
+            ,"situacion_laboral" : situacion_laboral
+            ,"ingresos" : ingresos
+            ,"sexo" : sexo
+            ,"poblacion" : poblacion
+            ,"nivel_educativo" : nivel_educativo
+        }
+        
+        requests.post(self.get_url('/respuestas/guardar/datosgenerales'), json=body)
     
+    def update_datos_generales(
+        self, id_usuario, situacion_laboral, ingresos, sexo, poblacion, nivel_educativo
+    ):
+
+        body = {
+            "usuario" : id_usuario
+            ,"situacion_laboral" : situacion_laboral
+            ,"ingresos" : ingresos
+            ,"sexo" : sexo
+            ,"poblacion" : poblacion
+            ,"nivel_educativo" : nivel_educativo
+        }
+        
+        requests.put(self.get_url(f'/respuestas/datosgenerales/{id_usuario}'), json=body)
+        
     def create_progres(self, id_usuario):
         body = {
             'id_usuario': id_usuario

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from clients.client import Client
 from datetime import datetime
 import random
 import requests
@@ -41,8 +42,10 @@ def informe_nutricional(request):
 
 @login_required
 def datos_generales(request):
-    respuestas = Respuestas.objects.filter(usuario=request.user.id).first()  
-    usuario = UserModel.objects.get(id = request.user.id)
+    respuestas = Respuestas.objects.filter(usuario=request.user.id).first()
+    usuario = UserModel.objects.get(id=request.user.id)
+    cliente_api = Client()
+
     if request.method == 'POST':
         nombre_completo = request.POST.get('nombre', '').upper()
         situacion_laboral = int(request.POST.get('situacionlaboral'))
@@ -50,8 +53,8 @@ def datos_generales(request):
         poblacion = int(request.POST.get('poblacion'))
         sexo = int(request.POST.get('sexo'))
         nivel_educativo = int(request.POST.get('niveleducativo'))
-        
-        
+
+        # Actualizar datos locales (en la BD)
         if respuestas:
             usuario.nombre_completo = nombre_completo
             respuestas.situacion_laboral = situacion_laboral
@@ -59,7 +62,24 @@ def datos_generales(request):
             respuestas.poblacion = poblacion
             respuestas.sexo = sexo
             respuestas.nivel_educativo = nivel_educativo
+            
+            cliente_api.update_datos_generales(
+                id_usuario=request.user.id,
+                situacion_laboral=situacion_laboral,
+                ingresos=ingresos,
+                sexo=sexo,
+                poblacion=poblacion,
+                nivel_educativo=nivel_educativo
+            )
         else:
+            cliente_api.save_datos_generales(
+                id_usuario=request.user.id,
+                situacion_laboral=situacion_laboral,
+                ingresos=ingresos,
+                sexo=sexo,
+                poblacion=poblacion,
+                nivel_educativo=nivel_educativo
+            )
             respuestas = Respuestas.objects.create(
                 usuario=request.user.id,
                 situacion_laboral=situacion_laboral,
@@ -68,11 +88,12 @@ def datos_generales(request):
                 sexo=sexo,
                 nivel_educativo=nivel_educativo
             )
+
         respuestas.save()
         usuario.save()
 
     datos = {
-        'respuestas': respuestas,  
+        'respuestas': respuestas,
         'sexo': CatSexo.objects.all(),
         'situacion_laboral': CatSituacionLaboral.objects.all(),
         'nivel_educativo': CatNivelEducativo.objects.all(),
@@ -82,6 +103,7 @@ def datos_generales(request):
     }
 
     return render(request, 'datos_generales.html', datos)
+
 
 @login_required
 @cache_control(no_store=True, no_cache=True, must_revalidate=True)
