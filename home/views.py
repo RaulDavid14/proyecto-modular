@@ -32,15 +32,6 @@ def index(request):
     return render(request, 'home.html', datos)
 
 @login_required
-@cache_control(no_store=True, no_cache=True, must_revalidate=True)
-def informe_nutricional(request):
-    data = {
-        'is_completed' : ProgresoSM.is_completed_form(request.user.id)
-    }
-    return render(request, 'informe.html', data)
-
-
-@login_required
 def datos_generales(request):
     respuestas = Respuestas.objects.filter(usuario=request.user.id).first()
     usuario = UserModel.objects.get(id=request.user.id)

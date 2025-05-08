@@ -26,6 +26,7 @@ cloudinary.config(
 )
 
 INSTALLED_APPS = [
+    'clustering',
     'imagenes',
     'cfca_api',
     'rest_framework',
