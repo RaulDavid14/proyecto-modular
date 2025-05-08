@@ -11,10 +11,14 @@
 {% block body %}
 <div class="container py-5">
 
-    {% if is_completed is True %}
-        <div class="text-center">
-            <h3>Completa la encuesta para poder visualizar el resultado</h3>
-            <p class="text-muted">Debes completar cada apartado de la encuesta para ver tu informe nutricional.</p>
+    {% if is_completed is False %}
+        <div class="alert alert-primary text-center">
+            <h4 class="alert-heading">Completa la encuesta para poder visualizar el resultado</h4>
+            <p>Debes completar cada apartado de la encuesta para ver tu informe nutricional.</p>
+            <hr>
+            <p class="mb-0"> 
+                <a href="{% url 'home' %}" class="btn btn-outline-primary">Regresar</a>
+            </p>
         </div>
     {% else %}
         <div class="report-header">
@@ -43,8 +47,8 @@
                         <p>
                             Tu dieta ha sido evaluada según la clasificación NOVA, y los resultados indican que priorizas alimentos naturales y mínimamente procesados.
                             <br><br>
-                            ✅ Predomina el consumo de frutas, verduras, legumbres y cereales integrales.<br>
-                            ✅ Tu ingesta de productos ultraprocesados es baja, lo que favorece tu salud y bienestar.<br>
+                            Predomina el consumo de frutas, verduras, legumbres y cereales integrales.<br>
+                            Tu ingesta de productos ultraprocesados es baja, lo que favorece tu salud y bienestar.<br>
                             🔹 Sigue así y continúa eligiendo alimentos naturales.<br>
                             🔹 Pequeñas mejoras como diversificar tus fuentes de proteína o incluir más alimentos ricos en fibra pueden potenciar aún más tu nutrición.<br><br>
                             <strong>¡Excelente trabajo!</strong> Mantener una alimentación basada en productos naturales es clave para tu salud a largo plazo. 🥦🥑💪🏼
@@ -56,20 +60,20 @@
                             🔹 Actualmente, tu dieta incluye una cantidad moderada de alimentos ultraprocesados.<br>
                             🔹 Pequeños cambios pueden mejorar tu alimentación y tu salud en general.<br><br>
                             Para mejorar tu puntaje NOVA:<br>
-                            ✅ Prioriza alimentos naturales y mínimamente procesados como frutas, verduras, legumbres y cereales integrales.<br>
-                            ⚠️ Reduce el consumo de productos ultraprocesados como embutidos, bebidas azucaradas, pan industrializado y snacks comerciales.<br><br>
+                             Prioriza alimentos naturales y mínimamente procesados como frutas, verduras, legumbres y cereales integrales.<br>
+                             Reduce el consumo de productos ultraprocesados como embutidos, bebidas azucaradas, pan industrializado y snacks comerciales.<br><br>
                             Pequeñas modificaciones en tu dieta pueden hacer una gran diferencia en tu bienestar. <strong>¡Tú puedes lograrlo!</strong> 💪🏼🥦🥑
                         </p>
                     {% else %}
                         <p>
                             Tu dieta ha sido evaluada según la clasificación NOVA, y los resultados indican un alto consumo de alimentos ultraprocesados, lo que puede afectar tu salud.
                             <br><br>
-                            ❌ Los productos ultraprocesados, como bebidas azucaradas, comida rápida, embutidos y snacks industriales, predominan en tu alimentación.<br>
-                            ❌ El consumo de alimentos naturales como frutas, verduras y legumbres es bajo.<br><br>
-                            🔹 Pequeños cambios pueden marcar una gran diferencia.<br>
-                            ✔️ Aumenta la ingesta de alimentos frescos y naturales.<br>
-                            ✔️ Reduce el consumo de productos industrializados con alto contenido de azúcares, grasas y aditivos.<br>
-                            ✔️ Introduce hábitos saludables poco a poco para lograr un cambio sostenible.<br><br>
+                             Los productos ultraprocesados, como bebidas azucaradas, comida rápida, embutidos y snacks industriales, predominan en tu alimentación.<br>
+                             El consumo de alimentos naturales como frutas, verduras y legumbres es bajo.<br><br>
+                             Pequeños cambios pueden marcar una gran diferencia.<br>
+                             Aumenta la ingesta de alimentos frescos y naturales.<br>
+                             Reduce el consumo de productos industrializados con alto contenido de azúcares, grasas y aditivos.<br>
+                             Introduce hábitos saludables poco a poco para lograr un cambio sostenible.<br><br>
                             <strong>Tu alimentación es clave para tu bienestar.</strong> ¡Cada paso cuenta para mejorar tu salud! 💪🏼🥗🥑
                         </p>
                     {% endif %}
@@ -106,13 +110,13 @@
 
 {% block scripts %}
 <script>
-    const puntaje = {{ puntaje|default:0 }};
+    const puntaje = {{ puntaje|default:60 }};
 const ctx = document.getElementById('novaChart').getContext('2d');
 
 const data = {
     labels: ['Pobre', 'Mejorable', 'Saludable'],
     datasets: [{
-        data: [180, 108, 72],
+        data: [40, 40, 20],
         backgroundColor: ['#F44336', '#FFC107', '#4CAF50'],
         borderWidth: 0
     }]
