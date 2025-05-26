@@ -9,13 +9,23 @@ class Client():
     
     def get_url(self, url):
         return f'{self.url}{url}'
-    
+
     def get(self, endpoint, params=None):
-        response = requests.get(f'{self.url}{endpoint}', params=params, timeout=self.timeout)
-        
-        if response.status_code == 200:
-            return response.json()
-        elif response.status_code == 404:
+        try:
+            response = requests.get(
+                f'{self.url}{endpoint}', 
+                params=params, 
+                timeout=self.timeout
+            )
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 404:
+                return None
+            else:
+                print(f'GET {endpoint} → Código inesperado: {response.status_code}')
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f'Error en GET {endpoint}: {e}')
             return None
 
     def save_respuesta(self, id_usuario, id_cuestionario, abreviacion, respuestas):
@@ -62,7 +72,15 @@ class Client():
         
     def create_progres(self, id_usuario):
         body = {
-            'id_usuario' : id_usuario
+            'id_usuario': id_usuario
         }
-        
-        requests.post(url=self.get_url('/respuestas/crear/progreso/'), json=body)
+        try:
+            response = requests.post(
+                url=self.get_url('/respuestas/crear/progreso/'),
+                json=body,
+                timeout=self.timeout
+            )
+            if response.status_code != 200:
+                print(f'Error al crear progreso: código {response.status_code}')
+        except requests.exceptions.RequestException as e:
+            print(f'Error al crear progreso: {e}')

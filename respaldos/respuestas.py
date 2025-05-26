@@ -3,9 +3,9 @@ from faker import Faker
 import random
 from usuario.models import UserModel
 from catalogos.models import CatPoblacion, CatSexo, CatNivelEducativo
-from datos_socioeconomicos.models import RespuestasDatosgenerales as DatosGenerales
+from catalogos.models import DatosGenerales
 
-
+"""
 fake = Faker()
 NUM_USUARIOS = 50
 
@@ -27,11 +27,10 @@ for i in range(NUM_USUARIOS):
     print(f"Usuario {i+1}: {email} creado.")
 
 print("Usuarios de prueba creados.")
+"""
 
 
 
-
-# Obtener valores disponibles en los catálogos
 poblaciones = list(CatPoblacion.objects.filter(id__in=[1, 2]))
 sexos = list(CatSexo.objects.filter(id__in=[1, 2]))
 niveles_educativos = list(CatNivelEducativo.objects.filter(id__range=(1, 6)))
